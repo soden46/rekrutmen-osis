@@ -25,13 +25,13 @@ class DataPembinaController extends Controller
                             });
                     })
                     ->paginate(10),
-                'user' => User::get()
+                'user' => User::where('role', 'pembina')->get()
             ]);
         } else {
             return view('admin.pembina.index', [
                 'title' => 'Data Pembina',
                 'pembina' => PembinaModel::with('users')->paginate(10),
-                'user' => User::get()
+                'user' => User::where('role', 'pembina')->get()
             ]);
         }
     }
@@ -60,23 +60,18 @@ class DataPembinaController extends Controller
     {
 
         $validatedData = $request->validate([
-            'nis' => 'max:255',
-            'kelas' => 'max:255',
+            'id_user' => 'max:255',
+            'nip' => 'max:255',
             'tempat_lahir' => 'max:255',
             'tanggal_lahir' => 'max:255',
-            'jenis_kelamin' => 'max:255',
             'alamat' => 'max:255',
-            'tinggai_badan' => 'max:255',
-            'berat_badan' => 'max:255',
-            'kelas' => 'max:255',
-            'kelas' => 'max:255',
-            'kelas' => 'max:255',
+            'jenis_kelamin' => 'max:255',
         ]);
 
         // dd($validatedData);
         PembinaModel::create($validatedData);
 
-        return redirect()->route('admin.didwa')->with('successCreatedPenduduk', 'Data has ben created');
+        return redirect()->route('admin.didwa')->with('success', 'Data has ben created');
     }
 
     /**
@@ -101,25 +96,23 @@ class DataPembinaController extends Controller
      * @param  \App\Models\Penduduk  $masyarakat
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id_siswa)
+    public function update(Request $request, $id_pembina)
     {
         $rules = [
-            'nis' => 'max:255',
-            'kelas' => 'max:255',
+            'id_user' => 'max:255',
+            'nip' => 'max:255',
             'tempat_lahir' => 'max:255',
             'tanggal_lahir' => 'max:255',
-            'jenis_kelamin' => 'max:255',
             'alamat' => 'max:255',
-            'tinggai_badan' => 'max:255',
-            'berat_badan' => 'max:255',
+            'jenis_kelamin' => 'max:255',
         ];
 
 
         $validatedData = $request->validate($rules);
 
-        PembinaModel::where('id_siswa', $id_siswa)->update($validatedData);
+        PembinaModel::where('id_pembina', $id_pembina)->update($validatedData);
 
-        return redirect()->route('admin.siswa')->with('successUpdatedMasyarakat', 'Data has ben updated');
+        return redirect()->route('admin.pembina')->with('success', 'Data has ben updated');
     }
 
     /**
@@ -128,21 +121,21 @@ class DataPembinaController extends Controller
      * @param  \App\Models\Penduduk  $masyarakat
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id_siswa)
+    public function destroy($id_pembina)
     {
-        PembinaModel::where('id_siswa', $id_siswa)->delete();
-        return redirect()->route('admin.siswa')->with('successDeletedMasyarakat', 'Data has ben deleted');
+        PembinaModel::where('id_pembina', $id_pembina)->delete();
+        return redirect()->route('admin.pembina')->with('success', 'Data has ben deleted');
     }
 
     public function pdf()
     {
         $data = [
-            'title' => 'Data Siswa',
-            'siswa' => PembinaModel::with('users')->get(),
+            'title' => 'Data Pembina',
+            'pembina' => PembinaModel::with('users')->get(),
         ];
 
         $customPaper = [0, 0, 567.00, 500.80];
-        $pdf = Pdf::loadView('admin.laporan.siswa', $data)->setPaper('customPaper', 'potrait');
+        $pdf = Pdf::loadView('admin.laporan.pembina', $data)->setPaper('customPaper', 'potrait');
         return $pdf->stream('surat-keterangan-biasa.pdf');
     }
 }

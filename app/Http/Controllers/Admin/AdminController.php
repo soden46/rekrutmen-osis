@@ -36,13 +36,13 @@ class AdminController extends Controller
                             });
                     })
                     ->paginate(10),
-                'user' => User::get()
+                'user' => User::where('role', 'admin')->get()
             ]);
         } else {
             return view('admin.admin.index', [
                 'title' => 'Data Admin',
                 'admin' => AdminModel::with('users')->paginate(10),
-                'user' => User::get()
+                'user' => User::where('role', 'admin')->get()
             ]);
         }
     }
@@ -56,7 +56,7 @@ class AdminController extends Controller
     {
         return view('admin.admin.create', [
             'title' => 'Tambah Data Admin',
-            'user' => User::get()
+            'user' => User::where('role', 'admin')->get()
         ]);
     }
 
@@ -70,23 +70,18 @@ class AdminController extends Controller
     {
 
         $validatedData = $request->validate([
-            'nis' => 'max:255',
-            'kelas' => 'max:255',
+            'id_user' => 'max:255',
+            'nip' => 'max:255',
             'tempat_lahir' => 'max:255',
             'tanggal_lahir' => 'max:255',
-            'jenis_kelamin' => 'max:255',
             'alamat' => 'max:255',
-            'tinggai_badan' => 'max:255',
-            'berat_badan' => 'max:255',
-            'kelas' => 'max:255',
-            'kelas' => 'max:255',
-            'kelas' => 'max:255',
+            'jenis_kelamin' => 'max:255',
         ]);
 
         // dd($validatedData);
         AdminModel::create($validatedData);
 
-        return redirect()->route('admin.didwa')->with('successCreatedPenduduk', 'Data has ben created');
+        return redirect()->route('admin.didwa')->with('success', 'Data has ben created');
     }
 
     /**
@@ -114,8 +109,8 @@ class AdminController extends Controller
     public function update(Request $request, $id_admin)
     {
         $rules = [
+            'id_user' => 'max:255',
             'nip' => 'max:255',
-            'kelas' => 'max:255',
             'tempat_lahir' => 'max:255',
             'tanggal_lahir' => 'max:255',
             'alamat' => 'max:255',
@@ -127,7 +122,7 @@ class AdminController extends Controller
 
         AdminModel::where('id_admin', $id_admin)->update($validatedData);
 
-        return redirect()->route('admin.admin')->with('successUpdatedMasyarakat', 'Data has ben updated');
+        return redirect()->route('admin.admin')->with('success', 'Data has ben updated');
     }
 
     /**
@@ -139,7 +134,7 @@ class AdminController extends Controller
     public function destroy($id_admin)
     {
         AdminModel::where('id_admin', $id_admin)->delete();
-        return redirect()->route('admin.admin')->with('successDeletedMasyarakat', 'Data has ben deleted');
+        return redirect()->route('admin.admin')->with('success', 'Data has ben deleted');
     }
 
     public function pdf()

@@ -20,15 +20,11 @@
 
                 <div class="form-group">
                     <label for="id_user">Nama Pembina</label>
-                    <input type="text" class="form-control" id="id_user" name="id_user" value="{{$pembina->users->nama}}">
+                    <input type="text" class="form-control" id="id_user" name="id_user" value="{{$pembina->users->nama}}" readonly>
                 </div>
                 <div class="form-group">
-                    <label for="nis">NIS</label>
-                    <input type="text" class="form-control" id="nis" name="nis" value="{{$pembina->nip}}">
-                </div>
-                <div class="form-group">
-                    <label for="kelas">Kelas</label>
-                    <input type="text" class="form-control" id="kelas" name="kelas" value="{{$pembina->kelas}}">
+                    <label for="nip">NIP</label>
+                    <input type="text" class="form-control" id="nip" name="nip" value="{{$pembina->nip}}">
                 </div>
                 <div class="form-group">
                     <label for="tempat_lahir">Tempat Lahir</label>
@@ -37,6 +33,10 @@
                 <div class="form-group">
                     <label for="tanggal_lahir">Tanggal Lahir</label>
                     <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" value="{{$pembina->tanggal_lahir}}">
+                </div>
+                <div class="form-group">
+                    <label for="alamat">Alamat</label>
+                    <input type="date" class="form-control" id="alamat" name="alamat" value="{{$pembina->alamat}}">
                 </div>
                 <div class="form-group">
                     <label for="jenis_kelamin">Pilih Jenis Kelamin</label>

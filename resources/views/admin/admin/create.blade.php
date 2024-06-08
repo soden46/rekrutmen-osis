@@ -1,6 +1,6 @@
 @extends('dashboard',[
-'title' => 'Tambah Ekstrakulikuler',
-'pageTitle' => 'Tambah Ekstrakulikuler'
+'title' => 'Tambah Admin',
+'pageTitle' => 'Tambah Admin'
 ])
 @section('content')
 @if ($message = Session::get('success'))
@@ -12,30 +12,44 @@
 <div class="col-lg-8">
     <div class="card">
         <div class="card-header">
-            <h5 class="card-title">Tambah Ekstrakulikuler</h5>
+            <h5 class="card-title">Tambah Admin</h5>
         </div>
         <div class="card-body">
             <form method="post" action="{{ route('admin.ekskul.save') }}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="form-group">
-                    <label for="id_admin">Pilih ADmin</label>
-                    <select class="form-control" id="id_admin" name="id_admin">
+                    <label for="id_user">Pilih Admin</label>
+                    <select class="form-control" id="id_user" name="id_user">
                         <option value="" selected>Pilih Admin</option>
                         @foreach($user as $admin)
-                        <option value="{{ $admin->id_admin }}">{{ $admin->id_admin }} | {{ $admin->nama }}</option>
+                        <option value="{{ $admin->id }}">{{ $admin->id }} | {{ $admin->nama }}</option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="nama_ekskul">Nama Ekskul</label>
-                    <input type="text" class="form-control" id="nama_ekskul" name="nama_ekskul">
+                    <label for="nip">NIP</label>
+                    <input type="text" class="form-control" id="nip" name="nip">
                 </div>
-
                 <div class="form-group">
-                    <label for="jml_anggota">Jumlah Anggota</label>
-                    <input type="number" class="form-control" id="jml_anggota" name="jml_anggota">
+                    <label for="tempat_lahir">Tempat Lahir</label>
+                    <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir">
+                </div>
+                <div class="form-group">
+                    <label for="tanggal_lahir">Tanggal Lahir</label>
+                    <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir">
+                </div>
+                <div class="form-group">
+                    <label for="alamat">Alamat</label>
+                    <input type="date" class="form-control" id="alamat" name="alamat">
+                </div>
+                <div class="form-group">
+                    <label for="jenis_kelamin">Pilih Jenis Kelamin</label>
+                    <select class="form-control" id="jenis_kelamin" name="jenis_kelamin">
+                        <option value="Laki-Laki" {{ $admin->jenis_kelamin == 'Laki-Laki' ? 'selected' : '' }}>Laki-Laki</option>
+                        <option value="Perempuan" {{ $admin->jenis_kelamin == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+                    </select>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Simpan</button>

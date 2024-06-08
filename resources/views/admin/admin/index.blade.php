@@ -17,6 +17,7 @@
         </form>
     </div>
     <div>
+        <a class="btn btn-md btn-success mr-2" href="{{ route('admin.admin.create') }}"><i class="fa fa-plus"></i> Tambah Data</a>
         <a class="btn btn-md btn-success" href="{{ route('admin.admin.cetak') }}" target="_blank"><i class="fa fa-print"></i> Cetak PDF</a>
     </div>
 </div>
@@ -24,7 +25,6 @@
     <tr class="font-12">
         <th style="width: 150px">NIP</th>
         <th style="width: 150px">Nama</th>
-        <th style="width: 150px">Kelas</th>
         <th style="width: 150px">Tanggal Lahir</th>
         <th style="width: 150px">Tempat Lahir</th>
         <th style="width: 150px">Alamat</th>
@@ -35,7 +35,6 @@
     <tr>
         <td style="width: 150px">{{$data->nip }}</td>
         <td style="width: 150px">{{$data->users->nama ?? ''}}</td>
-        <td style="width: 150px">{{$data->kelas}}</td>
         <td style="width: 150px">{{$data->tanggal_lahir}}</td>
         <td style="width: 150px">{{$data->tempat_lahir}}</td>
         <td style="width: 150px">{{$data->alamat}}</td>
