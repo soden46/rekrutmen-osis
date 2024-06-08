@@ -7,9 +7,11 @@ use App\Http\Controllers\EmailUndanganController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DataEkskulController;
+use App\Http\Controllers\Admin\DataHasilTesController;
 use App\Http\Controllers\admin\DataPembinaController;
 use App\Http\Controllers\Admin\DataRekrutmenController;
 use App\Http\Controllers\admin\DataSiswaController;
+use App\Http\Controllers\Admin\JadwalTesController;
 use App\Http\Controllers\Admin\PendaftaranController;
 use App\Http\Controllers\Siswa\SiswaController;
 use FontLib\Table\Type\name;
@@ -101,7 +103,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('/pendaftaran/cetak', 'pdf')->name('pendaftaran.cetak');
     });
     // Jadwal Tes
-    Route::controller(DataEkskulController::class)->group(function () {
+    Route::controller(JadwalTesController::class)->group(function () {
         Route::get('/jadwal', 'index')->name('jadwal');
         Route::get('/jadwal/create', 'create')->name('jadwal.create');
         Route::post('/jadwal/save', 'store')->name('jadwal.save');
@@ -111,7 +113,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('/jadwal/cetak', 'pdf')->name('jadwal.cetak');
     });
     // Hasil Akhir
-    Route::controller(DataEkskulController::class)->group(function () {
+    Route::controller(DataHasilTesController::class)->group(function () {
         Route::get('/hasil', 'index')->name('hasil');
         Route::get('/hasil/create', 'create')->name('hasil.create');
         Route::post('/hasil/save', 'store')->name('hasil.save');

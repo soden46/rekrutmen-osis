@@ -1,6 +1,6 @@
 @extends('dashboard',[
-'title' => 'Edit Pembina',
-'pageTitle' => 'Edit Pembina'
+'title' => 'Edit Pendaftaran',
+'pageTitle' => 'Edit Pendaftaran'
 ])
 @section('content')
 @if ($message = Session::get('success'))
@@ -12,40 +12,48 @@
 <div class="col-lg-8">
     <div class="card">
         <div class="card-header">
-            <h5 class="card-title">Edit Pembina</h5>
+            <h5 class="card-title">Edit Pendaftaran</h5>
         </div>
         <div class="card-body">
-            <form method="post" action="{{ route('admin.pembina.update',$pembina->id_pembina) }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('admin.pendaftaran.update', $pendaftaran->id_pendaftaran) }}" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
 
                 <div class="form-group">
-                    <label for="id_user">Nama Pembina</label>
-                    <input type="text" class="form-control" id="id_user" name="id_user" value="{{$pembina->users->nama}}">
-                </div>
-                <div class="form-group">
-                    <label for="nis">NIS</label>
-                    <input type="text" class="form-control" id="nis" name="nis" value="{{$pembina->nip}}">
-                </div>
-                <div class="form-group">
-                    <label for="kelas">Kelas</label>
-                    <input type="text" class="form-control" id="kelas" name="kelas" value="{{$pembina->kelas}}">
-                </div>
-                <div class="form-group">
-                    <label for="tempat_lahir">Tempat Lahir</label>
-                    <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" value="{{$pembina->tempat_lahir}}">
-                </div>
-                <div class="form-group">
-                    <label for="tanggal_lahir">Tanggal Lahir</label>
-                    <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" value="{{$pembina->tanggal_lahir}}">
-                </div>
-                <div class="form-group">
-                    <label for="jenis_kelamin">Pilih Jenis Kelamin</label>
-                    <select class="form-control" id="jenis_kelamin" name="jenis_kelamin">
-                        <option value="Laki-Laki" {{ $pembina->jenis_kelamin == 'Laki-Laki' ? 'selected' : '' }}>Laki-Laki</option>
-                        <option value="Perempuan" {{ $pembina->jenis_kelamin == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+                    <label for="id_siswa">Pilih Siswa</label>
+                    <select class="form-control" id="id_siswa" name="id_siswa">
+                        <option value="" selected>Pilih Siswa</option>
+                        @foreach($siswa as $siswas)
+                        <option value="{{ $siswas->id_siswa }}" {{ $siswas->id_siswa == $pendaftaran->id_siswa ? 'selected' : '' }}>
+                            {{ $siswas->id_siswa }} | {{ $siswas->users->nama ?? ''}}
+                        </option>
+                        @endforeach
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary">Simpan</button>
+                <div class="form-group">
+                    <label for="id_rekrutmen">Pilih Rekrutmen</label>
+                    <select class="form-control" id="id_rekrutmen" name="id_rekrutmen">
+                        <option value="" selected>Pilih Rekrutmen</option>
+                        @foreach($rekrutmen as $rekrutmen)
+                        <option value="{{ $rekrutmen->id_rekrutmen }}" {{ $rekrutmen->id_rekrutmen == $pendaftaran->id_rekrutmen ? 'selected' : '' }}>
+                            {{ $rekrutmen->id_rekrutmen }} | {{ $rekrutmen->nama_lowongan }}
+                        </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="tanggal">Tanggal</label>
+                    <input type="date" class="form-control" id="tanggal" name="tanggal" value="{{ $pendaftaran->tanggal }}">
+                </div>
+                <div class="form-group">
+                    <label for="status">Pilih Status</label>
+                    <select class="form-control" id="status" name="status">
+                        <option value="" selected>Pilih Status</option>
+                        <option value="Diterima" {{ $pendaftaran->status == 'Diterima' ? 'selected' : '' }}> Diterima</option>
+                        <option value="Ditolak" {{ $pendaftaran->status == 'Ditolak' ? 'selected' : '' }}> Ditolak</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Update</button>
             </form>
         </div>
     </div>

@@ -1,6 +1,6 @@
 @extends('dashboard',[
-'title' => 'Tambah Pendaftaran',
-'pageTitle' => 'Tambah Pendaftaran'
+'title' => 'Tambah Jadwal Tes',
+'pageTitle' => 'Tambah Jadwal Tes'
 ])
 @section('content')
 @if ($message = Session::get('success'))
@@ -12,10 +12,10 @@
 <div class="col-lg-8">
     <div class="card">
         <div class="card-header">
-            <h5 class="card-title">Tambah Pendaftaran</h5>
+            <h5 class="card-title">Tambah Jadwal Tes</h5>
         </div>
         <div class="card-body">
-            <form method="post" action="{{ route('admin.pendaftaran.save') }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('admin.jadwal.save') }}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="form-group">
@@ -28,25 +28,16 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="id_rekrutmen">Pilih Rekrutmen</label>
-                    <select class="form-control" id="id_rekrutmen" name="id_rekrutmen">
-                        <option value="" selected>Pilih Rekrutmen</option>
-                        @foreach($rekrutmen as $rekrutmen)
-                        <option value="{{ $rekrutmen->id_rekrutmen }}">{{ $rekrutmen->id_rekrutmen }} | {{ $rekrutmen->nama_lowongan }}</option>
-                        @endforeach
-                    </select>
+                    <label for="nama_jadwal_tes">Nama Jadwal</label>
+                    <input type="text" class="form-control" id="nama_jadwal_tes" name="nama_jadwal_tes">
                 </div>
                 <div class="form-group">
                     <label for="tanggal">Tanggal</label>
                     <input type="date" class="form-control" id="tanggal" name="tanggal">
                 </div>
                 <div class="form-group">
-                    <label for="status">Pilih Status</label>
-                    <select class="form-control" id="status" name="status">
-                        <option value="" selected>Pilih Ekskul</option>
-                        <option value="Diterima"> Diterima</option>
-                        <option value="Ditolak"> Ditolak</option>
-                    </select>
+                    <label for="jam">Jam</label>
+                    <input type="time" class="form-control" id="jam" name="jam">
                 </div>
                 <button type="submit" class="btn btn-primary">Simpan</button>
             </form>

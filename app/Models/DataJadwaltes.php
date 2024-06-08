@@ -5,17 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DataPendaftaran extends Model
+class DataJadwaltes extends Model
 {
     use HasFactory;
-    public $table = "pendaftaran";
-    protected $primary = 'id_pendaftaran';
+    public $table = "jadwal_tes";
+    protected $primary = 'id_jadwal';
     protected $guarded = [];
-
-    public function rekrutmen()
-    {
-        return $this->hasOne(DataRekrutmen::class, 'id_rekrutmen', 'id_rekrutmen');
-    }
 
     public function siswa()
     {
