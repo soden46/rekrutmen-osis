@@ -27,7 +27,7 @@ class JadwalTesController extends Controller
                         $query->where('nama_jadwal_tes', 'like', "%{$cari}%")
                             ->orWhere('tanggal', 'like', "%{$cari}%")
                             ->orWhereHas('siswa', function ($query) use ($cari) {
-                                $query->where('nama_ekskul->users->nama', 'like', "%{$cari}%");
+                                $query->where('users->nama', 'like', "%{$cari}%");
                             });
                     })
                     ->paginate(10),
@@ -91,7 +91,7 @@ class JadwalTesController extends Controller
         return view('admin.jadwal.edit', [
             'title' => 'Edit Data Jadwal Tes',
             'tes' => DataJadwaltes::with('siswa')->where('id_jadwal', $id_jadwal)->first(),
-            'ekskul' => SiswaModel::get()
+            'siswa' => SiswaModel::get()
         ]);
     }
 

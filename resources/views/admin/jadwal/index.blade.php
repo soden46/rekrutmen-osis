@@ -27,6 +27,7 @@
         <th style="width: 150px">Nama Siswa</th>
         <th style="width: 150px">Nama Jadwal Tes</th>
         <th style="width: 150px">Tanggal</th>
+        <th style="width: 150px">Jam</th>
         <th style="width: 100px">Aksi</th>
     </tr>
     @foreach ($tes as $data)
@@ -35,6 +36,7 @@
         <td style="width: 150px">{{ $data->siswa->users->nama ?? ''}}</td>
         <td style="width: 150px">{{$data->nama_jadwal_tes}}</td>
         <td style="width: 150px">{{$data->tanggal}}</td>
+        <td style="width: 150px">{{$data->jam}}</td>
         <td>
             <div class="btn-group" style="width:135px">
                 <form action="{{ route('admin.jadwal.destroy',$data->id_jadwal) }}" method="Post">
