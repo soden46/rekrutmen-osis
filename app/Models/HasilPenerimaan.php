@@ -8,16 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class HasilPenerimaan extends Model
 {
     use HasFactory;
-    public $table = "laporan_hasil_penerimaan";
-    protected $fillable = [
-        'id_lamaran',
-        'id_pelamar',
-        'nama_pelamar',
-        'email',
-        'foto',
-        'cv',
-        'surat_lamaran',
-        'status_lamaran',
-    ];
-    public $timestamps = false;
+    public $table = "hasil_akhir";
+    protected $primary = 'id_hasil';
+    protected $guarded = [];
+
+    public function pendaftaran()
+    {
+        return $this->hasOne(DataPendaftaran::class, 'id_pendaftaran', 'id_pendaftaran');
+    }
 }
