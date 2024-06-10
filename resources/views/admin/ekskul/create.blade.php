@@ -15,7 +15,7 @@
             <h5 class="card-title">Tambah Siswa</h5>
         </div>
         <div class="card-body">
-            <form method="post" action="{{ route('admin.siswa.save') }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('admin.ekskul.save') }}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="form-group">
@@ -23,7 +23,7 @@
                     <select class="form-control" id="id_pembina" name="id_pembina">
                         <option value="" selected>Pilih Pembina</option>
                         @foreach($pembina as $pemb)
-                        <option value="{{ $pemb->id_pembina }}">{{ $pemb->id_pembina }} | {{ $pemb->nama }}</option>
+                        <option value="{{ $pemb->id_pembina }}">{{ $pemb->id_pembina }} | {{ $pemb->users->nama }}</option>
                         @endforeach
                     </select>
                 </div>

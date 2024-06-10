@@ -113,9 +113,7 @@ class DataHasilTesController extends Controller
 
 
         $validatedData = $request->validate($rules);
-
         HasilPenerimaan::where('id_hasil', $id_hasil)->update($validatedData);
-
         return redirect()->route('admin.hasil')->with('success', 'Data has ben updated');
     }
 
@@ -136,7 +134,6 @@ class DataHasilTesController extends Controller
         $data = [
             'title' => 'Data Hasil Tes',
             'hasil' => HasilPenerimaan::with('pendaftaran')->get(),
-
         ];
 
         $customPaper = [0, 0, 567.00, 500.80];

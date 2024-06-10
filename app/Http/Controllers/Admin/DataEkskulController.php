@@ -73,7 +73,7 @@ class DataEkskulController extends Controller
         // dd($validatedData);
         EkskulModel::create($validatedData);
 
-        return redirect()->route('admin.ekskul')->with('successCreatedPenduduk', 'Data has ben created');
+        return redirect()->route('admin.ekskul')->with('success', 'Data has ben created');
     }
 
     /**
@@ -111,7 +111,7 @@ class DataEkskulController extends Controller
 
         EkskulModel::where('id_ekskul', $id_ekskul)->update($validatedData);
 
-        return redirect()->route('admin.ekskul')->with('successUpdatedMasyarakat', 'Data has ben updated');
+        return redirect()->route('admin.ekskul')->with('success', 'Data has ben updated');
     }
 
     /**

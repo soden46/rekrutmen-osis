@@ -24,7 +24,7 @@
                         <option value="" selected>Pilih Pembina</option>
                         @foreach($pembina as $pemb)
                         <option value="{{ $pemb->id_pembina }}" {{ $ekskul->id_pembina == $pemb->id_pembina ? 'selected' : '' }}>
-                            {{ $pemb->id_pembina }} | {{ $pemb->nama }}
+                            {{ $pemb->id_pembina }} | {{ $pemb->users->nama }}
                             @endforeach
                     </select>
                 </div>

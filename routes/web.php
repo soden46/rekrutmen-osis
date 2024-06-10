@@ -36,7 +36,6 @@ Route::get('/', [LoginController::class, 'index'])->middleware('guest');
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/authenticate', [LoginController::class, 'authenticate']);
 Route::post('/register', [RegisterController::class, 'store'])->name('register');
-
 Route::post('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
 //admin
