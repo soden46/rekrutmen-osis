@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('lowongan', function (Blueprint $table) {
+        Schema::create('rekrutmen', function (Blueprint $table) {
             $table->id('id_lowongan');
-            $table->foreignId('id_ekskul')->constrained('ekstrakulikuler', 'id_ekskul');
+            $table->foreignId('id_ekskul')->constrained('ekstrakulikuler', 'id_ekskul')->restrictOnDelete();
             $table->string('nama_lowongan', 20);
             $table->date('tanggal_dimulai');
             $table->date('tanggal_berakhir');

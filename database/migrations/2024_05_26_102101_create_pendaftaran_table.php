@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('pendaftaran', function (Blueprint $table) {
             $table->id('id_pendaftaran');
-            $table->foreignId('id_siswa')->constrained('siswa', 'id_siswa');
-            $table->foreignId('id_ekskul')->constrained('ekstrakulikuler', 'id_ekskul');
+            $table->bigInteger('id_siswa')->constrained('siswa', 'id_siswa');
+            $table->bigInteger('id_ekskul')->constrained('ekstrakulikuler', 'id_ekskul')->restrictOnDelete();
             $table->date('tanggal');
             $table->string('status', 20);
             $table->timestamps();

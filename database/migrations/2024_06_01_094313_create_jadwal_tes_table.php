@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('jadwal_tes', function (Blueprint $table) {
             $table->id('id_jadwal');
-            $table->foreignId('id_user')->constrained('users', 'id');
+            $table->foreignId('id_user')->constrained('users', 'id')->restrictOnDelete();
             $table->string('nama_jadwal_tes', 20);
             $table->date('tanggal');
             $table->time('jam');

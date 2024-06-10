@@ -136,6 +136,6 @@ class DataEkskulController extends Controller
 
         $customPaper = [0, 0, 567.00, 500.80];
         $pdf = Pdf::loadView('admin.laporan.ekskul', $data)->setPaper('customPaper', 'potrait');
-        return $pdf->stream('surat-keterangan-biasa.pdf');
+        return $pdf->stream('data-ekstrakulikuler.pdf');
     }
 }

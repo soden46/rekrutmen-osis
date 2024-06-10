@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('anggota_ekstrakulikuler', function (Blueprint $table) {
             $table->id('id_anggota');
-            $table->foreignId('id_siswa')->constrained('siswa', 'id_siswa');
-            $table->foreignId('id_ekskul')->constrained('ekstrakulikuler', 'id_ekskul');
+            $table->foreignId('id_siswa')->constrained('siswa', 'id_siswa')->restrictOnDelete();
+            $table->foreignId('id_ekskul')->constrained('ekstrakulikuler', 'id_ekskul')->restrictOnDelete();
             $table->string('tugas', 20);
             $table->timestamps();
         });

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('hasil_akhir', function (Blueprint $table) {
             $table->id('id_hasil');
-            $table->foreignId('id_pendaftaran')->constrained('pendaftaran', 'id_pendaftaran');
+            $table->foreignId('id_pendaftaran')->constrained('pendaftaran', 'id_pendaftaran')->restrictOnDelete();
             $table->enum('nama_tes', ['tes tertulis', 'tes wawncara', 'tes latihan']);
             $table->integer('skor_final');
             $table->timestamps();

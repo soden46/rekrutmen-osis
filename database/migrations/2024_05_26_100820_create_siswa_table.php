@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('siswa', function (Blueprint $table) {
             $table->id('id_siswa');
-            $table->foreignId('id_user')->constrained('users', 'id');
+            $table->foreignId('id_user')->constrained('users', 'id')->restrictOnDelete();
             $table->string('nis', 20);
             $table->string('nama', 100);
             $table->string('kelas', 50);

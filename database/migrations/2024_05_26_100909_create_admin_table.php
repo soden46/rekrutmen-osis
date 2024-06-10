@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('admin', function (Blueprint $table) {
             $table->id('id_pembina');
-            $table->foreignId('id_user')->constrained('users', 'id');
+            $table->bigInteger('id_user')->constrained('users', 'id')->restrictOnDelete();
             $table->string('nip', 20);
             $table->string('nama', 100);
             $table->string('kelas', 50);

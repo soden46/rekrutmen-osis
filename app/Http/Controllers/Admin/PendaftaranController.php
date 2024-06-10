@@ -143,6 +143,6 @@ class PendaftaranController extends Controller
 
         $customPaper = [0, 0, 567.00, 500.80];
         $pdf = Pdf::loadView('admin.laporan.pendaftaran', $data)->setPaper('customPaper', 'potrait');
-        return $pdf->stream('surat-keterangan-biasa.pdf');
+        return $pdf->stream('data-pendaftaran.pdf');
     }
 }
