@@ -35,10 +35,6 @@
                     <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" value="{{$pembina->tanggal_lahir}}">
                 </div>
                 <div class="form-group">
-                    <label for="alamat">Alamat</label>
-                    <input type="date" class="form-control" id="alamat" name="alamat" value="{{$pembina->alamat}}">
-                </div>
-                <div class="form-group">
                     <label for="jenis_kelamin">Pilih Jenis Kelamin</label>
                     <select class="form-control" id="jenis_kelamin" name="jenis_kelamin">
                         <option value="Laki-Laki" {{ $pembina->jenis_kelamin == 'Laki-Laki' ? 'selected' : '' }}>Laki-Laki</option>

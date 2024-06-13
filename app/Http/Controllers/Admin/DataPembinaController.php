@@ -64,14 +64,13 @@ class DataPembinaController extends Controller
             'nip' => 'max:255',
             'tempat_lahir' => 'max:255',
             'tanggal_lahir' => 'max:255',
-            'alamat' => 'max:255',
             'jenis_kelamin' => 'max:255',
         ]);
 
         // dd($validatedData);
         PembinaModel::create($validatedData);
 
-        return redirect()->route('admin.didwa')->with('success', 'Data has ben created');
+        return redirect()->route('admin.siswa')->with('success', 'Data has ben created');
     }
 
     /**
@@ -103,7 +102,6 @@ class DataPembinaController extends Controller
             'nip' => 'max:255',
             'tempat_lahir' => 'max:255',
             'tanggal_lahir' => 'max:255',
-            'alamat' => 'max:255',
             'jenis_kelamin' => 'max:255',
         ];
 

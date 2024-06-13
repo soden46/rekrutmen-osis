@@ -9,7 +9,7 @@ class AdminModel extends Model
 {
     use HasFactory;
     public $table = "admin";
-    protected $primary = 'id_admin';
+    protected $primaryKey = 'id_admin';
     protected $guarded = [];
 
     public function users()

@@ -34,6 +34,7 @@ Route::get('/linkstorage', function () {
 
 Route::get('/', [LoginController::class, 'index'])->middleware('guest');
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::post('/authenticate', [LoginController::class, 'authenticate']);
 Route::post('/register', [RegisterController::class, 'store'])->name('register');
 Route::post('/dashboard', [DashboardController::class, 'index'])->middleware('auth');

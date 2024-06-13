@@ -15,13 +15,13 @@
             <h5 class="card-title">Tambah Admin</h5>
         </div>
         <div class="card-body">
-            <form method="post" action="{{ route('admin.ekskul.save') }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('admin.admin.save') }}" enctype="multipart/form-data">
                 @csrf
-
+                @method("POST")
                 <div class="form-group">
-                    <label for="id_user">Pilih Admin</label>
+                    <label for="id_user">Pilih Pengguna</label>
                     <select class="form-control" id="id_user" name="id_user">
-                        <option value="" selected>Pilih Admin</option>
+                        <option value="" selected>Pilih Pengguna</option>
                         @foreach($user as $admin)
                         <option value="{{ $admin->id }}">{{ $admin->id }} | {{ $admin->nama }}</option>
                         @endforeach
@@ -41,14 +41,10 @@
                     <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir">
                 </div>
                 <div class="form-group">
-                    <label for="alamat">Alamat</label>
-                    <input type="date" class="form-control" id="alamat" name="alamat">
-                </div>
-                <div class="form-group">
                     <label for="jenis_kelamin">Pilih Jenis Kelamin</label>
                     <select class="form-control" id="jenis_kelamin" name="jenis_kelamin">
-                        <option value="Laki-Laki" {{ $admin->jenis_kelamin == 'Laki-Laki' ? 'selected' : '' }}>Laki-Laki</option>
-                        <option value="Perempuan" {{ $admin->jenis_kelamin == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+                        <option value="Laki-Laki">Laki-Laki</option>
+                        <option value="Perempuan">Perempuan</option>
                     </select>
                 </div>
 

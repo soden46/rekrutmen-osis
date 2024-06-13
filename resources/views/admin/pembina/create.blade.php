@@ -19,8 +19,8 @@
                 @csrf
 
                 <div class="form-group">
-                    <label for="id_pembina">Jadikan Pembina</label>
-                    <select class="form-control" id="id_pembina" name="id_pembina">
+                    <label for="id_user">Jadikan Pembina</label>
+                    <select class="form-control" id="id_user" name="id_user">
                         <option value="" selected>Jadikan Pembina</option>
                         @foreach($user as $pemb)
                         <option value="{{ $pemb->id }}">{{ $pemb->id }} | {{ $pemb->nama }}</option>
@@ -40,14 +40,10 @@
                     <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir">
                 </div>
                 <div class="form-group">
-                    <label for="alamat">Alamat</label>
-                    <input type="date" class="form-control" id="alamat" name="alamat">
-                </div>
-                <div class="form-group">
                     <label for="jenis_kelamin">Pilih Jenis Kelamin</label>
                     <select class="form-control" id="jenis_kelamin" name="jenis_kelamin">
-                        <option value="Laki-Laki" {{ $pembina->jenis_kelamin == 'Laki-Laki' ? 'selected' : '' }}>Laki-Laki</option>
-                        <option value="Perempuan" {{ $pembina->jenis_kelamin == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+                        <option value="Laki-Laki">Laki-Laki</option>
+                        <option value="Perempuan">Perempuan</option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Simpan</button>

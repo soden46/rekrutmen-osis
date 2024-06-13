@@ -4,11 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\AdminModel;
-use App\Models\Lamaran;
-use App\Models\Pelamar;
-use App\Models\News;
 use Barryvdh\DomPDF\Facade\Pdf;
-use App\Models\Caffe;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -68,20 +64,19 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-
+        // dd($request->all());
         $validatedData = $request->validate([
             'id_user' => 'max:255',
             'nip' => 'max:255',
             'tempat_lahir' => 'max:255',
             'tanggal_lahir' => 'max:255',
-            'alamat' => 'max:255',
             'jenis_kelamin' => 'max:255',
         ]);
 
         // dd($validatedData);
         AdminModel::create($validatedData);
 
-        return redirect()->route('admin.didwa')->with('success', 'Data has ben created');
+        return redirect()->route('admin.admin')->with('success', 'Data has ben created');
     }
 
     /**
@@ -112,8 +107,7 @@ class AdminController extends Controller
             'id_user' => 'max:255',
             'nip' => 'max:255',
             'tempat_lahir' => 'max:255',
-            'tanggal_lahir' => 'max:255',
-            'alamat' => 'max:255',
+            'tanggal_lahir' => 'date|max:255',
             'jenis_kelamin' => 'max:255',
         ];
 
