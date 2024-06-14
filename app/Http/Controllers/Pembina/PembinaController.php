@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Pembina;
 
 use App\Http\Controllers\Controller;
+use App\Models\DataRekrutmen;
+use App\Models\HasilPenerimaan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PembinaController extends Controller
 {
