@@ -43,7 +43,7 @@ class LoginController extends Controller
             } elseif ($user->role == 'pembina') {
                 return redirect()->route('pembina.index');
             } elseif ($user->role == 'siswa') {
-                return redirect()->route('siswa.index');
+                // return redirect()->route('siswa.index');
             }
         } else {
             Log::warning('Failed login attempt: ', ['email' => $request->input('email')]);
