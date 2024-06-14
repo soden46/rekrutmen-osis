@@ -118,7 +118,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('/hasil/create', 'create')->name('hasil.create');
         Route::post('/hasil/save', 'store')->name('hasil.save');
         Route::get('/hasil/edit/{id_hasil}', 'edit')->name('hasil.edit');
-        Route::post('/hasil/update/{id_hasil}', 'update')->name('hasil.update');
+        Route::put('/hasil/update/{id_hasil}', 'update')->name('hasil.update');
         Route::delete('/hasil/{id_hasil}', 'destroy')->name('hasil.destroy');
         Route::get('/hasil/cetak', 'pdf')->name('hasil.cetak');
     });
