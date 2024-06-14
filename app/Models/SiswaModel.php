@@ -16,4 +16,9 @@ class SiswaModel extends Model
     {
         return $this->hasOne(User::class, 'id', 'id_user');
     }
+
+    public function pendaftaran()
+    {
+        return $this->hasOne(DataPendaftaran::class, 'id_siswa', 'id_siswa');
+    }
 }

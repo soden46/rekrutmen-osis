@@ -10,7 +10,7 @@ class DataRekrutmen extends Model
     use HasFactory;
 
     public $table = "rekrutmen";
-    protected $primary = 'id_rekrutmen';
+    protected $primaryKey = 'id_rekrutmen';
     protected $guarded = [];
 
     public function ekskul()

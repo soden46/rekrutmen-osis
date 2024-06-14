@@ -83,23 +83,42 @@
     <hr class="sidebar-divider my-0">
     <!-- Nav Item -->
     <li class="nav-item">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="{{route('pembina.index')}}">
             <i class="fa fa-light fa-user-pen"></i>
-            <span>Biodata</span>
+            <span>Dashborad</span>
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="">
-            <i class="fa fa-light fa-newspaper"></i>
-            <span>Lowongan</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="{{route('pembina.rekrutmen')}}">
             <i class="fa fa-info-circle"></i>
-            <span>Status Lamaran</span>
+            <span>Data Rekrutmen</span>
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('pembina.siswa')}}">
+            <i class="fa fa-info-circle"></i>
+            <span>Data Siswa</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('pembina.pendaftaran')}}">
+            <i class="fa fa-info-circle"></i>
+            <span>Data Pendaftaran</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('pembina.jadwal')}}">
+            <i class="fa fa-info-circle"></i>
+            <span>Data Jadwal Tes</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('pembina.hasil')}}">
+            <i class="fa fa-info-circle"></i>
+            <span>Data Hasil Tes</span>
+        </a>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider">
     <!-- Sidebar Toggler (Sidebar) -->

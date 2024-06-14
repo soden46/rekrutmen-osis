@@ -20,7 +20,7 @@
                 @csrf
 
                 <div class="form-group">
-                    <label for="id_user">Pilih pengguna</label>
+                    <label for="id_user">Pilih Pengguna</label>
                     <select class="form-control" id="id_user" name="id_user" required>
                         @foreach($users as $user)
                         <option value="{{ $user->id }}">{{ $user->nama }}</option>
