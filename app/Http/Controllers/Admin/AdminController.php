@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\AdminModel;
+use App\Models\DataRekrutmen;
+use App\Models\EkskulModel;
+use App\Models\HasilPenerimaan;
+use App\Models\PembinaModel;
+use App\Models\SiswaModel;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -12,35 +17,30 @@ use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
-    public function dashboard()
+    public function index()
     {
-        return view('admin.index');
-    }
+        // Menghitung jumlah rekrutmen
+        $jumlahRekrutmen = DataRekrutmen::count();
 
-    public function index(Request $request)
-    {
-        $cari = $request->cari;
+        // Menghitung jumlah pendaftar
+        $jumlahPendaftar = HasilPenerimaan::distinct('id_pendaftaran')->count('id_pendaftaran');
 
-        if ($cari != NULL) {
-            return view('admin.admin.index', [
-                'title' => 'Data Admin',
-                'admin' => AdminModel::with('users')
-                    ->where(function ($query) use ($cari) {
-                        $query->where('nip', 'like', "%{$cari}%")
-                            ->orWhereHas('users', function ($query) use ($cari) {
-                                $query->where('nama', 'like', "%{$cari}%");
-                            });
-                    })
-                    ->paginate(10),
-                'user' => User::where('role', 'admin')->get()
-            ]);
-        } else {
-            return view('admin.admin.index', [
-                'title' => 'Data Admin',
-                'admin' => AdminModel::with('users')->paginate(10),
-                'user' => User::where('role', 'admin')->get()
-            ]);
-        }
+        // Menghitung jumlah ekstrakurikuler
+        $jumlahEkstrakurikuler = EkskulModel::count();
+
+        // Menghitung jumlah siswa
+        $jumlahSiswa = SiswaModel::count();
+
+        // Menghitung jumlah pembina
+        $jumlahPembina = PembinaModel::count();
+
+        return view('admin.index', [
+            'jumlahRekrutmen' => $jumlahRekrutmen,
+            'jumlahPendaftar' => $jumlahPendaftar,
+            'jumlahEkstrakurikuler' => $jumlahEkstrakurikuler,
+            'jumlahSiswa' => $jumlahSiswa,
+            'jumlahPembina' => $jumlahPembina,
+        ]);
     }
 
     /**

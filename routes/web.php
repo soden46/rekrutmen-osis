@@ -19,6 +19,7 @@ use App\Http\Controllers\Pembina\DataPendaftaranController;
 use App\Http\Controllers\Pembina\DataRekrutmenController as PembinaDataRekrutmenController;
 use App\Http\Controllers\Pembina\DataSiswaController as PembinaDataSiswaController;
 use App\Http\Controllers\Pembina\JadwalTesController as PembinaJadwalTesController;
+use App\Http\Controllers\Pembina\PembinaController;
 use App\Http\Controllers\Siswa\SiswaController;
 use FontLib\Table\Type\name;
 use Illuminate\Support\Facades\Artisan;
@@ -48,7 +49,7 @@ Route::post('/dashboard', [DashboardController::class, 'index'])->middleware('au
 
 //admin
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
-    Route::get('/dashbord', [AdminController::class, 'dashboard'])->name('index');
+    Route::get('/dashbord', [AdminController::class, 'index'])->name('index');
     // Admin
     Route::controller(AdminController::class)->group(function () {
         Route::get('/admin', 'index')->name('admin');
@@ -133,7 +134,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
 //pembina
 Route::group(['prefix' => 'pembina', 'as' => 'pembina.'], function () {
-    Route::get('/dashbord', [AdminController::class, 'index'])->name('index');
+    Route::get('/dashbord', [PembinaController::class, 'index'])->name('index');
 
     // Siswa
     Route::controller(PembinaDataSiswaController::class)->group(function () {
