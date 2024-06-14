@@ -43,6 +43,14 @@ class AdminController extends Controller
         ]);
     }
 
+    public function admin()
+    {
+        $user = User::where('role', 'admin')->get();
+        return view('admin.admin.index', [
+            'user' => $user
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
