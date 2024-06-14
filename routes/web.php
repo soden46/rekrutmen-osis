@@ -8,7 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DataEkskulController;
 use App\Http\Controllers\Admin\DataHasilTesController;
-use App\Http\Controllers\admin\DataPembinaController;
+use App\Http\Controllers\Admin\DataPembinaController;
 use App\Http\Controllers\Admin\DataRekrutmenController;
 use App\Http\Controllers\Admin\DataSiswaController;
 use App\Http\Controllers\Admin\JadwalTesController;
