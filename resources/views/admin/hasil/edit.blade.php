@@ -24,7 +24,7 @@
                     <select class="form-control" id="id_pendaftaran" name="id_pendaftaran">
                         <option value="" selected>Pilih Pendaftaran</option>
                         @foreach($pendaftaran as $pendaftarans)
-                        <option value="{{ $pendaftarans->id_pendaftaran }}" {{ $pendaftarans->id_pendaftaran == $hasilTes->id_pendaftaran ? 'selected' : '' }}>
+                        <option value="{{ $pendaftarans->id_pendaftaran }}" {{ $pendaftarans->id_pendaftaran == $hasil->id_pendaftaran ? 'selected' : '' }}>
                             {{ $pendaftarans->id_pendaftaran }} | {{ $pendaftarans->siswa->users->nama ?? ''}} | {{ $pendaftarans->tanggal ?? ''}}
                         </option>
                         @endforeach
@@ -34,21 +34,21 @@
                     <label for="nama_tes">Pilih Nama Tes</label>
                     <select class="form-control" id="nama_tes" name="nama_tes">
                         <option value="" selected>Pilih nama Tes</option>
-                        <option value="tes tertulis" {{ $hasilTes->nama_tes == 'tes tertulis' ? 'selected' : '' }}>Tes Tertulis</option>
-                        <option value="tes wawancara" {{ $hasilTes->nama_tes == 'tes wawancara' ? 'selected' : '' }}>Tes Wawancara</option>
-                        <option value="tes latihan" {{ $hasilTes->nama_tes == 'tes latihan' ? 'selected' : '' }}>Tes Latihan</option>
+                        <option value="tes tertulis" {{ $hasil->nama_tes == 'tes tertulis' ? 'selected' : '' }}>Tes Tertulis</option>
+                        <option value="tes wawancara" {{ $hasil->nama_tes == 'tes wawancara' ? 'selected' : '' }}>Tes Wawancara</option>
+                        <option value="tes latihan" {{ $hasil->nama_tes == 'tes latihan' ? 'selected' : '' }}>Tes Latihan</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="skor_final">Skor Final</label>
-                    <input type="number" class="form-control" id="skor_final" name="skor_final" value="{{ $hasilTes->skor_final }}">
+                    <input type="number" class="form-control" id="skor_final" name="skor_final" value="{{ $hasil->skor_final }}">
                 </div>
                 <div class="form-group">
                     <label for="status">Pilih Status</label>
                     <select class="form-control" id="status" name="status">
                         <option value="" selected>Pilih Status</option>
-                        <option value="Lolos" {{ $hasilTes->status == 'Lolos' ? 'selected' : '' }}>Lolos</option>
-                        <option value="Tidak Lolos" {{ $hasilTes->status == 'Tidak Lolos' ? 'selected' : '' }}>Tidak Lolos</option>
+                        <option value="Lolos" {{ $hasil->status == 'Lolos' ? 'selected' : '' }}>Lolos</option>
+                        <option value="Tidak Lolos" {{ $hasil->status == 'Tidak Lolos' ? 'selected' : '' }}>Tidak Lolos</option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Update</button>
