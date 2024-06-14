@@ -10,7 +10,7 @@ use App\Http\Controllers\Admin\DataEkskulController;
 use App\Http\Controllers\Admin\DataHasilTesController;
 use App\Http\Controllers\admin\DataPembinaController;
 use App\Http\Controllers\Admin\DataRekrutmenController;
-use App\Http\Controllers\admin\DataSiswaController;
+use App\Http\Controllers\Admin\DataSiswaController;
 use App\Http\Controllers\Admin\JadwalTesController;
 use App\Http\Controllers\Admin\PendaftaranController;
 use App\Http\Controllers\Siswa\SiswaController;
