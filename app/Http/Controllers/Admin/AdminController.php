@@ -46,7 +46,8 @@ class AdminController extends Controller
     public function admin()
     {
         $user = Auth::user();
-        $admin = AdminModel::with('users')->where('id_user', $user->id)->first();
+        $admin = AdminModel::with('users')->where('id_user', $user->id)->paginate(10);
+
         return view('admin.admin.index', [
             'admin' => $admin
         ]);
