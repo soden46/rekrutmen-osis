@@ -18,7 +18,7 @@
                 <form method="post" action="{{ route('pembina.jadwal.update', $tes->id_jadwal) }}"
                     enctype="multipart/form-data">
                     @csrf
-                    @method('POST')
+                    @method('PUT')
 
                     <div class="form-group">
                         <label for="id_rekrutmen">Pilih Rekrutmen</label>
