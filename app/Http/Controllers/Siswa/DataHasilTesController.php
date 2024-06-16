@@ -24,7 +24,7 @@ class DataHasilTesController extends Controller
         $siswaId = $siswa->id_siswa;
 
         // Ambil ID pendaftaran berdasarkan id_siswa
-        $pendaftaranIds = DataPendaftaran::where('id_siswa', $siswaId)->pluck('id');
+        $pendaftaranIds = DataPendaftaran::where('id_siswa', $siswaId)->pluck('id_pendaftaran');
 
         $query = HasilPenerimaan::with('pendaftaran', 'pendaftaran.siswa')
             ->whereIn('id_pendaftaran', $pendaftaranIds);
