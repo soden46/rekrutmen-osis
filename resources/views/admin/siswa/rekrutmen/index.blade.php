@@ -10,16 +10,12 @@
     @endif
     <div class="d-flex justify-content-between mb-3">
         <div>
-            <form action="{{ route('admin.rekrutmen') }}" method="GET" class="d-flex">
+            <form action="{{ route('siswa.rekrutmen') }}" method="GET" class="d-flex">
                 <input type="text" name="cari" class="form-control" placeholder="Cari Data" value="{{ request('cari') }}">
                 <button type="submit" class="btn btn-md btn-primary ml-2">Search</button>
             </form>
         </div>
         <div>
-            <a class="btn btn-md btn-success mr-2" href="{{ route('admin.rekrutmen.create') }}"><i class="fa fa-plus"></i>
-                Tambah Data</a>
-            <a class="btn btn-md btn-success" href="{{ route('admin.rekrutmen.cetak') }}" target="_blank"><i
-                    class="fa fa-print"></i> Cetak PDF</a>
         </div>
     </div>
     <table class="table table-bordered">
@@ -29,7 +25,6 @@
             <th style="width: 150px">Tanggal Dimulai</th>
             <th style="width: 150px">Tanggal Berakhir</th>
             <th style="width: 150px">Deskripsi</th>
-            <th style="width: 100px">Aksi</th>
         </tr>
         @foreach ($rekrutmen as $data)
             <tr>
@@ -43,17 +38,6 @@
                         data-target="#detailModal{{ $data->id }}">
                         Detail
                     </button>
-                </td>
-                <td>
-                    <div class="btn-group" style="width:135px">
-                        <form action="{{ route('admin.rekrutmen.destroy', $data->id_rekrutmen) }}" method="Post">
-                            <a class="btn btn-primary"
-                                href="{{ route('admin.rekrutmen.edit', $data->id_rekrutmen) }}">Edit</a>
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
-                    </div>
                 </td>
             </tr>
 
@@ -73,6 +57,10 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <form method="POST" action="{{ route('siswa.daftar', $data->id) }}">
+                                @csrf
+                                <button type="submit" class="btn btn-primary">Daftar</button>
+                            </form>
                         </div>
                     </div>
                 </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Siswa;
 
 use App\Http\Controllers\Controller;
+use App\Models\DataPendaftaran;
 use App\Models\DataRekrutmen;
 use App\Models\EkskulModel;
 use Illuminate\Http\Request;
@@ -65,86 +66,16 @@ class DataRekrutmenController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function daftar($id)
     {
-        // dd($request);
+        $user = Auth::user();
 
-        $validatedData = $request->validate([
-            'id_ekskul' => 'required',
-            'nama_lowongan' => 'required|max:255',
-            'tanggal_dimulai' => 'required',
-            'tanggal_berakhir' => 'required',
-            'deskripsi' => 'required',
+        // Logika untuk menyimpan data pendaftaran
+        DataPendaftaran::create([
+            'user_id' => $user->id,
+            'rekrutmen_id' => $id,
         ]);
 
-        // dd($validatedData);
-        DataRekrutmen::create($validatedData);
-
-        return redirect()->route('siswa.rekrutmen')->with('success', 'Data has ben created');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Penduduk  $masyarakat
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(DataRekrutmen $rekrutmen, $id_rekrutmen)
-    {
-        return view('siswa.rekrutmen.edit', [
-            'title' => 'Edit Data Rekrutmen',
-            'rekrutmen' => DataRekrutmen::with('ekskul')->where('id_rekrutmen', $id_rekrutmen)->first(),
-            'ekskul' => EkskulModel::get()
-        ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Penduduk  $masyarakat
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id_rekrutmen)
-    {
-        $rules = [
-            'id_ekskul' => 'required',
-            'nama_lowongan' => 'required|max:255',
-            'tanggal_dimulai' => 'required',
-            'tanggal_berakhir' => 'required',
-            'deskripsi' => 'required',
-        ];
-
-
-        $validatedData = $request->validate($rules);
-
-        DataRekrutmen::where('id_rekrutmen', $id_rekrutmen)->update($validatedData);
-
-        return redirect()->route('siswa.rekrutmen')->with('success', 'Data has ben updated');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Penduduk  $masyarakat
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id_rekrutmen)
-    {
-        DataRekrutmen::where('id_rekrutmen', $id_rekrutmen)->delete();
-        return redirect()->route('siswa.rekrutmen')->with('success', 'Data has ben deleted');
-    }
-
-    public function pdf()
-    {
-        $data = [
-            'title' => 'Data Ekstrakulikuler',
-            'rekrutmen' => DataRekrutmen::with('pembina')->get(),
-
-        ];
-
-        $customPaper = [0, 0, 567.00, 500.80];
-        $pdf = Pdf::loadView('siswa.laporan.rekrutmen', $data)->setPaper('customPaper', 'potrait');
-        return $pdf->stream('data-rekrutmen.pdf');
+        return redirect()->route('siswa.rekrutmen')->with('success', 'Pendaftaran berhasil');
     }
 }

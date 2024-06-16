@@ -201,12 +201,7 @@ Route::group(['prefix' => 'siswa', 'as' => 'siswa.'], function () {
     // Rekrutmen
     Route::controller(SiswaDataRekrutmenController::class)->group(function () {
         Route::get('/rekrutmen', 'index')->name('rekrutmen');
-        Route::get('/rekrutmen/create', 'create')->name('rekrutmen.create');
-        Route::post('/rekrutmen/save', 'store')->name('rekrutmen.save');
-        Route::get('/rekrutmen/edit/{id_rekrutmen}', 'edit')->name('rekrutmen.edit');
-        Route::put('/rekrutmen/update/{id_rekrutmen}', 'update')->name('rekrutmen.update');
-        Route::delete('/rekrutmen/{id_rekrutmen}', 'destroy')->name('rekrutmen.destroy');
-        Route::get('/rekrutmen/cetak', 'pdf')->name('rekrutmen.cetak');
+        Route::post('/rekrutmen/daftar/{id}', 'daftar')->name('daftar');
     });
     // Pendaftaran
     Route::controller(SiswaDataPendaftaranController::class)->group(function () {
