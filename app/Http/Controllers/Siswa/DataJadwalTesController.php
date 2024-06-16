@@ -28,10 +28,11 @@ class DataJadwalTesController extends Controller
 
         $siswaId = $siswa->id_siswa;
 
+        // Ambil ID rekrutmen dari tabel pendaftaran berdasarkan id_siswa
+        $rekrutmenIds = Pendaftaran::where('id_siswa', $siswaId)->pluck('id_rekrutmen');
+
         $query = DataJadwaltes::with('rekrutmen', 'rekrutmen.ekskul')
-            ->whereHas('rekrutmen.ekskul', function ($query) use ($siswaId) {
-                $query->where('id_siswa', $siswaId);
-            });
+            ->whereIn('id_rekrutmen', $rekrutmenIds);
 
         if ($cari) {
             $query->where(function ($query) use ($cari) {
