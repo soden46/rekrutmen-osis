@@ -61,7 +61,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::post('/admin/save', 'store')->name('admin.save');
         Route::get('/admin/edit/{id_admin}', 'edit')->name('admin.edit');
         Route::put('/admin/update/{id_admin}', 'update')->name('admin.update');
-        Route::delete('/admin/{id_admin}/destroy', 'destroy')->name('destroy');
+        Route::delete('/admin/{id_admin}/destroy', 'destroy')->name('admin.destroy');
         Route::get('/admin/cetak', 'pdf')->name('admin.cetak');
     });
     // Pembina
