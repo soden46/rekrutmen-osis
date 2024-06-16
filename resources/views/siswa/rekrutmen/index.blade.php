@@ -35,14 +35,14 @@
                 <td style="width: 150px">
                     {{ Str::limit(strip_tags($data->deskripsi), 100) }}
                     <button type="button" class="btn btn-info btn-sm ml-2" data-toggle="modal"
-                        data-target="#detailModal{{ $data->id }}">
+                        data-target="#detailModal{{ $data->id_rekrutmen }}">
                         Detail
                     </button>
                 </td>
             </tr>
 
             <!-- Modal -->
-            <div class="modal fade" id="detailModal{{ $data->id }}" tabindex="-1" role="dialog"
+            <div class="modal fade" id="detailModal{{ $data->id_rekrutmen }}" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -57,7 +57,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <form method="POST" action="{{ route('siswa.rekrutmen.daftar', $data->id) }}">
+                            <form method="POST" action="{{ route('siswa.rekrutmen.daftar', $data->id_rekrutmen) }}">
                                 @csrf
                                 <button type="submit" class="btn btn-primary">Daftar</button>
                             </form>

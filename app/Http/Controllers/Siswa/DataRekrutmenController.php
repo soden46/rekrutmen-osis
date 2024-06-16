@@ -66,14 +66,14 @@ class DataRekrutmenController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function daftar($id)
+    public function daftar($id_rekrutmen)
     {
         $user = Auth::user();
 
         // Logika untuk menyimpan data pendaftaran
         DataPendaftaran::create([
             'user_id' => $user->id,
-            'rekrutmen_id' => $id,
+            'id_rekrutmen' => $id_rekrutmen,
         ]);
 
         return redirect()->route('siswa.rekrutmen')->with('success', 'Pendaftaran berhasil');
