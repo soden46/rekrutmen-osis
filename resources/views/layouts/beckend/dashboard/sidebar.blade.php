@@ -124,7 +124,7 @@
         <hr class="sidebar-divider">
         <!-- Sidebar Toggler (Sidebar) -->
         <li class="nav-item">
-            <a class="nav-link" href="/LOGOUT">
+            <a class="nav-link" href="/logout">
                 <i class="fa fa-sign-out"></i>
                 <span>Logout</span></a>
         </li>
