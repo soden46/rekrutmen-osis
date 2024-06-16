@@ -22,37 +22,35 @@ class DataJadwalTesController extends Controller
         $user = Auth::user();
         $siswa = SiswaModel::where('id_user', $user->id)->first();
 
+        if (!$siswa) {
+            return redirect()->route('dashboard')->with('error', 'Siswa tidak ditemukan');
+        }
+
         $siswaId = $siswa->id_siswa;
 
-        if ($cari != NULL) {
-            return view('siswa.jadwal.index', [
-                'title' => 'Data Jadwal Tes',
-                'tes' => DataJadwaltes::with('rekrutmen', 'rekrutmen.ekskul')
-                    ->whereHas('rekrutmen.ekskul', function ($query) use ($siswaId) {
-                        $query->where('id_siswa', $siswaId);
-                    })
-                    ->where(function ($query) use ($cari) {
-                        $query->where('nama_jadwal_tes', 'like', "%{$cari}%")
-                            ->orWhere('tanggal', 'like', "%{$cari}%")
-                            ->orWhereHas('rekrutmen', function ($query) use ($cari) {
-                                $query->where('rekrutmen->nama_lowongan', 'like', "%{$cari}%");
-                            });
-                    })
-                    ->paginate(10),
-                'rekrutmen' => DataRekrutmen::get(),
-            ]);
-        } else {
-            return view('siswa.jadwal.index', [
-                'title' => 'Data Jadwal Tes',
-                'tes' => DataJadwaltes::with('rekrutmen', 'rekrutmen.ekskul')
-                    ->whereHas('rekrutmen.ekskul', function ($query) use ($siswaId) {
-                        $query->where('id_siswa', $siswaId);
-                    })
-                    ->paginate(10),
-                'rekrutmen' => DataRekrutmen::get(),
+        $query = DataJadwaltes::with('rekrutmen', 'rekrutmen.ekskul')
+        ->whereHas('rekrutmen.ekskul', function ($query) use ($siswaId) {
+            $query->where('id_siswa', $siswaId);
+        });
 
-            ]);
+        if ($cari) {
+            $query->where(function ($query) use ($cari) {
+                $query->where('nama_jadwal_tes', 'like', "%{$cari}%")
+                ->orWhere('tanggal', 'like', "%{$cari}%")
+                ->orWhereHas('rekrutmen', function ($query) use ($cari) {
+                    $query->where('nama_lowongan', 'like', "%{$cari}%");
+                });
+            });
         }
+
+        $tes = $query->paginate(10);
+
+        return view('siswa.jadwal.index', [
+            'title' => 'Data Jadwal Tes',
+            'tes' => $tes,
+            'rekrutmen' => DataRekrutmen::get(),
+        ]);
+    }
     }
 
     /**
