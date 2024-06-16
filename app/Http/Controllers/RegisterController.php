@@ -21,35 +21,26 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
-        $str = Str::random(100);
+        // Validasi data
         $ValidatedData = $request->validate([
-            'nama' => ['required', 'max:255',],
-            'username' => ['required', 'min:3', 'max:255', 'unique:users'],
+            'nama' => 'required|max:255',
+            'username' => 'required|min:3|max:255|unique:users',
             'email' => 'required|email:dns|unique:users',
             'password' => 'required|min:6|max:12',
-            'verify_key' => $str
         ]);
-        $id = User::create([
-            'nama' => $ValidatedData['nama'],
-            'username' => $ValidatedData['username'],
+
+        // Menyimpan data ke database
+        User::create([
             'email' => $ValidatedData['email'],
+            'nama' => $ValidatedData['nama'],
+            'userName' => $ValidatedData['username'],
             'password' => Hash::make($ValidatedData['password']),
             'role' => 'siswa',
-            'verify_key' => $str
         ]);
-        $user = $id->id;
-        $user = User::get('role');
-        $details = [
-            'username' => $request->username,
-            'role' => $user,
-            'email' => $request->email,
-            'datetime' => date('Y-m-d H:i:s'),
-            'url' => request()->getHttpHost() . '/register/verify/' . $str
-        ];
 
-        Mail::to($request->email)->send(new EmailVerifikasi($details));
-        return redirect('/register')
-            ->with('success', 'Email Verifikasi telah dikrim. Silahkan Cek Email Anda untuk Mengaktifkan Akun');
+        // Redirect dengan pesan sukses
+        return redirect('/login')
+            ->with('success', 'Akun berhasil dibuat');
     }
 
     public function verify($verify_key)

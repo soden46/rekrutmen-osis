@@ -15,7 +15,7 @@
             <h5 class="card-title">Edit Hasil Tes</h5>
         </div>
         <div class="card-body">
-            <form method="post" action="{{ route('admin.hasil.update', $hasil->id_hasil) }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('pembina.hasil.update', $hasil->id_hasil) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 

@@ -15,7 +15,7 @@
                 <h5 class="card-title">Edit Jadwal Tes</h5>
             </div>
             <div class="card-body">
-                <form method="post" action="{{ route('admin.jadwal.update', $tes->id_jadwal) }}"
+                <form method="post" action="{{ route('pembina.jadwal.update', $tes->id_jadwal) }}"
                     enctype="multipart/form-data">
                     @csrf
                     @method('POST')

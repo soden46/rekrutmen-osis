@@ -9,7 +9,7 @@
 
         <div class="form-floating">
             <label for="floatingInput">Nama</label>
-            <input type="text" name="nama" class="form-control @error('nama')is-invalid @enderror" id="floatingInput" placeholder="Nama Lengkap" required value="{{old('nama')}}">
+            <input type="text" name="nama" class="form-control @error('nama')is-invalid @enderror" id="floatingInput" placeholder="nama Lengkap" required value="{{old('nama')}}">
             @error('nama')
             <div class="invalid-feedback">
                 {{$message}}

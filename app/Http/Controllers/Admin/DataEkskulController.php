@@ -30,14 +30,12 @@ class DataEkskulController extends Controller
                                 $query->where('nama', 'like', "%{$cari}%");
                             });
                     })
-                    ->paginate(10),
-                'pembina' => PembinaModel::get()
+                    ->paginate(10)
             ]);
         } else {
             return view('admin.ekskul.index', [
                 'title' => 'Data Ekstrakulikuler',
                 'ekskul' => EkskulModel::with('pembina')->paginate(10),
-                'pembina' => PembinaModel::get()
             ]);
         }
     }

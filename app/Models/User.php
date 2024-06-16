@@ -12,7 +12,7 @@ class User extends Authenticatable
 
     // Add 'role' to the fillable array if you use mass assignment
     protected $fillable = [
-        'name', 'username', 'email', 'password', 'role',
+        'nama', 'userName', 'email', 'password', 'role',
     ];
 
     // Hide the password and remember_token fields

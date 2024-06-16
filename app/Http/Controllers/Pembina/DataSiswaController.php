@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Pembina;
 
 use App\Http\Controllers\Controller;
 use App\Models\SiswaModel;
@@ -20,7 +20,7 @@ class DataSiswaController extends Controller
         $cari = $request->cari;
 
         if ($cari != NULL) {
-            return view('admin.siswa.index', [
+            return view('pembina.siswa.index', [
                 'title' => 'Data Siswa',
                 'siswa' => SiswaModel::with('users')
                     ->where(function ($query) use ($cari) {
@@ -33,7 +33,7 @@ class DataSiswaController extends Controller
                 'users' => User::get()
             ]);
         } else {
-            return view('admin.siswa.index', [
+            return view('pembina.siswa.index', [
                 'title' => 'Data Siswa',
                 'siswa' => SiswaModel::with('users')->paginate(10),
                 'users' => User::get()
@@ -48,7 +48,7 @@ class DataSiswaController extends Controller
      */
     public function create()
     {
-        return view('admin.siswa.create', [
+        return view('pembina.siswa.create', [
             'title' => 'Tambah Data Siswa',
             'users' => User::get()
         ]);
@@ -80,7 +80,7 @@ class DataSiswaController extends Controller
         // dd($validatedData);
         SiswaModel::create($validatedData);
 
-        return redirect()->route('admin.didwa')->with('successCreatedPenduduk', 'Data has ben created');
+        return redirect()->route('pembina.didwa')->with('successCreatedPenduduk', 'Data has ben created');
     }
 
     /**
@@ -91,7 +91,7 @@ class DataSiswaController extends Controller
      */
     public function edit(SiswaModel $siswa, $id_siswa)
     {
-        return view('admin.siswa.edit', [
+        return view('pembina.siswa.edit', [
             'title' => 'Edit Data Siswa',
             'siswa' => SiswaModel::with('users')->where('id_siswa', $id_siswa)->first(),
             'user' => User::get(),
@@ -123,7 +123,7 @@ class DataSiswaController extends Controller
 
         SiswaModel::where('id_siswa', $id_siswa)->update($validatedData);
 
-        return redirect()->route('admin.siswa')->with('successUpdatedMasyarakat', 'Data has ben updated');
+        return redirect()->route('pembina.siswa')->with('successUpdatedMasyarakat', 'Data has ben updated');
     }
 
     /**
@@ -135,7 +135,7 @@ class DataSiswaController extends Controller
     public function destroy($id_siswa)
     {
         SiswaModel::where('id_siswa', $id_siswa)->delete();
-        return redirect()->route('admin.siswa')->with('successDeletedMasyarakat', 'Data has ben deleted');
+        return redirect()->route('pembina.siswa')->with('successDeletedMasyarakat', 'Data has ben deleted');
     }
 
     public function pdf()
@@ -146,7 +146,7 @@ class DataSiswaController extends Controller
         ];
 
         $customPaper = [0, 0, 567.00, 500.80];
-        $pdf = Pdf::loadView('admin.laporan.siswa', $data)->setPaper('customPaper', 'potrait');
+        $pdf = Pdf::loadView('pembina.laporan.siswa', $data)->setPaper('customPaper', 'potrait');
         return $pdf->stream('data-siswa.pdf');
     }
 }

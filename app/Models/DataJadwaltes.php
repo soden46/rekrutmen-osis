@@ -16,4 +16,9 @@ class DataJadwaltes extends Model
     {
         return $this->hasOne(SiswaModel::class, 'id_siswa', 'id_siswa');
     }
+
+    public function rekrutmen()
+    {
+        return $this->hasOne(DataRekrutmen::class, 'id_rekrutmen', 'id_rekrutmen');
+    }
 }

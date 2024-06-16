@@ -15,7 +15,7 @@
                 <h5 class="card-title">Tambah Jadwal Tes</h5>
             </div>
             <div class="card-body">
-                <form method="post" action="{{ route('admin.jadwal.save') }}" enctype="multipart/form-data">
+                <form method="post" action="{{ route('pembina.jadwal.save') }}" enctype="multipart/form-data">
                     @csrf
 
                     <div class="form-group">
