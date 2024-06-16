@@ -86,7 +86,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('/ekskul/create', 'create')->name('ekskul.create');
         Route::post('/ekskul/save', 'store')->name('ekskul.save');
         Route::get('/ekskul/edit/{id_ekskul}', 'edit')->name('ekskul.edit');
-        Route::post('/ekskul/update/{id_ekskul}', 'update')->name('ekskul.update');
+        Route::put('/ekskul/update/{id_ekskul}', 'update')->name('ekskul.update');
         Route::delete('/ekskul/{id_ekskul}', 'destroy')->name('ekskul.destroy');
         Route::get('/ekskul/cetak', 'pdf')->name('ekskul.cetak');
     });
@@ -106,7 +106,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('/pendaftaran/create', 'create')->name('pendaftaran.create');
         Route::post('/pendaftaran/save', 'store')->name('pendaftaran.save');
         Route::get('/pendaftaran/edit/{id_pendaftaran}', 'edit')->name('pendaftaran.edit');
-        Route::post('/pendaftaran/update/{id_pendaftaran}', 'update')->name('pendaftaran.update');
+        Route::put('/pendaftaran/update/{id_pendaftaran}', 'update')->name('pendaftaran.update');
         Route::delete('/pendaftaran/{id_pendaftaran}', 'destroy')->name('pendaftaran.destroy');
         Route::get('/pendaftaran/cetak', 'pdf')->name('pendaftaran.cetak');
     });
