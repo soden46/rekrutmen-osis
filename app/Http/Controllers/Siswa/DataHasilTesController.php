@@ -44,7 +44,7 @@ class DataHasilTesController extends Controller
         return view('siswa.hasil.index', [
             'title' => 'Data Hasil Akhir',
             'hasil' => $hasil,
-            'pendaftaran' => Pendaftaran::where('id_siswa', $siswaId)->get(),
+            'pendaftaran' => DataPendaftaran::where('id_siswa', $siswaId)->get(),
         ]);
     }
 }
