@@ -8,7 +8,7 @@
             <div class="card-body">
                 <h5 class="card-title">Jumlah Rekrutmen Dibuka</h5>
                 <h2 class="card-text">
-                    <i class="fa fa-clipboard-list"> {{ $lowongan }}</i>
+                    <i class="fa fa-clipboard-list"> {{ $rekrutmen }}</i>
                 </h2><br>
                 <a href="{{ route('siswa.rekrutmen') }}" class="btn btn-primary">Lihat Selengkapnya</a>
             </div>
