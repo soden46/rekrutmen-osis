@@ -29,17 +29,17 @@ class DataJadwalTesController extends Controller
         $siswaId = $siswa->id_siswa;
 
         $query = DataJadwaltes::with('rekrutmen', 'rekrutmen.ekskul')
-        ->whereHas('rekrutmen.ekskul', function ($query) use ($siswaId) {
-            $query->where('id_siswa', $siswaId);
-        });
+            ->whereHas('rekrutmen.ekskul', function ($query) use ($siswaId) {
+                $query->where('id_siswa', $siswaId);
+            });
 
         if ($cari) {
             $query->where(function ($query) use ($cari) {
                 $query->where('nama_jadwal_tes', 'like', "%{$cari}%")
-                ->orWhere('tanggal', 'like', "%{$cari}%")
-                ->orWhereHas('rekrutmen', function ($query) use ($cari) {
-                    $query->where('nama_lowongan', 'like', "%{$cari}%");
-                });
+                    ->orWhere('tanggal', 'like', "%{$cari}%")
+                    ->orWhereHas('rekrutmen', function ($query) use ($cari) {
+                        $query->where('nama_lowongan', 'like', "%{$cari}%");
+                    });
             });
         }
 
@@ -51,7 +51,7 @@ class DataJadwalTesController extends Controller
             'rekrutmen' => DataRekrutmen::get(),
         ]);
     }
-    }
+
 
     /**
      * Show the form for creating a new resource.
