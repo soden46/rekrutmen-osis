@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\DataPendaftaran;
 use App\Models\DataRekrutmen;
 use App\Models\EkskulModel;
+use App\Models\SiswaModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,6 +23,7 @@ class DataRekrutmenController extends Controller
 
         // Mendapatkan pengguna yang sedang login
         $user = Auth::user()->id;
+
 
         if ($cari != NULL) {
             return view('siswa.rekrutmen.index', [
@@ -69,11 +71,14 @@ class DataRekrutmenController extends Controller
     public function daftar($id_rekrutmen)
     {
         $user = Auth::user();
+        $siswa = SiswaModel::where('id_user', $user->id)->first();
 
         // Logika untuk menyimpan data pendaftaran
         DataPendaftaran::create([
-            'user_id' => $user->id,
+            'id_siswa' => $siswa->id_siswa,
             'id_rekrutmen' => $id_rekrutmen,
+            'tanggal' => now(),
+            'status' => 'Pending',
         ]);
 
         return redirect()->route('siswa.rekrutmen')->with('success', 'Pendaftaran berhasil');
