@@ -28,15 +28,15 @@ class JadwalTesController extends Controller
         if ($cari != NULL) {
             return view('pembina.jadwal.index', [
                 'title' => 'Data Jadwal Tes',
-                'tes' => DataJadwaltes::with('pendaftaran', 'pendaftaran.rekrutmen.ekskul')
-                    ->whereHas('pendaftaran.rekrutmen.ekskul', function ($query) use ($pembinaId) {
+                'tes' => DataJadwaltes::with('rekrutmen', 'rekrutmen.ekskul')
+                    ->whereHas('rekrutmen.ekskul', function ($query) use ($pembinaId) {
                         $query->where('id_pembina', $pembinaId);
                     })
                     ->where(function ($query) use ($cari) {
                         $query->where('nama_jadwal_tes', 'like', "%{$cari}%")
                             ->orWhere('tanggal', 'like', "%{$cari}%")
-                            ->orWhereHas('pendaftaran', function ($query) use ($cari) {
-                                $query->where('users->nama', 'like', "%{$cari}%");
+                            ->orWhereHas('rekrutmen', function ($query) use ($cari) {
+                                $query->where('rekrutmen->nama_lowongan', 'like', "%{$cari}%");
                             });
                     })
                     ->paginate(10),
@@ -45,8 +45,8 @@ class JadwalTesController extends Controller
         } else {
             return view('pembina.jadwal.index', [
                 'title' => 'Data Jadwal Tes',
-                'tes' => DataJadwaltes::with('pendaftaran', 'pendaftaran.rekrutmen.ekskul')
-                    ->whereHas('pendaftaran.rekrutmen.ekskul', function ($query) use ($pembinaId) {
+                'tes' => DataJadwaltes::with('rekrutmen', 'rekrutmen.ekskul')
+                    ->whereHas('rekrutmen.ekskul', function ($query) use ($pembinaId) {
                         $query->where('id_pembina', $pembinaId);
                     })
                     ->paginate(10),
