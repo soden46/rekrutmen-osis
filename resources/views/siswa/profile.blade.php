@@ -38,7 +38,7 @@
                     Edit Profile
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('profile.update', Auth::user()->id) }}">
+                    <form method="POST" action="{{ route('siswa.profile.update', Auth::user()->id) }}">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
