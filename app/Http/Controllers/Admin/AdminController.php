@@ -93,11 +93,11 @@ class AdminController extends Controller
      * @param  \App\Models\Penduduk  $masyarakat
      * @return \Illuminate\Http\Response
      */
-    public function edit(AdminModel $admin, $id_admin)
+    public function edit(AdminModel $admin, $nip)
     {
         return view('admin.admin.edit', [
             'title' => 'Edit Data Admin',
-            'admin' => AdminModel::with('users')->where('id_admin', $id_admin)->first(),
+            'admin' => AdminModel::with('users')->where('nip', $nip)->first(),
             'user' => User::get(),
         ]);
     }
@@ -133,9 +133,9 @@ class AdminController extends Controller
      * @param  \App\Models\Penduduk  $masyarakat
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id_admin)
+    public function destroy($nip)
     {
-        AdminModel::where('id_admin', $id_admin)->delete();
+        AdminModel::where('nip', $nip)->delete();
         return redirect()->route('admin.admin')->with('success', 'Data has ben deleted');
     }
 

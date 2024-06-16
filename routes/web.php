@@ -59,9 +59,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('/admin', 'admin')->name('admin');
         Route::get('/admin/create', 'create')->name('admin.create');
         Route::post('/admin/save', 'store')->name('admin.save');
-        Route::get('/admin/edit/{id_admin}', 'edit')->name('admin.edit');
-        Route::put('/admin/update/{id_admin}', 'update')->name('admin.update');
-        Route::delete('/admin/destroy/{id_admin}', 'destroy')->name('admin.destroy');
+        Route::get('/admin/edit/{nip}', 'edit')->name('admin.edit');
+        Route::put('/admin/update/{nip}', 'update')->name('admin.update');
+        Route::delete('/admin/destroy/{nip}', 'destroy')->name('admin.destroy');
         Route::get('/admin/cetak', 'pdf')->name('admin.cetak');
     });
     // Pembina
