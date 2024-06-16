@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Siswa;
 
 use App\Http\Controllers\Controller;
 use App\Models\DataJadwaltes;
+use App\Models\DataPendaftaran;
 use App\Models\DataRekrutmen;
 use App\Models\SiswaModel;
 use Illuminate\Http\Request;
@@ -29,7 +30,7 @@ class DataJadwalTesController extends Controller
         $siswaId = $siswa->id_siswa;
 
         // Ambil ID rekrutmen dari tabel pendaftaran berdasarkan id_siswa
-        $rekrutmenIds = Pendaftaran::where('id_siswa', $siswaId)->pluck('id_rekrutmen');
+        $rekrutmenIds = DataPendaftaran::where('id_siswa', $siswaId)->pluck('id_rekrutmen');
 
         $query = DataJadwaltes::with('rekrutmen', 'rekrutmen.ekskul')
             ->whereIn('id_rekrutmen', $rekrutmenIds);
