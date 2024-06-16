@@ -42,9 +42,9 @@ class SiswaController extends Controller
 			'berat_badan' => 'required|numeric',
 		]);
 
-		// Update User name
+		// Update nama user
 		$user = User::find($id);
-		$user->name = $request->input('nama');
+		$user->nama = $request->input('nama');
 		$user->save();
 
 		// Update Siswa data

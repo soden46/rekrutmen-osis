@@ -43,7 +43,7 @@
                         @method('PUT')
                         <div class="form-group">
                             <label for="nis">NIS</label>
-                            <input required value="{{ $siswa->nis }}" class="form-control" type="text" id="nis"
+                            <input required value="{{ $siswa->nis }}" class="form-control" type="number" id="nis"
                                 name="nis">
                         </div>
                         <div class="form-group">
@@ -58,7 +58,7 @@
                         </div>
                         <div class="form-group">
                             <label for="tempat_lahir">Tempat Lahir</label>
-                            <input required value="{{ $siswa->tempat_lahir }}" class="form-control" type="text"
+                            <input required value="{{ $siswa->tempat_lahir }}" class="form-control" type="area"
                                 id="tempat_lahir" name="tempat_lahir">
                         </div>
                         <div class="form-group">
@@ -78,12 +78,12 @@
                         </div>
                         <div class="form-group">
                             <label for="tinggi_badan">Tinggi Badan</label>
-                            <input required value="{{ $siswa->tinggi_badan }}" class="form-control" type="text"
+                            <input required value="{{ $siswa->tinggi_badan }}" class="form-control" type="number"
                                 id="tinggi_badan" name="tinggi_badan">
                         </div>
                         <div class="form-group">
                             <label for="berat_badan">Berat Badan</label>
-                            <input required value="{{ $siswa->berat_badan }}" class="form-control" type="text"
+                            <input required value="{{ $siswa->berat_badan }}" class="form-control" type="number"
                                 id="berat_badan" name="berat_badan">
                         </div>
                         <div class="form-group">
