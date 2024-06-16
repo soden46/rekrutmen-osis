@@ -15,13 +15,12 @@ class SiswaController extends Controller
 {
 	public function index()
 	{
-		dd('aa');
+		// dd('aa');
 		return view('pelamar.index');
 	}
 	public function lamar(Request $request)
 	{
 		$pelamar = Pelamar::where('id_user', Auth::user()->id)->value('id_pelamar');
-		$berita = News::where('id_berita', '=', $request->id)->value('judul');
 		$id_berita = $request->id;
 		return view('pelamar.lamaran', compact('berita', 'pelamar', 'id_berita'));
 	}

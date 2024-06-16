@@ -145,7 +145,7 @@ Route::group(['prefix' => 'pembina', 'as' => 'pembina.'], function () {
 
 //siswa
 Route::group(['prefix' => 'siswa', 'as' => 'siswa.'], function () {
-    Route::get('/dashbord', [AdminController::class, 'index'])->name('siswa');
+    Route::get('/dashbord', [SiswaController::class, 'index'])->name('index');
 
     // Route Resource
 });
