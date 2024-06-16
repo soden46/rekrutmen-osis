@@ -106,7 +106,7 @@
     <div class="card">
         <div class="card-body">
             <div class="header">
-                <img src="{{ asset('assets/img/logo.png') }}" id="foto" alt="Logo" height="75px" />
+                <img src="{{ public_path('storage/assets/logo.png') }}" id="foto" alt="Logo" height="75px" />
                 <h1 class="text-center">SMP Negeri 2 Mlati</h1>
                 <p class="text-center">Jalan </p>
                 <p class="text-center">Telepon (0274) 797496</p>
