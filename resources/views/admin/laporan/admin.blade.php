@@ -51,8 +51,8 @@
 
         #foto {
             float: left;
-            width: 120px;
-            height: 150px;
+            width: 88px;
+            height: 88px;
             background: transparent;
         }
 

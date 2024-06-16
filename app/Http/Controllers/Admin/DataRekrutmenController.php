@@ -136,7 +136,7 @@ class DataRekrutmenController extends Controller
     {
         $data = [
             'title' => 'Data Ekstrakulikuler',
-            'rekrutmen' => DataRekrutmen::with('pembina')->get(),
+            'rekrutmen' => DataRekrutmen::with('ekskul')->get(),
 
         ];
 
