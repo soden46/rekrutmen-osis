@@ -56,7 +56,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('/dashbord', [AdminController::class, 'index'])->name('index');
     // Admin
     Route::controller(AdminController::class)->group(function () {
-        Route::get('/admin', 'index')->name('admin');
+        Route::get('/admin', 'admin')->name('admin');
         Route::get('/admin/create', 'create')->name('admin.create');
         Route::post('/admin/save', 'store')->name('admin.save');
         Route::get('/admin/edit/{id_admin}', 'edit')->name('admin.edit');
