@@ -40,8 +40,8 @@
                 <td style="width: 150px">{{ $data->jenis_kelamin }}</td>
                 <td>
                     <div class="btn-group" style="width:135px">
-                        <form action="{{ route('admin.admin.destroy', $data->nip) }}" method="POST">
-                            <a class="btn btn-primary" href="{{ route('admin.admin.edit', $data->nip) }}">Edit</a>
+                        <form action="{{ route('admin.admin.destroy', $data->id_admin) }}" method="POST">
+                            <a class="btn btn-primary" href="{{ route('admin.admin.edit', $data->id_admin) }}">Edit</a>
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete</button>
