@@ -3,7 +3,7 @@
 
         <!-- Sidebar - Brand -->
         <div class="sidebar-brand-icon d-flex align-items-center justify-content-center">
-            <img src="{{ asset('assets/img/Logobgiputih.png') }}" alt="Logo" width="" height="80"></img>
+            <img src="{{ asset('assets/img/logo.png') }}" alt="Logo" width="" height="80"></img>
         </div>
         <a class="sidebar-brand d-flex align-items-center justify-content-center">
             <div class="sidebar-brand-text mx-3">

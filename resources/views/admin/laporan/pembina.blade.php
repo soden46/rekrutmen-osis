@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Data Siswa</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <style>
         body {
             font-size: 12px;
@@ -105,7 +106,7 @@
     <div class="card">
         <div class="card-body">
             <div class="header">
-                <img src="{{public_path('storage/asset/sleman.png')}}" id="foto" alt="Logo" height="75px" />
+                <img src="{{ asset('assets/img/logo.png') }}" id="foto" alt="Logo" height="75px" />
                 <h1 class="text-center">SMP Negeri 2 Mlati</h1>
                 <p class="text-center">Jalan </p>
                 <p class="text-center">Telepon (0274) 797496</p>
@@ -122,13 +123,13 @@
                     <th>Jenis Kelamin</th>
                 </tr>
                 @foreach ($pembina as $data)
-                <tr>
-                    <td>{{ $data->nip }}</td>
-                    <td>{{ $data->users->nama ?? ''}}</td>
-                    <td>{{$data->tanggal_lahir}}</td>
-                    <td>{{$data->alamat}}</td>
-                    <td>{{$data->jenis_kelamin}}</td>
-                </tr>
+                    <tr>
+                        <td>{{ $data->nip }}</td>
+                        <td>{{ $data->users->nama ?? '' }}</td>
+                        <td>{{ $data->tanggal_lahir }}</td>
+                        <td>{{ $data->alamat }}</td>
+                        <td>{{ $data->jenis_kelamin }}</td>
+                    </tr>
                 @endforeach
             </table>
         </div>
