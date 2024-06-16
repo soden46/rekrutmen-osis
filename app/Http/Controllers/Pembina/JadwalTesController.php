@@ -64,8 +64,7 @@ class JadwalTesController extends Controller
      */
     public function create()
     {
-        $rekrutmen = DataRekrutmen::get();
-        dd($rekrutmen);
+
         return view('pembina.jadwal.create', [
             'title' => 'Tambah Data Jadwal Tes',
             'rekrutmen' => DataRekrutmen::get()
