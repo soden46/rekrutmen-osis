@@ -128,7 +128,7 @@ class DataEkskulController extends Controller
     {
         $data = [
             'title' => 'Data Ekstrakulikuler',
-            'ekskul' => EkskulModel::with('pembina')->get(),
+            'ekskul' => EkskulModel::with('pembina', 'pembina.users')->get(),
             'pembina' => PembinaModel::get()
         ];
 
