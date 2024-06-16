@@ -143,21 +143,33 @@
         <hr class="sidebar-divider my-0">
         <!-- Nav Item -->
         <li class="nav-item">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="{{ route('siswa.biodata') }}">
                 <i class="fa fa-light fa-user-pen"></i>
                 <span>Biodata</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="{{ route('siswa.rekrutmen') }}">
                 <i class="fa fa-light fa-newspaper"></i>
-                <span>Lowongan</span>
+                <span>Rekrtutmen</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="{{ route('siswa.pendafataran') }}">
                 <i class="fa fa-info-circle"></i>
-                <span>Status Lamaran</span>
+                <span>Pendafatran</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('siswa.jadwal') }}">
+                <i class="fa fa-info-circle"></i>
+                <span>Jadwal Tes</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('siswa.hasil') }}">
+                <i class="fa fa-info-circle"></i>
+                <span>Hasil Tes</span>
             </a>
         </li>
         <!-- Divider -->
