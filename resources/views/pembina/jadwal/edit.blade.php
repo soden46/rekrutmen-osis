@@ -21,13 +21,13 @@
                     @method('POST')
 
                     <div class="form-group">
-                        <label for="idrekrutmen">Pilih Rekrutmen</label>
-                        <select class="form-control" id="idrekrutmen" name="idrekrutmen">
+                        <label for="id_rekrutmen">Pilih Rekrutmen</label>
+                        <select class="form-control" id="id_rekrutmen" name="id_rekrutmen">
                             <option value="" selected>Pilih Rekerutmen</option>
                             @foreach ($rekrutmen as $rekrutmens)
-                                <option value="{{ $rekrutmens->idrekrutmen }}"
-                                    {{ $rekrutmens->idrekrutmen == $tes->idrekrutmen ? 'selected' : '' }}>
-                                    {{ $rekrutmens->idrekrutmen }} | {{ $rekrutmens->rekrutmen->nama_lowongan ?? '' }}
+                                <option value="{{ $rekrutmens->id_rekrutmen }}"
+                                    {{ $rekrutmens->id_rekrutmen == $tes->id_rekrutmen ? 'selected' : '' }}>
+                                    {{ $rekrutmens->id_rekrutmen }} | {{ $rekrutmens->rekrutmen->nama_lowongan ?? '' }}
                                 </option>
                             @endforeach
                         </select>
