@@ -155,7 +155,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('siswa.pendafataran') }}">
+            <a class="nav-link" href="{{ route('siswa.pendaftaran') }}">
                 <i class="fa fa-info-circle"></i>
                 <span>Pendafatran</span>
             </a>
