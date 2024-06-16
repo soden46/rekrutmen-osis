@@ -48,7 +48,7 @@
                         </div>
                         <div class="form-group">
                             <label for="nama">Nama Lengkap</label>
-                            <input required value="{{ $siswa->user->nama }}" class="form-control" type="text"
+                            <input required value="{{ $siswa->users->nama }}" class="form-control" type="text"
                                 id="nama" name="nama">
                         </div>
                         <div class="form-group">

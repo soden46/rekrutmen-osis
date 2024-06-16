@@ -15,7 +15,7 @@ class SiswaController extends Controller
 {
 	public function index()
 	{
-		$siswa = SiswaModel::where('id_user', Auth::user()->id)->first();
+		$siswa = SiswaModel::with('users')->where('id_user', Auth::user()->id)->first();
 		$rekrutmen = DataRekrutmen::where('tanggal_berakhir', now())->count();
 		$pendaftaran = DataPendaftaran::where('id_siswa', $siswa->id_siswa)->count();
 		return view('siswa.index', compact('siswa', 'rekrutmen', 'pendaftaran'));
