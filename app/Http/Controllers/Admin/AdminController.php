@@ -45,9 +45,9 @@ class AdminController extends Controller
 
     public function admin()
     {
-        $user = User::where('role', 'admin')->get();
+        $admin = User::where('role', 'admin')->get();
         return view('admin.admin.index', [
-            'user' => $user
+            'admin' => $admin
         ]);
     }
 
