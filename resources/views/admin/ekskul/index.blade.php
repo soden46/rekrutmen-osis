@@ -32,7 +32,7 @@
         @foreach ($ekskul as $ekstra)
             <tr>
                 <td style="width: 150px">{{ $ekstra->nama_ekskul }}</td>
-                <td style="width: 150px">{{ $ekstra->pembina->user->nama ?? '' }}</td>
+                <td style="width: 150px">{{ $ekstra->pembina->users->nama ?? '' }}</td>
                 <td style="width: 150px">{{ $ekstra->jml_anggota }}</td>
                 <td>
                     <div class="btn-group" style="width:135px">
