@@ -13,6 +13,15 @@
                 <a href="{{ route('siswa.rekrutmen') }}" class="btn btn-primary">Lihat Selengkapnya</a>
             </div>
         </div>
+        <div class="card text-white bg-info col-sm-4">
+            <div class="card-body">
+                <h5 class="card-title">Jumlah Pendaftaran</h5>
+                <h2 class="card-text">
+                    <i class="fa fa-clipboard-list"> {{ $pendaftaran }}</i>
+                </h2><br>
+                <a href="{{ route('siswa.pendaftaran') }}" class="btn btn-primary">Lihat Selengkapnya</a>
+            </div>
+        </div>
         <div class="card text-white bg-warning col-sm-4">
             <div class="card-body">
                 <h5 class="card-title">Isi Biodata</h5>
@@ -28,10 +37,10 @@
                 <p class="card-text">
                     1. Klik menu rekrutmen untuk melihat rekrutmen yang dibuka<br>
                     2. Klik Lihat rekrutmen Pada tombol list rekrutmen<br>
-                    3. Klik menu rekrutmen
-                    3. Klik tombol ajukan pendaftaran
-                    5. Isi data yang diperlukan
-                    6. Klik tombol daftar
+                    3. Klik menu rekrutmen<br>
+                    4. Klik tombol ajukan pendaftaran<br>
+                    5. Isi data yang diperlukan<br>
+                    6. Klik tombol daftar<br>
                 </p>
             </div>
         </div>
