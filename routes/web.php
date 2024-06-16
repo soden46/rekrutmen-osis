@@ -201,7 +201,7 @@ Route::group(['prefix' => 'siswa', 'as' => 'siswa.'], function () {
     // Rekrutmen
     Route::controller(SiswaDataRekrutmenController::class)->group(function () {
         Route::get('/rekrutmen', 'index')->name('rekrutmen');
-        Route::post('/rekrutmen/daftar/{id}', 'daftar')->name('daftar');
+        Route::post('/rekrutmen/daftar/{id}', 'daftar')->name('rekrutmen.daftar');
     });
     // Pendaftaran
     Route::controller(SiswaDataPendaftaranController::class)->group(function () {

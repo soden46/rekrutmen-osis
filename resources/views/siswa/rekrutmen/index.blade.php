@@ -57,7 +57,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <form method="POST" action="{{ route('siswa.daftar', $data->id) }}">
+                            <form method="POST" action="{{ route('siswa.rekrutmen.daftar', $data->id) }}">
                                 @csrf
                                 <button type="submit" class="btn btn-primary">Daftar</button>
                             </form>
