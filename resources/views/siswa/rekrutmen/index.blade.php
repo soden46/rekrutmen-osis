@@ -8,6 +8,11 @@
             <p>{{ $message }}</p>
         </div>
     @endif
+    @if ($message = Session::get('error'))
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
+        </div>
+    @endif
     <div class="d-flex justify-content-between mb-3">
         <div>
             <form action="{{ route('siswa.rekrutmen') }}" method="GET" class="d-flex">
