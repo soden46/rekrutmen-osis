@@ -23,11 +23,11 @@ class DataPendaftaranController extends Controller
         $user = Auth::user();
         $siswa = SiswaModel::where('id_user', $user->id)->first();
         $siswaId = $siswa->id_siswa;
-
         if ($cari != NULL) {
             return view('siswa.pendaftaran.index', [
                 'title' => 'Data Pendaftaran',
                 'pendaftaran' => DataPendaftaran::with('rekrutmen', 'siswa', 'rekrutmen.ekskul')
+                    ->where('id_siswa', $siswaId)
                     ->whereHas('rekrutmen.ekskul', function ($query) use ($siswaId) {
                         $query->where('id_siswa', $siswaId);
                     })
@@ -44,6 +44,7 @@ class DataPendaftaranController extends Controller
             return view('siswa.pendaftaran.index', [
                 'title' => 'Data Pendaftaran',
                 'pendaftaran' => DataPendaftaran::with('rekrutmen', 'siswa', 'rekrutmen.ekskul')
+                    ->where('id_siswa', $siswaId)
                     ->whereHas('rekrutmen.ekskul', function ($query) use ($siswaId) {
                         $query->where('id_siswa', $siswaId);
                     })->paginate(10),

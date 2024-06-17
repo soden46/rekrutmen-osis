@@ -29,7 +29,7 @@
             <tr>
                 <td style="width: 150px">{{ $data->id_pendaftaran }}</td>
                 <td style="width: 150px">{{ $data->siswa->users->nama ?? '' }}</td>
-                <td style="width: 150px">{{ $data->rekrutmen->nama_lowongan ?? '' }}</td>
+                <td style="width: 150px">{{ $data->rekrutmen->nama_rekrutmen ?? '' }}</td>
                 <td style="width: 150px">{{ $data->tanggal }}</td>
                 <td style="width: 150px">{{ $data->status }}</td>
                 {{-- <td>

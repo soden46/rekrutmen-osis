@@ -23,8 +23,6 @@ class DataRekrutmenController extends Controller
 
         // Mendapatkan pengguna yang sedang login
         $user = Auth::user()->id;
-
-
         if ($cari != NULL) {
             return view('siswa.rekrutmen.index', [
                 'title' => 'Data Rekrutmen',
