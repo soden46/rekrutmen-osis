@@ -19,8 +19,6 @@ class PembinaController extends Controller
 
         $pembina = PembinaModel::where('id_user', $user->id)->first();
 
-        // Jika pembina tidak ditemukan atau tidak memiliki ekstrakurikuler, mungkin ada penanganan khusus yang perlu dilakukan di sini.
-
         // Mendapatkan id ekstrakurikuler dari pembina yang sedang login
         $Eksekul = EkskulModel::where('id_pembina', $pembina->id_pembina)->first();
         // dd($Eksekul);
