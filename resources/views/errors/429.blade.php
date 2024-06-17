@@ -1,6 +1,6 @@
 @extends('layouts.home.master',[
-'title' => '429 | Bento Group Indonesia',
-'pageTitle' => '429 | Bento Group Indonesia',
+'title' => '429 | SMP Negeri 2 Mlati',
+'pageTitle' => '429 | SMP Negeri 2 Mlati',
 ])
 @section('content')
 <div class="flex items-center justify-center w-screen h-screen  bg-gradient-to-r from-indigo-600 to-blue-400">
@@ -8,7 +8,7 @@
                 <div class="flex flex-col items-center">
                     <h1 class="font-bold text-blue-600 text-9xl">429 </h1>
                     <h6 class="mb-2 text-2xl font-bold text-center text-gray-800 md:text-3xl">
-                        <span class="text-red-500">Too Many Request!</span> terlalu Banyak Permintaan Akses Ke Halaman Ini - Bento Group Indonesia
+                        <span class="text-red-500">Too Many Request!</span> terlalu Banyak Permintaan Akses Ke Halaman Ini
                     </h6>
                     <p class="mb-8 text-center text-gray-500 md:text-lg">
                         Too Many request.

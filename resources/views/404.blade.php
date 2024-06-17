@@ -1,6 +1,6 @@
 @extends('layouts.home.master', [
-    'title' => '404 | Bento Group Indonesia',
-    'pageTitle' => '404 | Bento Group Indonesia',
+    'title' => '404 | SMP Negeri 2 Mlati',
+    'pageTitle' => '404 | SMP Negeri 2 Mlati',
 ])
 @section('content')
     <div class="container">

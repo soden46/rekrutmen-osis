@@ -1,6 +1,6 @@
 @extends('layouts.home.master',[
-'title' => '503 | Bento Group Indonesia',
-'pageTitle' => '503 | Bento Group Indonesia',
+'title' => '503 | SMP Negeri 2 Mlati',
+'pageTitle' => '503 | SMP Negeri 2 Mlati',
 ])
 @section('content')
 <div class="flex items-center justify-center w-screen h-screen  bg-gradient-to-r from-indigo-600 to-blue-400">
@@ -8,7 +8,7 @@
                 <div class="flex flex-col items-center">
                     <h1 class="font-bold text-blue-600 text-9xl">500 </h1>
                     <h6 class="mb-2 text-2xl font-bold text-center text-gray-800 md:text-3xl">
-                        <span class="text-red-500">Srevices Unvailable!</span> Layanan Tidak Tersedia - Bento Group Indonesia
+                        <span class="text-red-500">Srevices Unvailable!</span> Layanan Tidak Tersedia
                     </h6>
                     <p class="mb-8 text-center text-gray-500 md:text-lg">
                         Layanan Yang Anda Tuju Tidak Tersedia.

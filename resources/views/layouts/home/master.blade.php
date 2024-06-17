@@ -5,9 +5,9 @@
         <meta charset="utf-8">
         <title>{{ $pageTitle ?? '' }}</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="Bento Group Indonesia" name="keywords">
+        <meta content="SMP Negeri 2 Mlati" name="keywords">
         <meta
-            content="Bento Group Indonesia merupakan gabungan dari beberapa perusahaan bergerak sebagai pengelola dari berbagai dana investasi dari para investor. Kami bergerak di bidang Real Estate hingga kafe & Co-working. Saat ini sudah banyak cabang usaha di bawah pengelolaan Bento Group Indonesia."
+            content="SMP Negeri 2 Mlati."
             name="description">
         <!-- Favicon -->
         <link rel="shortcut icon" type="image/x-generic" href="/favicon.ico">
