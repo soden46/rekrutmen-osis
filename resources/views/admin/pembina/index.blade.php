@@ -26,6 +26,7 @@
         <tr class="font-12">
             <th style="width: 150px">NIP</th>
             <th style="width: 150px">Nama</th>
+            <th style="width: 150px">Tempat Lahir</th>
             <th style="width: 150px">Tanggal Lahir</th>
             <th style="width: 150px">Jenis Kelamin</th>
             <th style="width: 100px">Aksi</th>
@@ -34,6 +35,7 @@
             <tr>
                 <td style="width: 150px">{{ $data->nip }}</td>
                 <td style="width: 150px">{{ $data->users->nama ?? '' }}</td>
+                <td style="width: 150px">{{ $data->tempat_lahir }}</td>
                 <td style="width: 150px">{{ $data->tanggal_lahir }}</td>
                 <td style="width: 150px">{{ $data->jenis_kelamin }}</td>
                 <td>
