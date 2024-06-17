@@ -17,7 +17,7 @@
         <div class="card-body">
             <form method="post" action="{{ route('admin.siswa.update',$siswa->id_siswa) }}" enctype="multipart/form-data">
                 @csrf
-
+                @method('PUT')
                 <div class="form-group">
                     <label for="id_user">Nama Siswa</label>
                     <input type="text" class="form-control" id="id_user" name="id_user" value="{{$siswa->users->nama}}" readonly>
