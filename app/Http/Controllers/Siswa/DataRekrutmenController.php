@@ -73,6 +73,15 @@ class DataRekrutmenController extends Controller
         $user = Auth::user();
         $siswa = SiswaModel::where('id_user', $user->id)->first();
 
+        // Pengecekan apakah siswa sudah mendaftar
+        $existingPendaftaran = DataPendaftaran::where('id_siswa', $siswa->id_siswa)
+            ->where('id_rekrutmen', $id_rekrutmen)
+            ->first();
+
+        if ($existingPendaftaran) {
+            return redirect()->route('siswa.rekrutmen')->with('error', 'Maaf Anda hanya bisa mendaftar satu kali.');
+        }
+
         // Logika untuk menyimpan data pendaftaran
         DataPendaftaran::create([
             'id_siswa' => $siswa->id_siswa,
