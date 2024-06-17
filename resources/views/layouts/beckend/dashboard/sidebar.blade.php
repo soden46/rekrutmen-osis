@@ -151,13 +151,13 @@
         <li class="nav-item">
             <a class="nav-link" href="{{ route('siswa.rekrutmen') }}">
                 <i class="fa fa-light fa-newspaper"></i>
-                <span>Rekrtutmen</span>
+                <span>Rekrutmen</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('siswa.pendaftaran') }}">
                 <i class="fa fa-info-circle"></i>
-                <span>Pendafatran</span>
+                <span>Pendaftaran</span>
             </a>
         </li>
         <li class="nav-item">

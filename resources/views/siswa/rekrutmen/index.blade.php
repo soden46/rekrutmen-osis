@@ -21,7 +21,7 @@
     <table class="table table-bordered">
         <tr class="font-12">
             <th style="width: 150px">Nama Ekskul</th>
-            <th style="width: 150px">Nama Lowongan</th>
+            <th style="width: 150px">Nama Rekrutmen</th>
             <th style="width: 150px">Tanggal Dimulai</th>
             <th style="width: 150px">Tanggal Berakhir</th>
             <th style="width: 150px">Deskripsi</th>
@@ -29,7 +29,7 @@
         @foreach ($rekrutmen as $data)
             <tr>
                 <td style="width: 150px">{{ $data->ekskul->nama_ekskul ?? '' }}</td>
-                <td style="width: 150px">{{ $data->nama_lowongan ?? '' }}</td>
+                <td style="width: 150px">{{ $data->nama_rekrutmen ?? '' }}</td>
                 <td style="width: 150px">{{ date('d/m/Y', strtotime($data->tanggal_dimulai ?? '')) }}</td>
                 <td style="width: 150px">{{ date('d/m/Y', strtotime($data->tanggal_berakhir ?? '')) }}</td>
                 <td style="width: 150px">

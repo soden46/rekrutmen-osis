@@ -27,8 +27,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="nama_lowongan">Nama Lowongan</label>
-                    <input type="text" class="form-control" id="nama_lowongan" name="nama_lowongan">
+                    <label for="nama_rekrutmen">Nama Rekrutmen</label>
+                    <input type="text" class="form-control" id="nama_rekrutmen" name="nama_rekrutmen">
                 </div>
                 <div class="form-group">
                     <label for="tanggal_dimulai">tanggal_dimulai</label>

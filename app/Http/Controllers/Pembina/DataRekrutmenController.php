@@ -34,7 +34,7 @@ class DataRekrutmenController extends Controller
                     $query->where('id_pembina', $pembinaId);
                 })
                     ->where(function ($query) use ($cari) {
-                        $query->where('nama_lowongan', 'like', "%{$cari}%")
+                        $query->where('nama_rekrutmen', 'like', "%{$cari}%")
                             ->orWhereHas('ekstrakulikuler', function ($query) use ($cari) {
                                 $query->where('nama_ekskul', 'like', "%{$cari}%");
                             });
@@ -79,8 +79,8 @@ class DataRekrutmenController extends Controller
         // dd($request);
 
         $validatedData = $request->validate([
-            'id_ekskul' => 'required',
-            'nama_lowongan' => 'required|max:20',
+            'id_ekskul' => 'required|max:20',
+            'nama_rekrutmen' => 'required|max:50',
             'tanggal_dimulai' => 'required',
             'tanggal_berakhir' => 'required',
             'deskripsi' => 'required',
@@ -117,8 +117,8 @@ class DataRekrutmenController extends Controller
     public function update(Request $request, $id_rekrutmen)
     {
         $rules = [
-            'id_ekskul' => 'required',
-            'nama_lowongan' => 'required|max:20',
+            'id_ekskul' => 'required|max:20',
+            'nama_rekrutmen' => 'required|max:50',
             'tanggal_dimulai' => 'required',
             'tanggal_berakhir' => 'required',
             'deskripsi' => 'required',
