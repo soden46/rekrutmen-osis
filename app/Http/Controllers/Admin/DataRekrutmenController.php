@@ -67,8 +67,8 @@ class DataRekrutmenController extends Controller
         // dd($request);
 
         $validatedData = $request->validate([
-            'id_ekskul' => 'required',
-            'nama_lowongan' => 'required|max:255',
+            'id_ekskul' => 'required|max:20',
+            'nama_lowongan' => 'required|max:20',
             'tanggal_dimulai' => 'required',
             'tanggal_berakhir' => 'required',
             'deskripsi' => 'required',
@@ -105,8 +105,8 @@ class DataRekrutmenController extends Controller
     public function update(Request $request, $id_rekrutmen)
     {
         $rules = [
-            'id_ekskul' => 'required',
-            'nama_lowongan' => 'required|max:255',
+            'id_ekskul' => 'required|max:20',
+            'nama_lowongan' => 'required|max:20',
             'tanggal_dimulai' => 'required',
             'tanggal_berakhir' => 'required',
             'deskripsi' => 'required',

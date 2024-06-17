@@ -16,7 +16,7 @@
             <h1 class="h3 mb-3 fw-normal text-center">MASUK</h1>
             <div class="form-floating mb-3">
                 <label for="email">Email</label>
-                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="bentokopi@gmail.com" value="{{ old('email') }}" autofocus required>
+                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="email@gmail.com" value="{{ old('email') }}" autofocus required>
                 @error('email')
                 <div class="invalid-feedback">
                     {{ $message }}

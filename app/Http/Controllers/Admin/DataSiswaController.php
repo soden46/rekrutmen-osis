@@ -80,7 +80,7 @@ class DataSiswaController extends Controller
         // dd($validatedData);
         SiswaModel::create($validatedData);
 
-        return redirect()->route('admin.didwa')->with('successCreatedPenduduk', 'Data has ben created');
+        return redirect()->route('admin.didwa')->with('success', 'Data has ben created');
     }
 
     /**
@@ -123,7 +123,7 @@ class DataSiswaController extends Controller
 
         SiswaModel::where('id_siswa', $id_siswa)->update($validatedData);
 
-        return redirect()->route('admin.siswa')->with('successUpdatedMasyarakat', 'Data has ben updated');
+        return redirect()->route('admin.siswa')->with('success', 'Data has ben updated');
     }
 
     /**
@@ -135,7 +135,7 @@ class DataSiswaController extends Controller
     public function destroy($id_siswa)
     {
         SiswaModel::where('id_siswa', $id_siswa)->delete();
-        return redirect()->route('admin.siswa')->with('successDeletedMasyarakat', 'Data has ben deleted');
+        return redirect()->route('admin.siswa')->with('success', 'Data has ben deleted');
     }
 
     public function pdf()
