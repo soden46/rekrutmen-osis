@@ -17,4 +17,14 @@ class DataRekrutmen extends Model
     {
         return $this->hasOne(EkskulModel::class, 'id_ekskul', 'id_ekskul');
     }
+
+    public function jadwalTes()
+    {
+        return $this->hasMany(DataJadwaltes::class, 'id_rekrutmen');
+    }
+
+    public function pendaftaran()
+    {
+        return $this->hasMany(DataPendaftaran::class, 'id_rekrutmen');
+    }
 }

@@ -23,7 +23,7 @@ class DataEkskulController extends Controller
         if ($cari != NULL) {
             return view('admin.ekskul.index', [
                 'title' => 'Data Ekstrakulikuler',
-                'ekskul' => EkskulModel::with('pembina')
+                'ekskul' => EkskulModel::with('pembina', 'pembina.users')
                     ->where(function ($query) use ($cari) {
                         $query->where('nama_ekskul', 'like', "%{$cari}%")
                             ->orWhereHas('pembina', function ($query) use ($cari) {
@@ -35,7 +35,7 @@ class DataEkskulController extends Controller
         } else {
             return view('admin.ekskul.index', [
                 'title' => 'Data Ekstrakulikuler',
-                'ekskul' => EkskulModel::with('pembina')->paginate(10),
+                'ekskul' => EkskulModel::with('pembina', 'pembina.users')->paginate(10),
             ]);
         }
     }
@@ -128,7 +128,7 @@ class DataEkskulController extends Controller
     {
         $data = [
             'title' => 'Data Ekstrakulikuler',
-            'ekskul' => EkskulModel::with('pembina')->get(),
+            'ekskul' => EkskulModel::with('pembina', 'pembina.users')->get(),
             'pembina' => PembinaModel::get()
         ];
 

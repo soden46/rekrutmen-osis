@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Siswa;
 
 use App\Http\Controllers\Controller;
-use App\Models\Pelamar;
+use App\Models\DataPendaftaran;
+use App\Models\DataRekrutmen;
+use App\Models\Siswa;
 use App\Models\Lamaran;
-use App\Models\News;
-use App\Models\Caffe;
-use App\Models\LowonganPekerjaan;
+use App\Models\SiswaModel;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,57 +16,47 @@ class SiswaController extends Controller
 {
 	public function index()
 	{
-		dd('aa');
-		return view('pelamar.index');
-	}
-	public function lamar(Request $request)
-	{
-		$pelamar = Pelamar::where('id_user', Auth::user()->id)->value('id_pelamar');
-		$berita = News::where('id_berita', '=', $request->id)->value('judul');
-		$id_berita = $request->id;
-		return view('pelamar.lamaran', compact('berita', 'pelamar', 'id_berita'));
+		$siswa = SiswaModel::with('users')->where('id_user', Auth::user()->id)->first();
+		$rekrutmen = DataRekrutmen::where('tanggal_berakhir', now())->count();
+		$pendaftaran = DataPendaftaran::where('id_siswa', $siswa->id_siswa)->count();
+		return view('siswa.index', compact('siswa', 'rekrutmen', 'pendaftaran'));
 	}
 
-	public function store(Request $request)
+	public function profile()
 	{
-		$ValidatedData = $request->validate([
-			'id_pelamar' => ['required', 'max:255'],
-			'id_berita' => ['required', 'max:255'],
-			'lowongan' => ['required', 'max:255'],
-			'alamat_caffe' => ['required', 'min:6'],
-			'foto' => ['required', 'mimes:jpg,jpeg,png', 'max:5048'],
-			'cv' => ['required', 'mimes:pdf,PDF', 'max:2048'],
-			'surat_lamaran' => ['required', 'mimes:pdf,PDF', 'max:2048']
+		$siswa = SiswaModel::where('id_user', Auth::user()->id)->first();
+		return view('siswa.profile', compact('siswa'));
+	}
+
+
+	public function storeProfile(Request $request, $id)
+	{
+		$request->validate([
+			'nama' => 'required|string|max:255',
+			'nis' => 'required|string|max:255',
+			'kelas' => 'required|string|max:255',
+			'tempat_lahir' => 'required|string|max:255',
+			'tanggal_lahir' => 'required|date',
+			'jenis_kelamin' => 'required|string',
+			'tinggi_badan' => 'required|numeric',
+			'berat_badan' => 'required|numeric',
 		]);
 
-		if ($request->file('foto')) {
-			$ValidatedData['foto'] = $request->file('foto')->store('lamaran-foto');
-		}
-		if ($request->file('cv')) {
-			$ValidatedData['cv'] = $request->file('cv')->store('lamaran-cv');
-		}
-		if ($request->file('surat_lamaran')) {
-			$ValidatedData['surat_lamaran'] = $request->file('surat_lamaran')->store('lamaran-surat_lamaran');
-		}
+		// Update nama user
+		$user = User::find($id);
+		$user->nama = $request->input('nama');
+		$user->save();
 
-		Lamaran::create($ValidatedData);
-		return redirect()->back()
-			->with('success', 'Lamaran Anda Berhasil Disimpan dan Menunggu Ditindaklanjuti');
-	}
-
-	public function status()
-	{
-		//get posts
-		$lamaran = Lamaran::where('pelamar.id_user', '=', Auth::user()->id)->join('pelamar', 'lamaran.id_pelamar', '=', 'pelamar.id_pelamar')
-			->get(['lamaran.*', 'pelamar.*']);
-		//render view with posts
-		return view('pelamar.status', compact('lamaran'));
-	}
-	public function lowongan()
-	{
-		$news = News::where('kategori', '=', "Lowongan Kerja")->where('status_lowongan', '=', 'Lowongan Tersedia')
-			->get();
-		//render view with posts
-		return view('pelamar.lowongan', compact('news'));
+		// Update Siswa data
+		$siswa = SiswaModel::where('id_user', $id)->first();
+		$siswa->nis = $request->input('nis');
+		$siswa->kelas = $request->input('kelas');
+		$siswa->tempat_lahir = $request->input('tempat_lahir');
+		$siswa->tanggal_lahir = $request->input('tanggal_lahir');
+		$siswa->jenis_kelamin = $request->input('jenis_kelamin');
+		$siswa->tinggi_badan = $request->input('tinggi_badan');
+		$siswa->berat_badan = $request->input('berat_badan');
+		$siswa->save();
+		return redirect()->back()->with('success, Data Profile sukses diperbaharui');
 	}
 }

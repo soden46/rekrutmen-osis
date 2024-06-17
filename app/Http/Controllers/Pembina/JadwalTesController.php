@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Pembina;
 
 use App\Http\Controllers\Controller;
 use App\Models\DataJadwaltes;
+use App\Models\DataPendaftaran;
+use App\Models\DataRekrutmen;
 use App\Models\PembinaModel;
-use App\Models\SiswaModel;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,29 +29,29 @@ class JadwalTesController extends Controller
         if ($cari != NULL) {
             return view('pembina.jadwal.index', [
                 'title' => 'Data Jadwal Tes',
-                'tes' => DataJadwaltes::with('siswa', 'siswa.pendaftaran.rekrutmen.ekskul')
-                    ->whereHas('siswa.pendaftaran.rekrutmen.ekskul', function ($query) use ($pembinaId) {
+                'tes' => DataJadwaltes::with('rekrutmen', 'rekrutmen.ekskul')
+                    ->whereHas('rekrutmen.ekskul', function ($query) use ($pembinaId) {
                         $query->where('id_pembina', $pembinaId);
                     })
                     ->where(function ($query) use ($cari) {
                         $query->where('nama_jadwal_tes', 'like', "%{$cari}%")
                             ->orWhere('tanggal', 'like', "%{$cari}%")
-                            ->orWhereHas('siswa', function ($query) use ($cari) {
-                                $query->where('users->nama', 'like', "%{$cari}%");
+                            ->orWhereHas('rekrutmen', function ($query) use ($cari) {
+                                $query->where('rekrutmen->nama_lowongan', 'like', "%{$cari}%");
                             });
                     })
                     ->paginate(10),
-                'siswa' => SiswaModel::get(),
+                'rekrutmen' => DataRekrutmen::get(),
             ]);
         } else {
             return view('pembina.jadwal.index', [
                 'title' => 'Data Jadwal Tes',
-                'tes' => DataJadwaltes::with('siswa', 'siswa.pendaftaran.rekrutmen.ekskul')
-                    ->whereHas('siswa.pendaftaran.rekrutmen.ekskul', function ($query) use ($pembinaId) {
+                'tes' => DataJadwaltes::with('rekrutmen', 'rekrutmen.ekskul')
+                    ->whereHas('rekrutmen.ekskul', function ($query) use ($pembinaId) {
                         $query->where('id_pembina', $pembinaId);
                     })
                     ->paginate(10),
-                'siswa' => SiswaModel::get(),
+                'rekrutmen' => DataRekrutmen::get(),
 
             ]);
         }
@@ -63,9 +64,10 @@ class JadwalTesController extends Controller
      */
     public function create()
     {
+
         return view('pembina.jadwal.create', [
             'title' => 'Tambah Data Jadwal Tes',
-            'siswa' => SiswaModel::get()
+            'rekrutmen' => DataRekrutmen::get()
 
         ]);
     }
@@ -81,7 +83,7 @@ class JadwalTesController extends Controller
         // dd($request);
 
         $validatedData = $request->validate([
-            'id_siswa' => 'required',
+            'id_rekrutmen' => 'required',
             'nama_jadwal_tes' => 'required|max:255',
             'tanggal' => 'required',
             'jam' => 'required',
@@ -108,13 +110,13 @@ class JadwalTesController extends Controller
 
         return view('pembina.jadwal.edit', [
             'title' => 'Edit Data Jadwal Tes',
-            'tes' => DataJadwaltes::with('siswa', 'siswa.pendaftaran.rekrutmen.ekskul')
-                ->whereHas('siswa.pendaftaran.rekrutmen.ekskul', function ($query) use ($pembinaId) {
+            'tes' => DataJadwaltes::with('rekrutmen', 'rekrutmen.ekskul')
+                ->whereHas('rekrutmen.ekskul', function ($query) use ($pembinaId) {
                     $query->where('id_pembina', $pembinaId);
                 })
                 ->where('id_jadwal', $id_jadwal)
                 ->first(),
-            'siswa' => SiswaModel::get()
+            'rekrutmen' => DataRekrutmen::get()
         ]);
     }
 
@@ -128,7 +130,7 @@ class JadwalTesController extends Controller
     public function update(Request $request, $id_jadwal)
     {
         $rules = [
-            'id_siswa' => 'required',
+            'id_rekrutmen' => 'required',
             'nama_jadwal_tes' => 'required|max:255',
             'tanggal' => 'required',
             'jam' => 'required',
@@ -158,7 +160,7 @@ class JadwalTesController extends Controller
     {
         $data = [
             'title' => 'Data Ekstrakulikuler',
-            'tes' => DataJadwaltes::with('siswa')->get(),
+            'tes' => DataJadwaltes::with('pendaftaran')->get(),
 
         ];
 

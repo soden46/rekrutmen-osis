@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Data Ekstrakulikuler</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <style>
         body {
             font-size: 12px;
@@ -50,8 +51,8 @@
 
         #foto {
             float: left;
-            width: 120px;
-            height: 150px;
+            width: 88px;
+            height: 88px;
             background: transparent;
         }
 
@@ -105,7 +106,7 @@
     <div class="card">
         <div class="card-body">
             <div class="header">
-                <img src="{{public_path('storage/asset/sleman.png')}}" id="foto" alt="Logo" height="75px" />
+                <img src="{{ public_path('storage/assets/logo.png') }}" id="foto" alt="Logo" height="75px" />
                 <h1 class="text-center">SMP Negeri 2 Mlati</h1>
                 <p class="text-center">Jalan </p>
                 <p class="text-center">Telepon (0274) 797496</p>
@@ -120,11 +121,11 @@
                     <th style="width: 150px">Jumlah Anggota</th>
                 </tr>
                 @foreach ($ekskul as $ekstra)
-                <tr>
-                    <td style="width: 150px">{{ $ekstra->nama_ekskul }}</td>
-                    <td style="width: 150px">{{ $ekstra->pembina->nama ?? ''}}</td>
-                    <td style="width: 150px">{{$ekstra->jml_anggota}}</td>
-                </tr>
+                    <tr>
+                        <td style="width: 150px">{{ $ekstra->nama_ekskul }}</td>
+                        <td style="width: 150px">{{ $ekstra->pembina->users->nama ?? '' }}</td>
+                        <td style="width: 150px">{{ $ekstra->jml_anggota }}</td>
+                    </tr>
                 @endforeach
             </table>
         </div>

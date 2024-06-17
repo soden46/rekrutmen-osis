@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Data Siswa</title>
+    <title>Data Rekrutmen</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <style>
@@ -116,19 +116,18 @@
 
             <table class="table table-bordered">
                 <tr class="font-12">
-                    <th>NIP</th>
-                    <th>Nama</th>
-                    <th>Tanggal Lahir</th>
-                    <th>Alamat</th>
-                    <th>Jenis Kelamin</th>
+                    <th style="width: 150px">Nama Ekskul</th>
+                    <th style="width: 150px">Nama Lowongan</th>
+                    <th style="width: 150px">Tanggal Dimulai</th>
+                    <th style="width: 150px">Tanggal Berakhir</th>
                 </tr>
-                @foreach ($pembina as $data)
+                @foreach ($rekrutmen as $data)
                     <tr>
-                        <td>{{ $data->nip }}</td>
-                        <td>{{ $data->users->nama ?? '' }}</td>
-                        <td>{{ $data->tanggal_lahir }}</td>
-                        <td>{{ $data->alamat }}</td>
-                        <td>{{ $data->jenis_kelamin }}</td>
+                        <td style="width: 150px">{{ $data->ekskul->nama_ekskul ?? '' }}</td>
+                        <td style="width: 150px">{{ $data->nama_lowongan ?? '' }}</td>
+                        <td style="width: 150px">{{ date('d/m/Y', strtotime($data->tanggal_dimulai ?? '')) }}</td>
+                        <td style="width: 150px">{{ date('d/m/Y', strtotime($data->tanggal_berakhir ?? '')) }}</td>
+
                     </tr>
                 @endforeach
             </table>
