@@ -28,15 +28,15 @@ class LoginController extends Controller
     public function authenticate(Request $request)
     {
         $this->validate($request, [
-            'email' => 'required|email',
+            'userName' => 'required',
             'password' => 'required',
         ]);
 
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only('userName', 'password');
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-            Log::info('User logged in: ', ['email' => $user->email, 'role' => $user->role]);
+            Log::info('User logged in: ', ['userName' => $user->userName, 'role' => $user->role]);
 
             if ($user->role == 'admin') {
                 return redirect()->route('admin.index');

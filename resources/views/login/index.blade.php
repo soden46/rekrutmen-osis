@@ -16,10 +16,10 @@
                 </div>
                 <h1 class="h3 mb-3 fw-normal text-center">MASUK</h1>
                 <div class="form-floating mb-3">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
-                        id="email" placeholder="email@gmail.com" value="{{ old('email') }}" autofocus required>
-                    @error('email')
+                    <label for="userName">Username</label>
+                    <input type="userName" name="userName" class="form-control @error('userName') is-invalid @enderror"
+                        id="userName" value="{{ old('userName') }}" autofocus required>
+                    @error('userName')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>

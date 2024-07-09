@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\AdminModel;
+use App\Models\DataPendaftaran;
 use App\Models\DataRekrutmen;
 use App\Models\EkskulModel;
 use App\Models\HasilPenerimaan;
@@ -23,20 +24,16 @@ class AdminController extends Controller
         $jumlahRekrutmen = DataRekrutmen::count();
 
         // Menghitung jumlah pendaftar Osis
-        $jumlahPendaftarOsis = HasilPenerimaan::whereHas('pendaftaran', function ($query) {
-            $query->whereHas('rekrutmen', function ($query) {
-                $query->whereHas('ekskul', function ($query) {
-                    $query->where('nama_ekskul', 'osis');
-                });
+        $jumlahPendaftarOsis = DataPendaftaran::whereHas('rekrutmen', function ($query) {
+            $query->whereHas('ekskul', function ($query) {
+                $query->where('nama_ekskul', 'osis');
             });
         })->distinct('id_pendaftaran')->count('id_pendaftaran');
 
         // Menghitung jumlah pendaftar Tonti
-        $jumlahPendaftarTonti = HasilPenerimaan::whereHas('pendaftaran', function ($query) {
-            $query->whereHas('rekrutmen', function ($query) {
-                $query->whereHas('ekskul', function ($query) {
-                    $query->where('nama_ekskul', 'tonti');
-                });
+        $jumlahPendaftarTonti = DataPendaftaran::whereHas('rekrutmen', function ($query) {
+            $query->whereHas('ekskul', function ($query) {
+                $query->where('nama_ekskul', 'tonti');
             });
         })->distinct('id_pendaftaran')->count('id_pendaftaran');
 

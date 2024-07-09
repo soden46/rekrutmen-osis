@@ -63,21 +63,32 @@ class DataSiswaController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         // Validasi data
         $ValidatedData = $request->validate([
             'nama' => 'required|max:255',
-            'username' => 'required|min:3|max:255|unique:users',
-            'nis' => 'required|unique:users',
+            'nis' => 'required|unique:siswa',
             'password' => 'required|min:6|max:12',
         ]);
 
         // Menyimpan data ke database
-        User::create([
-            'nis' => $ValidatedData['nis'],
+        $userID = User::create([
             'nama' => $ValidatedData['nama'],
-            'userName' => $ValidatedData['username'],
+            'userName' => $ValidatedData['nama'],
             'password' => Hash::make($ValidatedData['password']),
             'role' => 'siswa',
+        ]);
+
+        SiswaModel::create([
+            'id_user' => $userID->id,
+            'nis' => $ValidatedData['nis'],
+            'kelas' => $request->kelas,
+            'tempat_lahir' => $request->tempat_lahir,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'alamat' => $request->alamat,
+            'tinggi_badan' => $request->tinggi_badan,
+            'berat_badan' => $request->berat_badan,
         ]);
 
         return redirect()->route('admin.siswa')->with('success', 'Data has ben created');

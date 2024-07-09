@@ -29,26 +29,44 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="form-floating">
-                        <label for="floatingInput">Username</label>
-                        <input type="text" name="username" class="form-control @error('username')is-invalid @enderror"
-                            id="floatingInput" placeholder="Username" required value="{{ old('username') }}">
-                        @error('username')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+
+
+                    <div class="form-group">
+                        <label for="nis">NIS</label>
+                        <input class="form-control" type="number" id="nis" name="nis">
                     </div>
 
-                    <div class="form-floating">
-                        <label for="floatingInput">NIS</label>
-                        <input type="nis" name="nis" class="form-control @error('nis')is-invalid @enderror"
-                            id="floatingInput" required value="{{ old('nis') }}">
-                        @error('nis')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                    <div class="form-group">
+                        <label for="kelas">Kelas</label>
+                        <input class="form-control" type="text" id="kelas" name="kelas">
+                    </div>
+                    <div class="form-group">
+                        <label for="tempat_lahir">Tempat Lahir</label>
+                        <input class="form-control" type="area" id="tempat_lahir" name="tempat_lahir">
+                    </div>
+                    <div class="form-group">
+                        <label for="tanggal_lahir">Tanggal Lahir</label>
+                        <input class="form-control" type="date" id="tanggal_lahir" name="tanggal_lahir">
+                    </div>
+                    <div class="form-group">
+                        <label for="jenis_kelamin">Jenis Kelamin</label>
+                        <select name="jenis_kelamin" id="jenis_kelamin" class="form-control">
+                            <option value="" selected>Pilih Jenis Kelamin</option>
+                            <option value="Laki-Laki">Laki-Laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="alamat">Alamat</label>
+                        <textarea class="form-control" id="alamat" name="alamat"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="tinggi_badan">Tinggi Badan</label>
+                        <input class="form-control" type="number" id="tinggi_badan" name="tinggi_badan">
+                    </div>
+                    <div class="form-group">
+                        <label for="berat_badan">Berat Badan</label>
+                        <input class="form-control" type="number" id="berat_badan" name="berat_badan">
                     </div>
 
                     <div class="form-floating">
