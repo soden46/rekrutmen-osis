@@ -231,9 +231,7 @@ class PendaftaranController extends Controller
             'id_siswa' => 'required',
             'id_rekrutmen' => 'required',
             'tanggal' => 'required',
-            'nilai_tertulis' => 'nullable',
-            'nilai_wawancara' => 'nullable',
-            'rata_rata' => 'nullable',
+            'nilai_seleksi_latihan_tonti' => 'nullable',
             'status' => 'required',
         ]);
 
@@ -272,9 +270,7 @@ class PendaftaranController extends Controller
             'id_siswa' => 'nullable',
             'id_rekrutmen' => 'nullable',
             'tanggal' => 'nullable',
-            'nilai_tertulis' => 'nullable',
-            'nilai_wawancara' => 'nullable',
-            'rata_rata' => 'nullable',
+            'nilai_seleksi_latihan_tonti' => 'nullable',
             'status' => 'nullable',
         ];
 

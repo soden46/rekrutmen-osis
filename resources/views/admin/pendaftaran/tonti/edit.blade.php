@@ -50,19 +50,9 @@
                             value="{{ $pendaftaran->tanggal }}">
                     </div>
                     <div class="form-group">
-                        <label for="nilai_tertulis">Nilai Tertulis</label>
-                        <input type="number" class="form-control" id="nilai_tertulis" name="nilai_tertulis"
-                            value="{{ $pendaftaran->nilai_tertulis }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="nilai_wawancara">Nilai Wawancara</label>
-                        <input type="number" class="form-control" id="nilai_wawancara" name="nilai_wawancara"
-                            value="{{ $pendaftaran->nilai_wawancara }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="rata_rata">Rata Rata</label>
-                        <input type="text" class="form-control" id="rata_rata" name="rata_rata"
-                            value="{{ ($pendaftaran->nilai_tertulis + $pendaftaran->nilai_wawancara) / 2 }}" readonly>
+                        <label for="nilai_seleksi_latihan_tonti">Nilai Seleksi Latihan</label>
+                        <input type="number" class="form-control" id="nilai_seleksi_latihan_tonti"
+                            name="nilai_seleksi_latihan_tonti" value="{{ $pendaftaran->nilai_seleksi_latihan_tonti }}">
                     </div>
                     <div class="form-group">
                         <label for="status">Pilih Status</label>
