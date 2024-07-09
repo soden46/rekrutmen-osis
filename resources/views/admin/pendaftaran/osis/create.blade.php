@@ -12,7 +12,7 @@
     <div class="col-lg-8">
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title">Tambah Pendaftaran</h5>
+                <h5 class="card-title">Tambah Pendaftaran Osis</h5>
             </div>
             <div class="card-body">
                 <form method="post" action="{{ route('admin.pendaftaran.osis.save') }}" enctype="multipart/form-data">
