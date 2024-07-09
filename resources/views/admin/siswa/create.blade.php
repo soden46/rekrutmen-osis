@@ -41,10 +41,10 @@
                     </div>
 
                     <div class="form-floating">
-                        <label for="floatingInput">Email</label>
-                        <input type="email" name="email" class="form-control @error('email')is-invalid @enderror"
-                            id="floatingInput" placeholder="akun@gmail.com" required value="{{ old('email') }}">
-                        @error('email')
+                        <label for="floatingInput">NIS</label>
+                        <input type="nis" name="nis" class="form-control @error('nis')is-invalid @enderror"
+                            id="floatingInput" required value="{{ old('nis') }}">
+                        @error('nis')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>

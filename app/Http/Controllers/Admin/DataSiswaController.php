@@ -67,13 +67,13 @@ class DataSiswaController extends Controller
         $ValidatedData = $request->validate([
             'nama' => 'required|max:255',
             'username' => 'required|min:3|max:255|unique:users',
-            'email' => 'required|email:dns|unique:users',
+            'nis' => 'required|unique:users',
             'password' => 'required|min:6|max:12',
         ]);
 
         // Menyimpan data ke database
         User::create([
-            'email' => $ValidatedData['email'],
+            'nis' => $ValidatedData['nis'],
             'nama' => $ValidatedData['nama'],
             'userName' => $ValidatedData['username'],
             'password' => Hash::make($ValidatedData['password']),

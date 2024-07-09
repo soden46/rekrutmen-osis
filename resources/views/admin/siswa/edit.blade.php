@@ -15,7 +15,8 @@
                 <h5 class="card-title">Edit Siswa</h5>
             </div>
             <div class="card-body">
-                <form method="post" action="{{ route('admin.siswa.update', $siswa->id_siswa) }}" enctype="multipart/form-data">
+                <form method="post" action="{{ route('admin.siswa.update', $siswa->id_siswa) }}"
+                    enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="form-group">
