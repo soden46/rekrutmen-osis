@@ -22,8 +22,23 @@ class AdminController extends Controller
         // Menghitung jumlah rekrutmen
         $jumlahRekrutmen = DataRekrutmen::count();
 
-        // Menghitung jumlah pendaftar
-        $jumlahPendaftar = HasilPenerimaan::distinct('id_pendaftaran')->count('id_pendaftaran');
+        // Menghitung jumlah pendaftar Osis
+        $jumlahPendaftarOsis = HasilPenerimaan::whereHas('pendaftaran', function ($query) {
+            $query->whereHas('rekrutmen', function ($query) {
+                $query->whereHas('ekskul', function ($query) {
+                    $query->where('nama_ekskul', 'osis');
+                });
+            });
+        })->distinct('id_pendaftaran')->count('id_pendaftaran');
+
+        // Menghitung jumlah pendaftar Tonti
+        $jumlahPendaftarTonti = HasilPenerimaan::whereHas('pendaftaran', function ($query) {
+            $query->whereHas('rekrutmen', function ($query) {
+                $query->whereHas('ekskul', function ($query) {
+                    $query->where('nama_ekskul', 'tonti');
+                });
+            });
+        })->distinct('id_pendaftaran')->count('id_pendaftaran');
 
         // Menghitung jumlah ekstrakurikuler
         $jumlahEkstrakurikuler = EkskulModel::count();
@@ -36,7 +51,8 @@ class AdminController extends Controller
 
         return view('admin.index', [
             'jumlahRekrutmen' => $jumlahRekrutmen,
-            'jumlahPendaftar' => $jumlahPendaftar,
+            'jumlahPendaftarOsis' => $jumlahPendaftarOsis,
+            'jumlahPendaftarTonti' => $jumlahPendaftarTonti,
             'jumlahEkstrakurikuler' => $jumlahEkstrakurikuler,
             'jumlahSiswa' => $jumlahSiswa,
             'jumlahPembina' => $jumlahPembina,

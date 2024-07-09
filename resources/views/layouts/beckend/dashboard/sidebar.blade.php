@@ -46,10 +46,18 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('admin.pendaftaran') }}">
-                <i class="fa fa-info-circle"></i>
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePendaftaran"
+                aria-expanded="true" aria-controls="collapsePendaftaran">
+                <i class="fa fa-building-o"></i>
                 <span>Data Pendaftaran</span>
             </a>
+            <div id="collapsePendaftaran" class="collapse" aria-labelledby="headingPendaftaran"
+                data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="{{ route('admin.pendaftaran.osis') }}">Data Osis</a>
+                    <a class="collapse-item" href="{{ route('admin.pendaftaran.tonti') }}">Data Tonti</a>
+                </div>
+            </div>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('admin.jadwal') }}">

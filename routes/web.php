@@ -104,15 +104,25 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::delete('/rekrutmen/{id_rekrutmen}', 'destroy')->name('rekrutmen.destroy');
         Route::get('/rekrutmen/cetak', 'pdf')->name('rekrutmen.cetak');
     });
-    // Pendaftaran
+    // Pendaftaran Osis
     Route::controller(PendaftaranController::class)->group(function () {
-        Route::get('/pendaftaran', 'index')->name('pendaftaran');
-        Route::get('/pendaftaran/create', 'create')->name('pendaftaran.create');
-        Route::post('/pendaftaran/save', 'store')->name('pendaftaran.save');
-        Route::get('/pendaftaran/edit/{id_pendaftaran}', 'edit')->name('pendaftaran.edit');
-        Route::put('/pendaftaran/update/{id_pendaftaran}', 'update')->name('pendaftaran.update');
-        Route::delete('/pendaftaran/{id_pendaftaran}', 'destroy')->name('pendaftaran.destroy');
-        Route::get('/pendaftaran/cetak', 'pdf')->name('pendaftaran.cetak');
+        Route::get('/pendaftaran-osis', 'indexOsis')->name('pendaftaran.osis');
+        Route::get('/pendaftaran-osis/create', 'createOsis')->name('pendaftaran.osis.create');
+        Route::post('/pendaftaran-osis/save', 'storeOsis')->name('pendaftaran.osis.save');
+        Route::get('/pendaftaran-osis/edit/{id_pendaftaran}', 'editOsis')->name('pendaftaran.osis.edit');
+        Route::put('/pendaftaran-osis/update/{id_pendaftaran}', 'updateOsis')->name('pendaftaran.osis.update');
+        Route::delete('/pendaftaran-osis/{id_pendaftaran}', 'destroyOsis')->name('pendaftaran.osis.destroy');
+        Route::get('/pendaftaran-osis/cetak', 'pdfOsis')->name('pendaftaran.osis.cetak');
+    });
+    // Pendaftaran Tonti
+    Route::controller(PendaftaranController::class)->group(function () {
+        Route::get('/pendaftaran-tonti', 'indexTonti')->name('pendaftaran.tonti');
+        Route::get('/pendaftaran-tonti/create', 'createTonti')->name('pendaftaran.tonti.create');
+        Route::post('/pendaftaran-tonti/save', 'storeTonti')->name('pendaftaran.tonti.save');
+        Route::get('/pendaftaran-tonti/edit/{id_pendaftaran}', 'editTonti')->name('pendaftaran.tonti.edit');
+        Route::put('/pendaftaran-tonti/update/{id_pendaftaran}', 'updateTonti')->name('pendaftaran.tonti.update');
+        Route::delete('/pendaftaran-tonti/{id_pendaftaran}', 'destroyTonti')->name('pendaftaran.tonti.destroy');
+        Route::get('/pendaftaran-tonti/cetak', 'pdfTonti')->name('pendaftaran.tonti.cetak');
     });
     // Jadwal Tes
     Route::controller(JadwalTesController::class)->group(function () {
