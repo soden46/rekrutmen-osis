@@ -65,12 +65,6 @@
                 <span>Data Jadwal Tes</span>
             </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('admin.hasil') }}">
-                <i class="fa fa-info-circle"></i>
-                <span>Data Hasil Tes</span>
-            </a>
-        </li>
         <hr class="sidebar-divider">
         <li class="nav-item">
             <a class="nav-link" href="/logout">
@@ -119,12 +113,6 @@
             <a class="nav-link" href="{{ route('pembina.jadwal') }}">
                 <i class="fa fa-info-circle"></i>
                 <span>Data Jadwal Tes</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('pembina.hasil') }}">
-                <i class="fa fa-info-circle"></i>
-                <span>Data Hasil Tes</span>
             </a>
         </li>
 

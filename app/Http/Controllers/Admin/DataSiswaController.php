@@ -7,6 +7,7 @@ use App\Models\SiswaModel;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class DataSiswaController extends Controller
 {
@@ -62,25 +63,24 @@ class DataSiswaController extends Controller
      */
     public function store(Request $request)
     {
-
-        $validatedData = $request->validate([
-            'nis' => 'max:255',
-            'kelas' => 'max:255',
-            'tempat_lahir' => 'max:255',
-            'tanggal_lahir' => 'max:255',
-            'jenis_kelamin' => 'max:255',
-            'alamat' => 'max:255',
-            'tinggai_badan' => 'max:255',
-            'berat_badan' => 'max:255',
-            'kelas' => 'max:255',
-            'kelas' => 'max:255',
-            'kelas' => 'max:255',
+        // Validasi data
+        $ValidatedData = $request->validate([
+            'nama' => 'required|max:255',
+            'username' => 'required|min:3|max:255|unique:users',
+            'email' => 'required|email:dns|unique:users',
+            'password' => 'required|min:6|max:12',
         ]);
 
-        // dd($validatedData);
-        SiswaModel::create($validatedData);
+        // Menyimpan data ke database
+        User::create([
+            'email' => $ValidatedData['email'],
+            'nama' => $ValidatedData['nama'],
+            'userName' => $ValidatedData['username'],
+            'password' => Hash::make($ValidatedData['password']),
+            'role' => 'siswa',
+        ]);
 
-        return redirect()->route('admin.didwa')->with('success', 'Data has ben created');
+        return redirect()->route('admin.siswa')->with('success', 'Data has ben created');
     }
 
     /**

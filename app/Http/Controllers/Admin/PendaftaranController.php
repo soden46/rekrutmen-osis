@@ -81,6 +81,9 @@ class PendaftaranController extends Controller
             'id_siswa' => 'required',
             'id_rekrutmen' => 'required',
             'tanggal' => 'required',
+            'nilai_tertulis' => 'nullable',
+            'nilai_wawancara' => 'nullable',
+            'rata_rata' => 'nullable',
             'status' => 'required',
         ]);
 
@@ -116,11 +119,13 @@ class PendaftaranController extends Controller
     public function updateOsis(Request $request, $id_pendaftaran)
     {
         $rules = [
-            'id_rekrutmen' => 'required',
-            'nama_lowongan' => 'required|max:255',
-            'tanggal_dimulai' => 'required',
-            'tanggal_berakhir' => 'required',
-            'deskripsi' => 'required',
+            'id_siswa' => 'nullable',
+            'id_rekrutmen' => 'nullable',
+            'tanggal' => 'nullable',
+            'nilai_tertulis' => 'nullable',
+            'nilai_wawancara' => 'nullable',
+            'rata_rata' => 'nullable',
+            'status' => 'nullable',
         ];
 
 
@@ -226,6 +231,9 @@ class PendaftaranController extends Controller
             'id_siswa' => 'required',
             'id_rekrutmen' => 'required',
             'tanggal' => 'required',
+            'nilai_tertulis' => 'nullable',
+            'nilai_wawancara' => 'nullable',
+            'rata_rata' => 'nullable',
             'status' => 'required',
         ]);
 
@@ -261,11 +269,13 @@ class PendaftaranController extends Controller
     public function updateTonti(Request $request, $id_pendaftaran)
     {
         $rules = [
-            'id_rekrutmen' => 'required',
-            'nama_lowongan' => 'required|max:255',
-            'tanggal_dimulai' => 'required',
-            'tanggal_berakhir' => 'required',
-            'deskripsi' => 'required',
+            'id_siswa' => 'nullable',
+            'id_rekrutmen' => 'nullable',
+            'tanggal' => 'nullable',
+            'nilai_tertulis' => 'nullable',
+            'nilai_wawancara' => 'nullable',
+            'rata_rata' => 'nullable',
+            'status' => 'nullable',
         ];
 
 

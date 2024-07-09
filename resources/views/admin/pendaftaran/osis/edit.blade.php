@@ -50,6 +50,21 @@
                             value="{{ $pendaftaran->tanggal }}">
                     </div>
                     <div class="form-group">
+                        <label for="nilai_tertulis">Nilai Tertulis</label>
+                        <input type="number" class="form-control" id="nilai_tertulis" name="nilai_tertulis"
+                            value="{{ $pendaftaran->nilai_tertulis }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="nilai_wawancara">Nilai Wawancara</label>
+                        <input type="number" class="form-control" id="nilai_wawancara" name="nilai_wawancara"
+                            value="{{ $pendaftaran->nilai_wawancara }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="rata_rata">Rata Rata</label>
+                        <input type="text" class="form-control" id="rata_rata" name="rata_rata"
+                            value="{{ ($pendaftaran->nilai_tertulis + $pendaftaran->nilai_wawancara) / 2 }}" readonly>
+                    </div>
+                    <div class="form-group">
                         <label for="status">Pilih Status</label>
                         <select class="form-control" id="status" name="status">
                             <option value="" selected>Pilih Status</option>
@@ -64,4 +79,22 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const nilaiTertulisInput = document.getElementById('nilai_tertulis');
+            const nilaiWawancaraInput = document.getElementById('nilai_wawancara');
+            const rataRataInput = document.getElementById('rata_rata');
+
+            function calculateRataRata() {
+                const nilaiTertulis = parseFloat(nilaiTertulisInput.value) || 0;
+                const nilaiWawancara = parseFloat(nilaiWawancaraInput.value) || 0;
+                const rataRata = (nilaiTertulis + nilaiWawancara) / 2;
+                rataRataInput.value = rataRata.toFixed(2);
+            }
+
+            nilaiTertulisInput.addEventListener('input', calculateRataRata);
+            nilaiWawancaraInput.addEventListener('input', calculateRataRata);
+        });
+    </script>
 @endsection

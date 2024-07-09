@@ -29,6 +29,9 @@
             <th style="width: 150px">Nama Siswa</th>
             <th style="width: 150px">Nama Rekrutmen</th>
             <th style="width: 150px">Tanggal</th>
+            <th style="width: 150px">Nilai Tertulis</th>
+            <th style="width: 150px">Nilai Wawancara</th>
+            <th style="width: 150px">Rata Rata</th>
             <th style="width: 150px">Status</th>
             <th style="width: 100px">Aksi</th>
         </tr>
@@ -38,6 +41,9 @@
                 <td style="width: 150px">{{ $data->siswa->users->nama ?? '' }}</td>
                 <td style="width: 150px">{{ $data->rekrutmen->nama_rekrutmen ?? '' }}</td>
                 <td style="width: 150px">{{ $data->tanggal }}</td>
+                <td style="width: 150px">{{ $data->nilai_tertulis }}</td>
+                <td style="width: 150px">{{ $data->nilai_wawancara }}</td>
+                <td style="width: 150px">{{ $data->rata_rata }}</td>
                 <td style="width: 150px">{{ $data->status }}</td>
                 <td>
                     <div class="btn-group" style="width:135px">
