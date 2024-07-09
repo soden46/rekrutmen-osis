@@ -51,8 +51,8 @@
                         <label for="status">Pilih Status</label>
                         <select class="form-control" id="status" name="status">
                             <option value="" selected>Pilih Ekskul</option>
-                            <option value="Diterima"> Diterima</option>
-                            <option value="Ditolak"> Ditolak</option>
+                            <option value="Lolos"> Lolos</option>
+                            <option value="Tidak Lolos"> Tidak Lolos</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Simpan</button>

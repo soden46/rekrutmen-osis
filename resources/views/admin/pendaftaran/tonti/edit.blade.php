@@ -58,9 +58,10 @@
                         <label for="status">Pilih Status</label>
                         <select class="form-control" id="status" name="status">
                             <option value="" selected>Pilih Status</option>
-                            <option value="Diterima" {{ $pendaftaran->status == 'Diterima' ? 'selected' : '' }}> Diterima
+                            <option value="Lolos" {{ $pendaftaran->status == 'Lolos' ? 'selected' : '' }}> Lolos
                             </option>
-                            <option value="Ditolak" {{ $pendaftaran->status == 'Ditolak' ? 'selected' : '' }}> Ditolak
+                            <option value="Tidak Lolos" {{ $pendaftaran->status == 'Tidak Lolos' ? 'selected' : '' }}>
+                                Tidak Lolos
                             </option>
                         </select>
                     </div>
