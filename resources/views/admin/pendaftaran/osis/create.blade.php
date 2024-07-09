@@ -34,7 +34,7 @@
                             <option value="" selected>Pilih Rekrutmen</option>
                             @foreach ($rekrutmen as $rekrutmen)
                                 <option value="{{ $rekrutmen->id_rekrutmen }}">{{ $rekrutmen->id_rekrutmen }} |
-                                    {{ $rekrutmen->nama_lowongan }}</option>
+                                    {{ $rekrutmen->nama_rekrutmen }}</option>
                             @endforeach
                         </select>
                     </div>
