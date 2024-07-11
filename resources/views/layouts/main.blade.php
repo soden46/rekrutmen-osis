@@ -54,19 +54,17 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('assets/template/backend/sb-admin-2/js/sb-admin-2.min.js') }}"></script>
-    @push('script')
-        <script>
-            function togglePasswordVisibility() {
-                var passwordField = document.getElementById("password");
-                var showPasswordCheckbox = document.getElementById("showPassword");
-                if (showPasswordCheckbox.checked) {
-                    passwordField.type = "text";
-                } else {
-                    passwordField.type = "password";
-                }
+    <script>
+        function togglePasswordVisibility() {
+            var passwordField = document.getElementById("password");
+            var showPasswordCheckbox = document.getElementById("showPassword");
+            if (showPasswordCheckbox.checked) {
+                passwordField.type = "text";
+            } else {
+                passwordField.type = "password";
             }
-        </script>
-    @endpush
+        }
+    </script>
 </body>
 
 </html>
