@@ -32,7 +32,7 @@
                 </div>
 
                 <button class="w-100 btn btn-lg btn-primary" type="submit">MASUK</button>
-                <p><a href="">Lupa Password</a></p>
+                {{-- <p><a href="">Lupa Password</a></p> --}}
             </form>
         </div>
     </main>
