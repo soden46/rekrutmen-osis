@@ -24,31 +24,47 @@
                         </div>
                     @enderror
                 </div>
-                <div class="form-floating mb-3">
-                    <label for="password">Password</label>
-                    <input type="password" name="password" class="form-control" id="password" placeholder="Password"
-                        required>
-                    <button type="button" class="btn btn-outline-secondary" id="togglePassword">
-                        <i class="bi bi-eye-slash" id="passwordToggleIcon"></i>
-                    </button>
+                <div class="form-floating">
+                    <label for="floatingPassword">Password</label>
+                    <div class="input-group">
+                        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
+                            id="password" placeholder="Password" required>
+                        <div class="input-group-append" style="height: 55px">
+                            <span class="input-group-text" onclick="password_show_hide();"
+                                style="border: none; background: none;">
+                                <i class="fas fa-eye" id="show_eye"></i>
+                                <i class="fas fa-eye-slash d-none" id="hide_eye"></i>
+                            </span>
+                        </div>
+                    </div>
+                    @error('password')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
+
 
                 <button class="w-100 btn btn-lg btn-primary" type="submit">MASUK</button>
                 {{-- <p><a href="">Lupa Password</a></p> --}}
             </form>
         </div>
     </main>
-    @push('script')
-        <script>
-            function togglePasswordVisibility() {
-                var passwordField = document.getElementById("password");
-                var showPasswordCheckbox = document.getElementById("showPassword");
-                if (showPasswordCheckbox.checked) {
-                    passwordField.type = "text";
-                } else {
-                    passwordField.type = "password";
-                }
+    <script>
+        function password_show_hide() {
+            var x = document.getElementById("password");
+            var show_eye = document.getElementById("show_eye");
+            var hide_eye = document.getElementById("hide_eye");
+            hide_eye.classList.remove("d-none");
+            if (x.type === "password") {
+                x.type = "text";
+                show_eye.style.display = "none";
+                hide_eye.style.display = "block";
+            } else {
+                x.type = "password";
+                show_eye.style.display = "block";
+                hide_eye.style.display = "none";
             }
-        </script>
-    @endpush
+        }
+    </script>
 @endsection
