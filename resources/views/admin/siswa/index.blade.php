@@ -26,6 +26,7 @@
         <tr class="font-12">
             <th style="width: 150px">NIS</th>
             <th style="width: 150px">Nama</th>
+            <th style="width: 150px">Username</th>
             <th style="width: 150px">Kelas</th>
             <th style="width: 150px">Tanggal Lahir</th>
             <th style="width: 150px">Alamat</th>
@@ -38,6 +39,7 @@
             <tr>
                 <td style="width: 150px">{{ $data->nis }}</td>
                 <td style="width: 150px">{{ $data->users->nama ?? '' }}</td>
+                <td style="width: 150px">{{ $data->users->userName ?? '' }}</td>
                 <td style="width: 150px">{{ $data->kelas }}</td>
                 <td style="width: 150px">{{ $data->tanggal_lahir }}</td>
                 <td style="width: 150px">{{ $data->alamat }}</td>
