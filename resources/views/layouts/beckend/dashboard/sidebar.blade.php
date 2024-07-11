@@ -162,12 +162,6 @@
                 <span>Jadwal Tes</span>
             </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('siswa.hasil') }}">
-                <i class="fa fa-info-circle"></i>
-                <span>Hasil Tes</span>
-            </a>
-        </li>
         <!-- Divider -->
         <hr class="sidebar-divider">
         <!-- Sidebar Toggler (Sidebar) -->
