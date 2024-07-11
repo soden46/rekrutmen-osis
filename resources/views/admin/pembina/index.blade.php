@@ -26,6 +26,7 @@
         <tr class="font-12">
             <th style="width: 150px">NIP</th>
             <th style="width: 150px">Nama</th>
+            <th style="width: 150px">Username</th>
             <th style="width: 150px">Tempat Lahir</th>
             <th style="width: 150px">Tanggal Lahir</th>
             <th style="width: 150px">Jenis Kelamin</th>
@@ -36,10 +37,10 @@
             <tr>
                 <td style="width: 150px">{{ $data->nip }}</td>
                 <td style="width: 150px">{{ $data->users->nama ?? '' }}</td>
+                <td style="width: 150px">{{ $data->users->userName ?? '' }}</td>
                 <td style="width: 150px">{{ $data->tempat_lahir }}</td>
                 <td style="width: 150px">{{ $data->tanggal_lahir }}</td>
                 <td style="width: 150px">{{ $data->jenis_kelamin }}</td>
-                <td style="width: 150px">{{ $data->alamat }}</td>
                 <td>
                     <div class="btn-group" style="width:135px">
                         <form action="{{ route('admin.pembina.destroy', $data->id_pembina) }}" method="Post">
