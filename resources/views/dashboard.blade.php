@@ -10,19 +10,22 @@
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @can('admin')
-    <title>Admin | {{ $title ?? 'Dashboard' }}</title>
+        <title>Admin | {{ $title ?? 'Dashboard' }}</title>
     @endcan
     @can('pelamar')
-    <title>Pelamar | {{ $title ?? 'Dashboard' }}</title>
+        <title>Pelamar | {{ $title ?? 'Dashboard' }}</title>
     @endcan
     <!-- Custom fonts for this template-->
-    <link href="{{ asset('template/backend/sb-admin-2/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('template/backend/sb-admin-2/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet"
+        type="text/css">
     <script src="https://kit.fontawesome.com/5fafd18292.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="{{ asset('assets/template/backend/sb-admin-2/css/sb-admin-2.min.css') }}" rel="stylesheet">
     <!--Trix Editor CSS-->
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/trix.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/trix.css') }}">
 
     <style type="text/css">
         trix-toolbar [data-trix-button-group="file-tools"] {
@@ -84,7 +87,8 @@
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -120,7 +124,7 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('assets/template/backend/sb-admin-2') }}/js/demo/chart-area-demo.js"></script>
     <script src="{{ asset('assets/template/backend/sb-admin-2') }}/js/demo/chart-pie-demo.js"></script>
-    <script type="text/javascript" src="{{asset('assets/js/trix.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/trix.js') }}"></script>
     <script type="text/javascript">
         $.ajaxSetup({
             headers: {
@@ -128,6 +132,19 @@
             }
         });
     </script>
+    @push('script')
+        <script>
+            function togglePasswordVisibility() {
+                var passwordField = document.getElementById("password");
+                var showPasswordCheckbox = document.getElementById("showPassword");
+                if (showPasswordCheckbox.checked) {
+                    passwordField.type = "text";
+                } else {
+                    passwordField.type = "password";
+                }
+            }
+        </script>
+    @endpush
     @stack('js')
 </body>
 

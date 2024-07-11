@@ -12,25 +12,27 @@
     <link href="assets/img/favicon.ico" rel="icon">
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@1,600;1,700;1,800&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@1,600;1,700;1,800&family=Roboto:wght@400;500&display=swap"
+        rel="stylesheet">
 
     <!-- CSS Libraries -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="{{asset('assets/lib/animate/animate.min.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets/lib/animate/animate.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 </head>
 
 <body>
     <!-- Nav Bar Start -->
-    
+
     <!-- Nav Bar End -->
 
     <!-- Carousel Start -->
-    
+
     <!-- Carousel End -->
 
     <!-- About Start -->
@@ -55,11 +57,11 @@
 
 
     <!-- FAQs Start -->
-    
+
     <!-- FAQs End -->
 
     <!-- Newsletter Start -->
-    
+
     <!-- Footer End -->
 
     <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
@@ -68,12 +70,25 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="{{asset('assets/lib/easing/easing.min.js')}}"></script>
-    <script src="{{asset('assets/lib/owlcarousel/owl.carousel.min.js')}}"></script>
-    <script src="{{asset('assets/lib/isotope/isotope.pkgd.min.js')}}"></script>
+    <script src="{{ asset('assets/lib/easing/easing.min.js') }}"></script>
+    <script src="{{ asset('assets/lib/owlcarousel/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('assets/lib/isotope/isotope.pkgd.min.js') }}"></script>
 
     <!-- Template Javascript -->
-    <script src="{{asset('assets/js/main.js')}}"></script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
+    @push('script')
+        <script>
+            function togglePasswordVisibility() {
+                var passwordField = document.getElementById("password");
+                var showPasswordCheckbox = document.getElementById("showPassword");
+                if (showPasswordCheckbox.checked) {
+                    passwordField.type = "text";
+                } else {
+                    passwordField.type = "password";
+                }
+            }
+        </script>
+    @endpush
 </body>
 
 </html>

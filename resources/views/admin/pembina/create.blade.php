@@ -65,17 +65,3 @@
         </div>
     </div>
 @endsection
-
-@section('scripts')
-    <script>
-        function togglePasswordVisibility() {
-            var passwordField = document.getElementById("floatingPassword");
-            var showPasswordCheckbox = document.getElementById("showPassword");
-            if (showPasswordCheckbox.checked) {
-                passwordField.type = "text";
-            } else {
-                passwordField.type = "password";
-            }
-        }
-    </script>
-@endsection

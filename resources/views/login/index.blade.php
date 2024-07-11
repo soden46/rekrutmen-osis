@@ -36,18 +36,17 @@
             </form>
         </div>
     </main>
-@endsection
-
-@section('scripts')
-    <script>
-        function togglePasswordVisibility() {
-            var passwordField = document.getElementById("password");
-            var showPasswordCheckbox = document.getElementById("showPassword");
-            if (showPasswordCheckbox.checked) {
-                passwordField.type = "text";
-            } else {
-                passwordField.type = "password";
+    @push('script')
+        <script>
+            function togglePasswordVisibility() {
+                var passwordField = document.getElementById("password");
+                var showPasswordCheckbox = document.getElementById("showPassword");
+                if (showPasswordCheckbox.checked) {
+                    passwordField.type = "text";
+                } else {
+                    passwordField.type = "password";
+                }
             }
-        }
-    </script>
+        </script>
+    @endpush
 @endsection
