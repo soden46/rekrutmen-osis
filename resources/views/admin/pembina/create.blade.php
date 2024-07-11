@@ -51,9 +51,12 @@
                         <label for="floatingPassword">Password</label>
                         <input type="password" name="password" class="form-control @error('password')is-invalid @enderror"
                             id="floatingPassword" placeholder="Password" required>
-                        <button type="button" class="btn btn-outline-secondary" id="togglePassword">
-                            <i class="bi bi-eye-slash" id="passwordToggleIcon"></i>
-                        </button>
+                        <div class="input-group-append" style="height: 55px">
+                            <span class="input-group-text" onclick="password_show_hide();">
+                                <i class="fas fa-eye" id="show_eye"></i>
+                                <i class="fas fa-eye-slash d-none" id="hide_eye"></i>
+                            </span>
+                        </div>
                         @error('password')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -66,4 +69,21 @@
             </div>
         </div>
     </div>
+    <script>
+        function password_show_hide() {
+            var x = document.getElementById("password");
+            var show_eye = document.getElementById("show_eye");
+            var hide_eye = document.getElementById("hide_eye");
+            hide_eye.classList.remove("d-none");
+            if (x.type === "password") {
+                x.type = "text";
+                show_eye.style.display = "none";
+                hide_eye.style.display = "block";
+            } else {
+                x.type = "password";
+                show_eye.style.display = "block";
+                hide_eye.style.display = "none";
+            }
+        }
+    </script>
 @endsection
