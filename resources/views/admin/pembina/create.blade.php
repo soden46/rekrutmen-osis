@@ -50,7 +50,7 @@
                     <div class="form-floating">
                         <label for="floatingPassword">Password</label>
                         <input type="password" name="password" class="form-control @error('password')is-invalid @enderror"
-                            id="floatingPassword" placeholder="Password" required>
+                            id="password" placeholder="Password" required>
                         <div class="input-group-append" style="height: 55px">
                             <span class="input-group-text" onclick="password_show_hide();">
                                 <i class="fas fa-eye" id="show_eye"></i>
