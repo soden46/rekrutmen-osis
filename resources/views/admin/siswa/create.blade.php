@@ -30,7 +30,6 @@
                         @enderror
                     </div>
 
-
                     <div class="form-group">
                         <label for="nis">NIS</label>
                         <input class="form-control" type="number" id="nis" name="nis">
@@ -73,6 +72,7 @@
                         <label for="floatingPassword">Password</label>
                         <input type="password" name="password" class="form-control @error('password')is-invalid @enderror"
                             id="floatingPassword" placeholder="Password" required>
+                        <input type="checkbox" id="showPassword" onclick="togglePasswordVisibility()"> Show Password
                         @error('password')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -86,3 +86,10 @@
         </div>
     </div>
 @endsection
+
+@section('scripts')
+    <script>
+        function togglePasswordVisibility() {
+            var passwordField = document.getElementById("floatingPassword");
+            var showPasswordCheckbox = document.getElementById("showPassword");
+            if (
