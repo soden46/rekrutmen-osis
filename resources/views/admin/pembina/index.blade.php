@@ -30,7 +30,6 @@
             <th style="width: 150px">Tempat Lahir</th>
             <th style="width: 150px">Tanggal Lahir</th>
             <th style="width: 150px">Jenis Kelamin</th>
-            <th style="width: 150px">Alamat</th>
             <th style="width: 100px">Aksi</th>
         </tr>
         @foreach ($pembina as $data)
