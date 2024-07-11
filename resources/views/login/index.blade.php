@@ -28,7 +28,9 @@
                     <label for="password">Password</label>
                     <input type="password" name="password" class="form-control" id="password" placeholder="Password"
                         required>
-                    <input type="checkbox" id="showPassword" onclick="togglePasswordVisibility()"> Show Password
+                    <button type="button" class="btn btn-outline-secondary" id="togglePassword">
+                        <i class="bi bi-eye-slash" id="passwordToggleIcon"></i>
+                    </button>
                 </div>
 
                 <button class="w-100 btn btn-lg btn-primary" type="submit">MASUK</button>

@@ -51,6 +51,9 @@
                         <label for="floatingPassword">Password</label>
                         <input type="password" name="password" class="form-control @error('password')is-invalid @enderror"
                             id="floatingPassword" placeholder="Password" required>
+                        <button type="button" class="btn btn-outline-secondary" id="togglePassword">
+                            <i class="bi bi-eye-slash" id="passwordToggleIcon"></i>
+                        </button>
                         @error('password')
                             <div class="invalid-feedback">
                                 {{ $message }}
