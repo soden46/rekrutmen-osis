@@ -32,23 +32,25 @@
                 </a>
             </div>
         </div>
-        <div class="col-md-3 mb-4">
-            <div class="card d-inline-flex mainMenu"
-                style="width: 100%; padding: 12px; border-left: 5px solid #1746a2; margin-bottom: 20px;">
-                <a href="{{ route('pembina.pendaftaran') }}" style="text-decoration: none; color: black;">
-                    <div class="d-flex">
-                        <div style="width: 100%;">
-                            <h6 style="color: #1746a2;">Jumlah Pendaftar</h6>
-                            <h4>{{ $jumlah }}</h4>
+        @foreach ($jumlahPendaftar as $namaEkskul => $jumlah)
+            <div class="col-md-3 mb-4">
+                <div class="card d-inline-flex mainMenu"
+                    style="width: 100%; padding: 12px; border-left: 5px solid #1746a2; margin-bottom: 20px;">
+                    <a href="{{ route('pembina.pendaftaran') }}" style="text-decoration: none; color: black;">
+                        <div class="d-flex">
+                            <div style="width: 100%;">
+                                <h6 style="color: #1746a2;">Jumlah Pendaftar {{ ucfirst($namaEkskul) }}</h6>
+                                <h4>{{ $jumlah }}</h4>
+                            </div>
+                            <div style="width: auto;">
+                                <h1><span style="color: black; vertical-align: middle;"
+                                        class="bi bi-file-earmark-text"></span></h1>
+                            </div>
                         </div>
-                        <div style="width: auto;">
-                            <h1><span style="color: black; vertical-align: middle;" class="bi bi-file-earmark-text"></span>
-                            </h1>
-                        </div>
-                    </div>
-                    <div class="card-footer border bg-transparent" style="width: 100%;">View Details</div>
-                </a>
+                        <div class="card-footer border bg-transparent" style="width: 100%;">View Details</div>
+                    </a>
+                </div>
             </div>
-        </div>
+        @endforeach
     </div>
 @stop
