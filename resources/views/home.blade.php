@@ -77,15 +77,23 @@
     <!-- Template Javascript -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
     <script>
-        function togglePasswordVisibility() {
-            var passwordField = document.getElementById("password");
-            var showPasswordCheckbox = document.getElementById("showPassword");
-            if (showPasswordCheckbox.checked) {
-                passwordField.type = "text";
-            } else {
-                passwordField.type = "password";
-            }
-        }
+        document.addEventListener('DOMContentLoaded', function() {
+            const passwordField = document.getElementById('password');
+            const togglePasswordButton = document.getElementById('togglePassword');
+            const passwordToggleIcon = document.getElementById('passwordToggleIcon');
+
+            togglePasswordButton.addEventListener('click', function() {
+                if (passwordField.type === 'password') {
+                    passwordField.type = 'text';
+                    passwordToggleIcon.classList.remove('bi-eye-slash');
+                    passwordToggleIcon.classList.add('bi-eye');
+                } else {
+                    passwordField.type = 'password';
+                    passwordToggleIcon.classList.remove('bi-eye');
+                    passwordToggleIcon.classList.add('bi-eye-slash');
+                }
+            });
+        });
     </script>
 </body>
 

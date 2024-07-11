@@ -6,9 +6,7 @@
         <title>{{ $pageTitle ?? '' }}</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="SMP Negeri 2 Mlati" name="keywords">
-        <meta
-            content="SMP Negeri 2 Mlati."
-            name="description">
+        <meta content="SMP Negeri 2 Mlati." name="description">
         <!-- Favicon -->
         <link rel="shortcut icon" type="image/x-generic" href="/favicon.ico">
         <link rel="manifest" href="/site.webmanifest">
@@ -50,6 +48,25 @@
 
         <!-- Template Javascript -->
         <script src="{{ asset('assets/js/main.js') }}"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const passwordField = document.getElementById('password');
+                const togglePasswordButton = document.getElementById('togglePassword');
+                const passwordToggleIcon = document.getElementById('passwordToggleIcon');
+
+                togglePasswordButton.addEventListener('click', function() {
+                    if (passwordField.type === 'password') {
+                        passwordField.type = 'text';
+                        passwordToggleIcon.classList.remove('bi-eye-slash');
+                        passwordToggleIcon.classList.add('bi-eye');
+                    } else {
+                        passwordField.type = 'password';
+                        passwordToggleIcon.classList.remove('bi-eye');
+                        passwordToggleIcon.classList.add('bi-eye-slash');
+                    }
+                });
+            });
+        </script>
     </body>
 
     </html>
