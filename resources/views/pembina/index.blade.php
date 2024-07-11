@@ -38,8 +38,8 @@
                 <a href="{{ route('pembina.pendaftaran') }}" style="text-decoration: none; color: black;">
                     <div class="d-flex">
                         <div style="width: 100%;">
-                            <h6 style="color: #1746a2;">Jumlah Pendaftar</h6>
-                            <h4>{{ $jumlahPendaftar }}</h4>
+                            <h6 style="color: #1746a2;">Jumlah Pendaftar {{ ucfirst($namaEkskul) }}</h6>
+                            <h4>{{ $jumlah }}</h4>
                         </div>
                         <div style="width: auto;">
                             <h1><span style="color: black; vertical-align: middle;" class="bi bi-file-earmark-text"></span>
