@@ -53,7 +53,7 @@
                             <input type="password" name="password"
                                 class="form-control @error('password') is-invalid @enderror" id="password"
                                 placeholder="Password" required>
-                            <div class="input-group-append" style="height: 55px">
+                            <div class="input-group-append" style="height: 35px">
                                 <span class="input-group-text" onclick="password_show_hide();"
                                     style="border: ture; background: none;">
                                     <i class="fas fa-eye" id="show_eye"></i>
