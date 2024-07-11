@@ -69,23 +69,25 @@
                     </div>
 
                     <div class="form-floating">
-    <label for="floatingPassword">Password</label>
-    <div class="input-group">
-        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
-            id="password" placeholder="Password" required>
-        <div class="input-group-append" style="height: 55px">
-            <span class="input-group-text" onclick="password_show_hide();" style="border: none; background: none;">
-                <i class="fas fa-eye" id="show_eye"></i>
-                <i class="fas fa-eye-slash d-none" id="hide_eye"></i>
-            </span>
-        </div>
-    </div>
-    @error('password')
-        <div class="invalid-feedback">
-            {{ $message }}
-        </div>
-    @enderror
-</div>
+                        <label for="floatingPassword">Password</label>
+                        <div class="input-group">
+                            <input type="password" name="password"
+                                class="form-control @error('password') is-invalid @enderror" id="password"
+                                placeholder="Password" required>
+                            <div class="input-group-append" style="height: 55px bordered">
+                                <span class="input-group-text" onclick="password_show_hide();"
+                                    style="border: none; background: none;">
+                                    <i class="fas fa-eye" id="show_eye"></i>
+                                    <i class="fas fa-eye-slash d-none" id="hide_eye"></i>
+                                </span>
+                            </div>
+                        </div>
+                        @error('password')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
 
                     <button type="submit" class="btn btn-primary">Simpan</button>
                     <button type="reset" class="btn btn-secondary">Reset</button>
