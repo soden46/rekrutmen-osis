@@ -80,6 +80,7 @@
                         @enderror
                     </div>
                     <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
                 </form>
             </div>
         </div>

@@ -15,6 +15,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -88,16 +89,27 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        $validatedData = $request->validate([
-            'id_user' => 'max:255',
-            'nip' => 'max:255',
-            'tempat_lahir' => 'max:255',
-            'tanggal_lahir' => 'max:255',
-            'jenis_kelamin' => 'max:255',
+        $ValidatedData = $request->validate([
+            'nama' => 'required|max:255',
+            'nip' => 'required|unique:admin',
+            'password' => 'required|min:6|max:12',
         ]);
 
-        // dd($validatedData);
-        AdminModel::create($validatedData);
+        // Menyimpan data ke database
+        $userID = User::create([
+            'nama' => $ValidatedData['nama'],
+            'userName' => $ValidatedData['nip'],
+            'password' => Hash::make($ValidatedData['password']),
+            'role' => 'pembina',
+        ]);
+
+        AdminModel::create([
+            'id_user' => $userID->id,
+            'nip' => $ValidatedData['nip'],
+            'tempat_lahir' => $request->tempat_lahir,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'jenis_kelamin' => $request->jenis_kelamin,
+        ]);
 
         return redirect()->route('admin.admin')->with('success', 'Data has ben created');
     }

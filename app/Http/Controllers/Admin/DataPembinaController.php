@@ -7,6 +7,7 @@ use App\Models\PembinaModel;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class DataPembinaController extends Controller
 {
@@ -59,18 +60,29 @@ class DataPembinaController extends Controller
     public function store(Request $request)
     {
 
-        $validatedData = $request->validate([
-            'id_user' => 'max:255',
-            'nip' => 'max:255',
-            'tempat_lahir' => 'max:255',
-            'tanggal_lahir' => 'max:255',
-            'jenis_kelamin' => 'max:255',
+        $ValidatedData = $request->validate([
+            'nama' => 'required|max:255',
+            'nip' => 'required|unique:pembina',
+            'password' => 'required|min:6|max:12',
         ]);
 
-        // dd($validatedData);
-        PembinaModel::create($validatedData);
+        // Menyimpan data ke database
+        $userID = User::create([
+            'nama' => $ValidatedData['nama'],
+            'userName' => $ValidatedData['nip'],
+            'password' => Hash::make($ValidatedData['password']),
+            'role' => 'pembina',
+        ]);
 
-        return redirect()->route('admin.siswa')->with('success', 'Data has ben created');
+        PembinaModel::create([
+            'id_user' => $userID->id,
+            'nip' => $ValidatedData['nip'],
+            'tempat_lahir' => $request->tempat_lahir,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'jenis_kelamin' => $request->jenis_kelamin,
+        ]);
+
+        return redirect()->route('admin.pembina')->with('success', 'Data has ben created');
     }
 
     /**

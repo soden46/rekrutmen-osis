@@ -74,7 +74,7 @@ class DataSiswaController extends Controller
         // Menyimpan data ke database
         $userID = User::create([
             'nama' => $ValidatedData['nama'],
-            'userName' => $ValidatedData['nama'],
+            'userName' => $ValidatedData['nis'],
             'password' => Hash::make($ValidatedData['password']),
             'role' => 'siswa',
         ]);

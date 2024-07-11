@@ -29,6 +29,7 @@
             <th style="width: 150px">Tempat Lahir</th>
             <th style="width: 150px">Tanggal Lahir</th>
             <th style="width: 150px">Jenis Kelamin</th>
+            <th style="width: 150px">Alamat</th>
             <th style="width: 100px">Aksi</th>
         </tr>
         @foreach ($pembina as $data)
@@ -38,6 +39,7 @@
                 <td style="width: 150px">{{ $data->tempat_lahir }}</td>
                 <td style="width: 150px">{{ $data->tanggal_lahir }}</td>
                 <td style="width: 150px">{{ $data->jenis_kelamin }}</td>
+                <td style="width: 150px">{{ $data->alamat }}</td>
                 <td>
                     <div class="btn-group" style="width:135px">
                         <form action="{{ route('admin.pembina.destroy', $data->id_pembina) }}" method="Post">

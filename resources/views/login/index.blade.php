@@ -16,7 +16,7 @@
                 </div>
                 <h1 class="h3 mb-3 fw-normal text-center">MASUK</h1>
                 <div class="form-floating mb-3">
-                    <label for="userName">Username</label>
+                    <label for="userName">NIP/NIS</label>
                     <input type="userName" name="userName" class="form-control @error('userName') is-invalid @enderror"
                         id="userName" value="{{ old('userName') }}" autofocus required>
                     @error('userName')
