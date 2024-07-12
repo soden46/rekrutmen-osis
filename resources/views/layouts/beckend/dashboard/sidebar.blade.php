@@ -139,7 +139,7 @@
         <hr class="sidebar-divider my-0">
         <!-- Nav Item -->
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('siswa.profile') }}">
+            <a class="nav-link" href="{{ route('profile') }}">
                 <i class="fa fa-light fa-user-pen"></i>
                 <span>Biodata</span>
             </a>

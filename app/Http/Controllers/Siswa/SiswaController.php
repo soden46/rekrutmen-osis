@@ -19,7 +19,7 @@ class SiswaController extends Controller
 		$siswa = SiswaModel::with('users')->where('id_user', Auth::user()->id)->first();
 		$rekrutmen = DataRekrutmen::where('tanggal_berakhir', now())->count();
 		$pendaftaran = DataPendaftaran::where('id_siswa', $siswa->id_siswa)->count();
-		return view('siswa.index', compact('siswa', 'rekrutmen', 'pendaftaran'));
+		return view('profile', compact('siswa', 'rekrutmen', 'pendaftaran'));
 	}
 
 	public function profile()

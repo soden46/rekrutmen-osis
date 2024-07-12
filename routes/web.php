@@ -204,10 +204,7 @@ Route::group(['prefix' => 'pembina', 'as' => 'pembina.'], function () {
 
 //siswa
 Route::group(['prefix' => 'siswa', 'as' => 'siswa.'], function () {
-    Route::get('/dashbord', [SiswaController::class, 'index'])->name('index');
-    Route::get('/profile', [SiswaController::class, 'profile'])->name('profile');
-    Route::put('/profile/{id}', [SiswaController::class, 'storeProfile'])->name('profile.update');
-
+    Route::get('/dashbord', [SiswaController::class, 'index'])->name('index')->middleware('auth');
     // Rekrutmen
     Route::controller(SiswaDataRekrutmenController::class)->group(function () {
         Route::get('/rekrutmen', 'index')->name('rekrutmen');
@@ -244,3 +241,6 @@ Route::group(['prefix' => 'siswa', 'as' => 'siswa.'], function () {
         Route::get('/hasil/cetak', 'pdf')->name('hasil.cetak');
     });
 });
+
+Route::get('/profile', [SiswaController::class, 'index'])->name('profile')->middleware('auth');
+Route::put('/profile/{id}', [SiswaController::class, 'storeProfile'])->name('profile.update')->middleware('auth');
