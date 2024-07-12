@@ -18,9 +18,9 @@ class ProfileController extends Controller
     public function index()
     {
         $user = User::get();
-        $admin = AdminModel::get();
-        $pembina = PembinaModel::get();
-        $siswa = SiswaModel::get();
+        $admin = AdminModel::with('users')->where('id_user', Auth::user()->id)->first();
+        $pembina = PembinaModel::with('users')->where('id_user', Auth::user()->id)->first();
+        $siswa = SiswaModel::with('users')->where('id_user', Auth::user()->id)->first();
         return view('profile', compact('user', 'admin', 'pembina', 'siswa'));
     }
 

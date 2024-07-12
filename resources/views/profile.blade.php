@@ -143,11 +143,6 @@
                                     id="nip" name="nip">
                             </div>
                             <div class="form-group">
-                                <label for="kelas">Kelas</label>
-                                <input required value="{{ $admin->kelas }}" class="form-control" type="text"
-                                    id="kelas" name="kelas">
-                            </div>
-                            <div class="form-group">
                                 <label for="tempat_lahir">Tempat Lahir</label>
                                 <input required value="{{ $admin->tempat_lahir }}" class="form-control" type="area"
                                     id="tempat_lahir" name="tempat_lahir">
@@ -226,11 +221,6 @@
                                 <label for="nip">NIP</label>
                                 <input required value="{{ $pembina->nip }}" class="form-control" type="text"
                                     id="nip" name="nip">
-                            </div>
-                            <div class="form-group">
-                                <label for="kelas">Kelas</label>
-                                <input required value="{{ $pembina->kelas }}" class="form-control" type="text"
-                                    id="kelas" name="kelas">
                             </div>
                             <div class="form-group">
                                 <label for="tempat_lahir">Tempat Lahir</label>
