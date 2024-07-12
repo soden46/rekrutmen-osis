@@ -122,8 +122,6 @@
                     <th>Tanggal Lahir</th>
                     <th>Alamat</th>
                     <th>Jenis Kelamin</th>
-                    <th>TB</th>
-                    <th>BB</th>
                 </tr>
                 @foreach ($siswa as $data)
                     <tr>
@@ -133,8 +131,6 @@
                         <td>{{ $data->tanggal_lahir }}</td>
                         <td>{{ $data->alamat }}</td>
                         <td>{{ $data->jenis_kelamin }}</td>
-                        <td>{{ $data->tinggi_badan }}</td>
-                        <td>{{ $data->berat_badan }}</td>
                     </tr>
                 @endforeach
             </table>
