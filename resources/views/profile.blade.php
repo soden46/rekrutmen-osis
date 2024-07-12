@@ -42,6 +42,8 @@
                         @csrf
                         @method('PUT')
                         @if (Auth::user()->role == 'siswa')
+                            <input required value="{{ $siswa->users->id }}" class="form-control" type="text"
+                                id="id_user" name="id_user" hidden>
                             <div class="form-group">
                                 <label for="nis">NIS</label>
                                 <input required value="{{ $siswa->nis }}" class="form-control" type="number"
@@ -87,7 +89,7 @@
                                 <div class="input-group">
                                     <input type="password" name="password"
                                         class="form-control @error('password') is-invalid @enderror" id="password"
-                                        placeholder="Password" required>
+                                        placeholder="Password" name="password" required>
                                     <div class="input-group-append" style="height: 38px">
                                         <span class="input-group-text" onclick="password_show_hide();"
                                             style="border: true; background: none;">
@@ -123,6 +125,8 @@
                                 @enderror
                             </div>
                         @elseif(Auth::user()->role == 'admin')
+                            <input required value="{{ $admin->users->id }}" class="form-control" type="text"
+                                id="id_user" name="id_user" hidden>
                             <div class="form-group">
                                 <label for="nip">NIP</label>
                                 <input required value="{{ $admin->nip }}" class="form-control" type="number"
@@ -170,7 +174,7 @@
                                 <div class="input-group">
                                     <input type="password" name="password"
                                         class="form-control @error('password') is-invalid @enderror" id="password"
-                                        placeholder="Password" required>
+                                        placeholder="Password" name="password" required>
                                     <div class="input-group-append" style="height: 38px">
                                         <span class="input-group-text" onclick="password_show_hide();"
                                             style="border: true; background: none;">
@@ -206,6 +210,8 @@
                                 @enderror
                             </div>
                         @else
+                            <input required value="{{ $pembina->users->id }}" class="form-control" type="text"
+                                id="id_user" name="id_user" hidden>
                             <div class="form-group">
                                 <label for="nip">NIP</label>
                                 <input required value="{{ $pembina->nip }}" class="form-control" type="number"
@@ -253,7 +259,7 @@
                                 <div class="input-group">
                                     <input type="password" name="password"
                                         class="form-control @error('password') is-invalid @enderror" id="password"
-                                        placeholder="Password"required>
+                                        placeholder="Password" name="password" required>
                                     <div class="input-group-append" style="height: 38px">
                                         <span class="input-group-text" onclick="password_show_hide();"
                                             style="border: true; background: none;">

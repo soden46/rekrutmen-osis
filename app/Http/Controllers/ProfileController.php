@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Pelamar;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Siswa\SiswaController;
@@ -35,11 +35,11 @@ class ProfileController extends Controller
     }
     public function save(Request $request, User $user)
     {
+
         if (Auth::user()->role == "siswa") {
             $validatedData = $request->validate([
                 'id_user' => 'nullable',
                 'nis' => 'nullable',
-                'nama' => 'nullable',
                 'kelas' => 'nullable',
                 'tempat_lahir' => 'nullable',
                 'tanggal_lahir' => 'nullable',
@@ -49,16 +49,15 @@ class ProfileController extends Controller
             $id_user = $request->id_user;
 
             User::where('id', $id_user)->update([
-                "nama" => $validatedData['nama'],
-                "userName" => $validatedData['username'],
-                "password" => Hash::make($validatedData['password'])
+                "nama" => $request->nama,
+                "userName" => $validatedData['nis'],
+                "password" => Hash::make($request->password)
             ]);
             SiswaModel::create($validatedData);
         } elseif (Auth::user()->role == "admin") {
             $validatedData = $request->validate([
                 'id_user' => 'nullable',
                 'nip' => 'nullable',
-                'nama' => 'nullable',
                 'kelas' => 'nullable',
                 'tempat_lahir' => 'nullable',
                 'tanggal_lahir' => 'nullable',
@@ -67,16 +66,15 @@ class ProfileController extends Controller
             $id_user = $request->id_user;
 
             User::where('id', $id_user)->update([
-                "nama" => $validatedData['nama'],
-                "userName" => $validatedData['username'],
-                "password" => Hash::make($validatedData['password'])
+                "nama" => $request->nama,
+                "userName" => $validatedData['nip'],
+                "password" => Hash::make($request->password)
             ]);
             AdminModel::create($validatedData);
         } else {
             $validatedData = $request->validate([
                 'id_user' => 'nullable',
                 'nip' => 'nullable',
-                'nama' => 'nullable',
                 'kelas' => 'nullable',
                 'tempat_lahir' => 'nullable',
                 'tanggal_lahir' => 'nullable',
@@ -85,9 +83,9 @@ class ProfileController extends Controller
             $id_user = $request->id_user;
 
             User::where('id', $id_user)->update([
-                "nama" => $validatedData['nama'],
-                "userName" => $validatedData['username'],
-                "password" => Hash::make($validatedData['password'])
+                "nama" => $request->nama,
+                "userName" => $validatedData['nip'],
+                "password" => Hash::make($request->password)
             ]);
             PembinaModel::create($validatedData);
         }

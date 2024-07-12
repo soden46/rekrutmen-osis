@@ -20,6 +20,7 @@ use App\Http\Controllers\Pembina\DataRekrutmenController as PembinaDataRekrutmen
 use App\Http\Controllers\Pembina\DataSiswaController as PembinaDataSiswaController;
 use App\Http\Controllers\Pembina\JadwalTesController as PembinaJadwalTesController;
 use App\Http\Controllers\Pembina\PembinaController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Siswa\DataHasilTesController as SiswaDataHasilTesController;
 use App\Http\Controllers\Siswa\DataJadwalTesController;
 use App\Http\Controllers\Siswa\DataPendaftaranController as SiswaDataPendaftaranController;
@@ -242,5 +243,5 @@ Route::group(['prefix' => 'siswa', 'as' => 'siswa.'], function () {
     });
 });
 
-Route::get('/profile', [SiswaController::class, 'index'])->name('profile')->middleware('auth');
-Route::put('/profile/{id}', [SiswaController::class, 'storeProfile'])->name('profile.update')->middleware('auth');
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile')->middleware('auth');
+Route::put('/profile/{id}', [ProfileController::class, 'save'])->name('profile.update')->middleware('auth');
