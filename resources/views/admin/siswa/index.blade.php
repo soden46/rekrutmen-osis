@@ -31,8 +31,6 @@
             <th style="width: 150px">Tanggal Lahir</th>
             <th style="width: 150px">Alamat</th>
             <th style="width: 150px">Jenis Kelamin</th>
-            <th style="width: 150px">TB</th>
-            <th style="width: 150px">BB</th>
             <th style="width: 100px">Aksi</th>
         </tr>
         @foreach ($siswa as $data)
@@ -44,8 +42,6 @@
                 <td style="width: 150px">{{ $data->tanggal_lahir }}</td>
                 <td style="width: 150px">{{ $data->alamat }}</td>
                 <td style="width: 150px">{{ $data->jenis_kelamin }}</td>
-                <td style="width: 150px">{{ $data->tinggi_badan }}</td>
-                <td style="width: 150px">{{ $data->berat_badan }}</td>
                 <td>
                     <div class="btn-group" style="width:135px">
                         <form action="{{ route('admin.siswa.destroy', $data->id_siswa) }}" method="Post">

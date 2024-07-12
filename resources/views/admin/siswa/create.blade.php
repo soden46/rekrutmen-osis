@@ -59,14 +59,6 @@
                         <label for="alamat">Alamat</label>
                         <textarea class="form-control" id="alamat" name="alamat"></textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="tinggi_badan">Tinggi Badan</label>
-                        <input class="form-control" type="number" id="tinggi_badan" name="tinggi_badan">
-                    </div>
-                    <div class="form-group">
-                        <label for="berat_badan">Berat Badan</label>
-                        <input class="form-control" type="number" id="berat_badan" name="berat_badan">
-                    </div>
 
                     <div class="form-floating">
                         <label for="floatingPassword">Password</label>

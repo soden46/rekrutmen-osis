@@ -58,16 +58,6 @@
                         <label for="alamat">Alamat</label>
                         <textarea class="form-control" id="alamat" name="alamat">{{ $siswa->alamat }}</textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="tinggi_badan">Tinggi Badan</label>
-                        <input type="number" class="form-control" id="tinggi_badan" name="tinggi_badan"
-                            value="{{ $siswa->tinggi_badan }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="berat_badan">Berat Badan</label>
-                        <input type="number" class="form-control" id="berat_badan" name="berat_badan"
-                            value="{{ $siswa->berat_badan }}">
-                    </div>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </form>
             </div>
