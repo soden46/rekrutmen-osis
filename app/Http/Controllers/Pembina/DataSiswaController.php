@@ -70,10 +70,6 @@ class DataSiswaController extends Controller
             'tanggal_lahir' => 'max:255',
             'jenis_kelamin' => 'max:255',
             'alamat' => 'max:255',
-            'tinggai_badan' => 'max:255',
-            'berat_badan' => 'max:255',
-            'kelas' => 'max:255',
-            'kelas' => 'max:255',
             'kelas' => 'max:255',
         ]);
 
@@ -114,8 +110,6 @@ class DataSiswaController extends Controller
             'tanggal_lahir' => 'max:255',
             'jenis_kelamin' => 'max:255',
             'alamat' => 'max:255',
-            'tinggai_badan' => 'max:255',
-            'berat_badan' => 'max:255',
         ];
 
 

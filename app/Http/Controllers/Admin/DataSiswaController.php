@@ -87,8 +87,6 @@ class DataSiswaController extends Controller
             'tanggal_lahir' => $request->tanggal_lahir,
             'jenis_kelamin' => $request->jenis_kelamin,
             'alamat' => $request->alamat,
-            'tinggi_badan' => $request->tinggi_badan,
-            'berat_badan' => $request->berat_badan,
         ]);
 
         return redirect()->route('admin.siswa')->with('success', 'Data has ben created');
@@ -125,8 +123,6 @@ class DataSiswaController extends Controller
             'tanggal_lahir' => 'max:255',
             'jenis_kelamin' => 'max:255',
             'alamat' => 'max:255',
-            'tinggai_badan' => 'max:255',
-            'berat_badan' => 'max:255',
         ];
 
 

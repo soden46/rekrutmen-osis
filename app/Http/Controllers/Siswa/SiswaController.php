@@ -38,8 +38,6 @@ class SiswaController extends Controller
 			'tempat_lahir' => 'required|string|max:255',
 			'tanggal_lahir' => 'required|date',
 			'jenis_kelamin' => 'required|string',
-			'tinggi_badan' => 'required|numeric',
-			'berat_badan' => 'required|numeric',
 		]);
 
 		// Update nama user
@@ -54,8 +52,6 @@ class SiswaController extends Controller
 		$siswa->tempat_lahir = $request->input('tempat_lahir');
 		$siswa->tanggal_lahir = $request->input('tanggal_lahir');
 		$siswa->jenis_kelamin = $request->input('jenis_kelamin');
-		$siswa->tinggi_badan = $request->input('tinggi_badan');
-		$siswa->berat_badan = $request->input('berat_badan');
 		$siswa->save();
 		return redirect()->back()->with('success, Data Profile sukses diperbaharui');
 	}
