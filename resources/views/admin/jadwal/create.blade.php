@@ -24,7 +24,7 @@
                             <option value="" selected>Pilih Rekrutmen</option>
                             @foreach ($rekrutmen as $rekrutmens)
                                 <option value="{{ $rekrutmens->id_rekrutmen }}">{{ $rekrutmens->id_rekrutmen }} |
-                                    {{ $rekrutmens->nama_lowongan ?? '' }}</option>
+                                    {{ $rekrutmens->nama_rekrutmen ?? '' }}</option>
                             @endforeach
                         </select>
                     </div>
