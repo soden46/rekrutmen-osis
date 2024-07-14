@@ -23,7 +23,7 @@ class PembinaController extends Controller
         // Mendapatkan id ekstrakurikuler dari pembina yang sedang login
         $Eksekul = EkskulModel::where('id_pembina', $pembina->id_pembina)->first();
         // dd($Eksekul);
-        $idEkstrakurikuler = $Eksekul->id_ekskul;
+        $idEkstrakurikuler = $Eksekul->id_ekskul ?? '';
 
         // Mendapatkan ekskul yang diasuh oleh pembina
         $ekskuls = EkskulModel::where('id_pembina', $pembina->id_pembina)->get();
