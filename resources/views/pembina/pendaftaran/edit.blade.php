@@ -50,21 +50,23 @@
                         <input type="date" class="form-control" id="tanggal" name="tanggal"
                             value="{{ $pendaftaran->tanggal }}">
                     </div>
-                    <div class="form-group">
-                        <label for="nilai_tertulis">Nilai Tertulis</label>
-                        <input type="number" class="form-control" id="nilai_tertulis" name="nilai_tertulis"
-                            value="{{ $pendaftaran->nilai_tertulis }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="nilai_wawancara">Nilai Wawancara</label>
-                        <input type="number" class="form-control" id="nilai_wawancara" name="nilai_wawancara"
-                            value="{{ $pendaftaran->nilai_wawancara }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="rata_rata">Rata Rata</label>
-                        <input type="text" class="form-control" id="rata_rata" name="rata_rata"
-                            value="{{ ($pendaftaran->nilai_tertulis + $pendaftaran->nilai_wawancara) / 2 }}" readonly>
-                    </div>
+                    @if ($pendaftarn->rekrutmen->ekskul->nama_ekskul === 'osis' || $pendaftarn->rekrutmen->ekskul->nama_ekskul === 'Osis')
+                        <div class="form-group">
+                            <label for="nilai_tertulis">Nilai Tertulis</label>
+                            <input type="number" class="form-control" id="nilai_tertulis" name="nilai_tertulis"
+                                value="{{ $pendaftaran->nilai_tertulis }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="nilai_wawancara">Nilai Wawancara</label>
+                            <input type="number" class="form-control" id="nilai_wawancara" name="nilai_wawancara"
+                                value="{{ $pendaftaran->nilai_wawancara }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="rata_rata">Rata Rata</label>
+                            <input type="text" class="form-control" id="rata_rata" name="rata_rata"
+                                value="{{ ($pendaftaran->nilai_tertulis + $pendaftaran->nilai_wawancara) / 2 }}" readonly>
+                        </div>
+                    @endif
                     <div class="form-group" id="nilai_seleksi_latihan_tonti_group">
                         <label for="nilai_seleksi_latihan_tonti">Nilai Seleksi Latihan</label>
                         <input type="number" class="form-control" id="nilai_seleksi_latihan_tonti"
