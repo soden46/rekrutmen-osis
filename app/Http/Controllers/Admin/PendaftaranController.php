@@ -297,19 +297,21 @@ class PendaftaranController extends Controller
     public function pdfTonti()
     {
 
+        $pendaftaran = DataPendaftaran::with('rekrutmen.ekskul', 'siswa.users')->get();
+
+        // Pastikan bahwa pendaftaran tidak null atau kosong
+        if ($pendaftaran->isEmpty()) {
+            return redirect()->back()->with('error', 'Data pendaftaran tidak ditemukan');
+        }
+
         $data = [
-            'title' => 'Data Pendaftaran Tonti',
-            'pendaftaran' => DataPendaftaran::with('rekrutmen', 'siswa')
-                ->whereHas('rekrutmen', function ($query) {
-                    $query->whereHas('ekskul', function ($query) {
-                        $query->where('nama_ekskul', 'tonti');
-                    });
-                })
-                ->get(),
+            'title' => 'Data Pendaftaran',
+            'pendaftaran' => $pendaftaran,
         ];
 
         $customPaper = [0, 0, 567.00, 500.80];
-        $pdf = Pdf::loadView('admin.laporan.pendaftaran', $data)->setPaper('customPaper', 'potrait');
+        $pdf = Pdf::loadView('admin.laporan.pendaftaran', $data)->setPaper($customPaper, 'portrait');
+
         return $pdf->stream('data-pendaftaran.pdf');
     }
 }

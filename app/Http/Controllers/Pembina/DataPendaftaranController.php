@@ -151,14 +151,21 @@ class DataPendaftaranController extends Controller
 
     public function pdf()
     {
+        $pendaftaran = DataPendaftaran::with('rekrutmen.ekskul', 'siswa.users')->get();
+
+        // Pastikan bahwa pendaftaran tidak null atau kosong
+        if ($pendaftaran->isEmpty()) {
+            return redirect()->back()->with('error', 'Data pendaftaran tidak ditemukan');
+        }
+
         $data = [
             'title' => 'Data Pendaftaran',
-            'pendaftaran' => DataPendaftaran::with('rekrutmen', 'siswa')->get(),
-
+            'pendaftaran' => $pendaftaran,
         ];
 
         $customPaper = [0, 0, 567.00, 500.80];
-        $pdf = Pdf::loadView('pembina.laporan.pendaftaran', $data)->setPaper('customPaper', 'potrait');
+        $pdf = Pdf::loadView('admin.laporan.pendaftaran', $data)->setPaper($customPaper, 'portrait');
+
         return $pdf->stream('data-pendaftaran.pdf');
     }
 }

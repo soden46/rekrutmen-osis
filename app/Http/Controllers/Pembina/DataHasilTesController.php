@@ -156,7 +156,7 @@ class DataHasilTesController extends Controller
         ];
 
         $customPaper = [0, 0, 567.00, 500.80];
-        $pdf = Pdf::loadView('pembina.laporan.hasil', $data)->setPaper('customPaper', 'potrait');
+        $pdf = Pdf::loadView('admin.laporan.hasil', $data)->setPaper('customPaper', 'potrait');
         return $pdf->stream('data-hasil-tes.pdf');
     }
 }

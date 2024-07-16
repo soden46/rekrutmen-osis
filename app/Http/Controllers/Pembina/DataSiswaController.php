@@ -140,7 +140,7 @@ class DataSiswaController extends Controller
         ];
 
         $customPaper = [0, 0, 567.00, 500.80];
-        $pdf = Pdf::loadView('pembina.laporan.siswa', $data)->setPaper('customPaper', 'potrait');
+        $pdf = Pdf::loadView('admin.laporan.siswa', $data)->setPaper('customPaper', 'potrait');
         return $pdf->stream('data-siswa.pdf');
     }
 }

@@ -27,6 +27,12 @@
             border-collapse: collapse;
         }
 
+        .table td,
+        .table th {
+            padding: 8px;
+            word-wrap: break-word;
+        }
+
         .text-center {
             text-align: center;
         }
@@ -46,7 +52,6 @@
         .tandatangan {
             text-align: center;
             margin-left: 400px;
-
         }
 
         #foto {
@@ -99,6 +104,32 @@
             padding: 0;
             top: 2px;
         }
+
+        @media print {
+            @page {
+                margin: 20mm;
+            }
+
+            .table {
+                page-break-inside: auto;
+            }
+
+            .table tr {
+                page-break-inside: avoid;
+                page-break-after: auto;
+            }
+
+            .table td,
+            .table th {
+                word-wrap: break-word;
+                overflow: hidden;
+                white-space: nowrap;
+            }
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
     </style>
 </head>
 
@@ -113,25 +144,38 @@
                 <p class="text-center">Laman: </p>
             </div>
             <div class="divider py-1 bg-dark mb-3 mt-2"></div>
-
-            <table class="table table-bordered">
-                <tr class="font-12">
-                    <th style="width: 150px">Nama Siswa</th>
-                    <th style="width: 150px">Nama Rekrutmen</th>
-                    <th style="width: 150px">Tanggal</th>
-                    <th style="width: 150px">Status</th>
-                    <th style="width: 100px">Aksi</th>
-                </tr>
-                @foreach ($pendaftaran as $data)
-                    <tr>
-                        <td style="width: 150px">{{ $data->siswa->users->nama ?? '' }}</td>
-                        <td style="width: 150px">{{ $data->rekrutmen->nama_rekrutmen ?? '' }}</td>
-                        <td style="width: 150px">{{ $data->tanggal }}</td>
-                        <td style="width: 150px">{{ $data->status }}</td>
-
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <tr class="font-12">
+                        <th>Nama Siswa</th>
+                        <th>Nama Rekrutmen</th>
+                        <th>Tanggal</th>
+                        <th>Nilai Tertulis</th>
+                        <th>Nilai Wawancara</th>
+                        @if (
+                            $pendaftaran->first()->rekrutmen->ekskul->nama_ekskul === 'tonti' ||
+                                $pendaftaran->first()->rekrutmen->ekskul->nama_ekskul === 'Tonti')
+                            <th>Nilai Seleksi Latihan Tonti</th>
+                        @endif
+                        <th>Rata Rata</th>
+                        <th>Status</th>
                     </tr>
-                @endforeach
-            </table>
+                    @foreach ($pendaftaran as $data)
+                        <tr>
+                            <td>{{ $data->siswa->users->nama ?? '' }}</td>
+                            <td>{{ $data->rekrutmen->nama_rekrutmen ?? '' }}</td>
+                            <td>{{ $data->tanggal }}</td>
+                            <td>{{ $data->nilai_tertulis }}</td>
+                            <td>{{ $data->nilai_wawancara }}</td>
+                            @if ($data->rekrutmen->ekskul->nama_ekskul === 'tonti' || $data->rekrutmen->ekskul->nama_ekskul === 'Tonti')
+                                <td>{{ $data->nilai_seleksi_latihan_tonti ?? '' }}</td>
+                            @endif
+                            <td>{{ $data->rata_rata }}</td>
+                            <td>{{ $data->status }}</td>
+                        </tr>
+                    @endforeach
+                </table>
+            </div>
         </div>
     </div>
 </body>

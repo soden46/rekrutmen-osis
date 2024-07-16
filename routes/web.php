@@ -205,7 +205,7 @@ Route::group(['prefix' => 'pembina', 'as' => 'pembina.'], function () {
 
 //siswa
 Route::group(['prefix' => 'siswa', 'as' => 'siswa.'], function () {
-    Route::get('/dashbord', [SiswaController::class, 'index'])->name('index')->middleware('auth');
+    Route::get('/dashbord', [SiswaController::class, 'dashboard'])->name('index')->middleware('auth');
     // Rekrutmen
     Route::controller(SiswaDataRekrutmenController::class)->group(function () {
         Route::get('/rekrutmen', 'index')->name('rekrutmen');

@@ -22,25 +22,30 @@
             <th style="width: 150px">Nama Siswa</th>
             <th style="width: 150px">Nama Rekrutmen</th>
             <th style="width: 150px">Tanggal</th>
+            <th style="width: 150px">Nilai Tertulis</th>
+            <th style="width: 150px">Nilai Wawancara</th>
+            @if (
+                $pendaftaran->first()->rekrutmen->ekskul->nama_ekskul === 'tonti' ||
+                    $pendaftaran->first()->rekrutmen->ekskul->nama_ekskul === 'Tonti')
+                <th style="width: 150px">Nilai Seleksi Latihan Tonti</th>
+            @endif
+            <th style="width: 150px">Nilai Rata Rata</th>
             <th style="width: 150px">Status</th>
             {{-- <th style="width: 100px">Aksi</th> --}}
         </tr>
         @foreach ($pendaftaran as $data)
             <tr>
-                <td style="width: 150px">{{ $data->id_pendaftaran }}</td>
+                <td style="width: 150px">{{ $data->id_pendaftaran ?? '' }}</td>
                 <td style="width: 150px">{{ $data->siswa->users->nama ?? '' }}</td>
                 <td style="width: 150px">{{ $data->rekrutmen->nama_rekrutmen ?? '' }}</td>
-                <td style="width: 150px">{{ $data->tanggal }}</td>
-                <td style="width: 150px">{{ $data->status }}</td>
-                {{-- <td>
-                    <div class="btn-group" style="width:135px">
-                        <form action="{{ route('siswa.pendaftaran.destroy', $data->id_pendaftaran) }}" method="Post">
-                            <a class="btn btn-primary"
-                                href="{{ route('siswa.pendaftaran.edit', $data->id_pendaftaran) }}">Edit</a>
-                            @csrf
-                        </form>
-                    </div>
-                </td> --}}
+                <td style="width: 150px">{{ $data->tanggal ?? '' }}</td>
+                <td style="width: 150px">{{ $data->nilai_tertulis ?? '' }}</td>
+                <td style="width: 150px">{{ $data->nilai_wawancara ?? '' }}</td>
+                @if ($data->rekrutmen->ekskul->nama_ekskul === 'tonti' || $data->rekrutmen->ekskul->nama_ekskul === 'Tonti')
+                    <td style="width: 150px">{{ $data->nilai_seleksi_latihan_tonti ?? '' }}</td>
+                @endif
+                <td style="width: 150px">{{ $data->rata_rata ?? '' }}</td>
+                <td style="width: 150px">{{ $data->status ?? '' }}</td>
             </tr>
         @endforeach
     </table>
