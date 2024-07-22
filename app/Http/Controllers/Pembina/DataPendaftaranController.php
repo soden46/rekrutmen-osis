@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pembina;
 use App\Http\Controllers\Controller;
 use App\Models\DataPendaftaran;
 use App\Models\DataRekrutmen;
+use App\Models\DokumenPendaftaran;
 use App\Models\PembinaModel;
 use App\Models\SiswaModel;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -29,7 +30,7 @@ class DataPendaftaranController extends Controller
         if ($cari != NULL) {
             return view('pembina.pendaftaran.index', [
                 'title' => 'Data Pendaftaran',
-                'pendaftaran' => DataPendaftaran::with('rekrutmen', 'siswa', 'rekrutmen.ekskul')
+                'pendaftaran' => DataPendaftaran::with('rekrutmen', 'siswa', 'rekrutmen.ekskul', 'dokumen')
                     ->whereHas('rekrutmen.ekskul', function ($query) use ($pembinaId) {
                         $query->where('id_pembina', $pembinaId);
                     })
@@ -45,7 +46,7 @@ class DataPendaftaranController extends Controller
         } else {
             return view('pembina.pendaftaran.index', [
                 'title' => 'Data Pendaftaran',
-                'pendaftaran' => DataPendaftaran::with('rekrutmen', 'siswa', 'rekrutmen.ekskul')
+                'pendaftaran' => DataPendaftaran::with('rekrutmen', 'siswa', 'rekrutmen.ekskul', 'dokumen')
                     ->whereHas('rekrutmen.ekskul', function ($query) use ($pembinaId) {
                         $query->where('id_pembina', $pembinaId);
                     })->paginate(10),
@@ -76,8 +77,6 @@ class DataPendaftaranController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-
         $validatedData = $request->validate([
             'id_siswa' => 'required',
             'id_rekrutmen' => 'required',
@@ -85,10 +84,12 @@ class DataPendaftaranController extends Controller
             'status' => 'required',
         ]);
 
-        // dd($validatedData);
-        DataPendaftaran::create($validatedData);
-
-        return redirect()->route('pembina.pendaftaran')->with('success', 'Data has ben created');
+        try {
+            DataPendaftaran::create($validatedData);
+            return redirect()->route('pembina.pendaftaran')->with('success', 'Data has been created');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('pembina.pendaftaran')->with('error', 'Data could not be saved due to a foreign key constraint.');
+        }
     }
 
     /**
@@ -102,6 +103,7 @@ class DataPendaftaranController extends Controller
         $user = Auth::user();
         $pembina = PembinaModel::where('id_user', $user->id)->first();
         $pembinaId = $pembina->id_pembina;
+        $dokumen = DokumenPendaftaran::all()->where('id_pendaftaran', $id_pendaftaran)->groupBy('type');
 
         return view('pembina.pendaftaran.edit', [
             'title' => 'Edit Data pendaftaran',
@@ -110,7 +112,8 @@ class DataPendaftaranController extends Controller
                     $query->where('id_pembina', $pembinaId);
                 })->where('id_pendaftaran', $id_pendaftaran)->first(),
             'rekrutmen' => DataRekrutmen::get(),
-            'siswa' => SiswaModel::get()
+            'siswa' => SiswaModel::get(),
+            'dokumen' => $dokumen
         ]);
     }
 
@@ -123,18 +126,23 @@ class DataPendaftaranController extends Controller
      */
     public function update(Request $request, $id_pendaftaran)
     {
-        // dd($request->all());
         $rules = [
             'tanggal' => 'required',
-            'status' => 'required'
+            'status' => 'required',
+            'nilai_tertulis' => 'nullable',
+            'nilai_wawancara' => 'nullable',
+            'nilai_seleksi_latihan_tonti' => 'nullable',
+            'rata_rata' => 'nullable',
         ];
-
 
         $validatedData = $request->validate($rules);
 
-        DataPendaftaran::where('id_pendaftaran', $id_pendaftaran)->update($validatedData);
-
-        return redirect()->route('pembina.pendaftaran')->with('success', 'Data has ben updated');
+        try {
+            DataPendaftaran::where('id_pendaftaran', $id_pendaftaran)->update($validatedData);
+            return redirect()->route('pembina.pendaftaran')->with('success', 'Data has been updated');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('pembina.pendaftaran')->with('error', 'Data could not be updated due to a foreign key constraint.');
+        }
     }
 
     /**
@@ -145,8 +153,12 @@ class DataPendaftaranController extends Controller
      */
     public function destroy($id_pendaftaran)
     {
-        DataPendaftaran::where('id_pendaftaran', $id_pendaftaran)->delete();
-        return redirect()->route('pembina.pendaftaran')->with('success', 'Data has ben deleted');
+        try {
+            DataPendaftaran::where('id_pendaftaran', $id_pendaftaran)->delete();
+            return redirect()->route('pembina.pendaftaran')->with('success', 'Data has been deleted');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('pembina.pendaftaran')->with('error', 'Data could not be deleted due to a foreign key constraint.');
+        }
     }
 
     public function pdf()

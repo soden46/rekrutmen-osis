@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Siswa;
 
 use App\Http\Controllers\Controller;
 use App\Models\DataPendaftaran;
+use App\Models\DokumenPendaftaran;
 use App\Models\DataRekrutmen;
 use App\Models\EkskulModel;
 use App\Models\SiswaModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class DataRekrutmenController extends Controller
@@ -66,28 +69,83 @@ class DataRekrutmenController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function daftar($id_rekrutmen)
+    public function daftar(Request $request, $id_rekrutmen)
     {
-        $user = Auth::user();
-        $siswa = SiswaModel::where('id_user', $user->id)->first();
+        // Validasi input
+        // dd($request->file('kartu_pelajar'));
+        // $request->validate([
+        //     'kartu_pelajar' => 'required|file|mimes:pdf',
+        //     'pas_foto' => 'required|file|image',
+        //     'surat_izin' => 'required|file|mimes:pdf',
+        // ]);
 
-        // Pengecekan apakah siswa sudah mendaftar pada ekskul yang sama
-        $existingPendaftaran = DataPendaftaran::where('id_siswa', $siswa->id_siswa)
-            ->where('id_rekrutmen', $id_rekrutmen) // atau ganti 'id_rekrutmen' dengan 'id_ekskul' jika perlu
-            ->first();
 
-        if ($existingPendaftaran) {
-            return redirect()->route('siswa.rekrutmen')->with('error', 'Anda sudah mendaftar untuk ekskul ini');
+        try {
+            DB::transaction(function () use ($request, $id_rekrutmen) {
+                // Mendapatkan pengguna yang sedang login
+                $user = Auth::user();
+                $siswa = SiswaModel::where('id_user', $user->id)->first();
+
+                // Pengecekan apakah siswa sudah mendaftar pada ekskul yang sama
+                $existingPendaftaran = DataPendaftaran::where('id_siswa', $siswa->id_siswa)
+                    ->where('id_rekrutmen', $id_rekrutmen)
+                    ->first();
+
+                if ($existingPendaftaran) {
+                    throw new \Exception('Anda sudah mendaftar untuk ekskul ini');
+                }
+
+                // Logika untuk menyimpan data pendaftaran
+                $pendaftaran = DataPendaftaran::create([
+                    'id_siswa' => $siswa->id_siswa,
+                    'id_rekrutmen' => $id_rekrutmen,
+                    'tanggal' => now(),
+                    'status' => 'Pending',
+                ]);
+
+                // dd($pendaftaran->id);
+
+                // Menyimpan file dokumen
+                $files = [
+                    'kartu_pelajar' => $request->file('kartu_pelajar'),
+                    'pas_foto' => $request->file('pas_foto'),
+                    'surat_izin' => $request->file('surat_izin')
+                ];
+
+                $storagePath = public_path('dokumen_pendaftaran'); // Lokasi penyimpanan file
+
+                // Membuat direktori jika belum ada
+                if (!file_exists($storagePath)) {
+                    mkdir($storagePath, 0777, true);
+                }
+
+                foreach ($files as $type => $file) {
+                    if ($file) {
+                        // Membuat nama file unik
+                        $fileName = uniqid() . '.' . $file->getClientOriginalExtension();
+                        $filePath = 'dokumen_pendaftaran/' . $fileName;
+
+                        // Memindahkan file dari direktori sementara ke direktori yang ditentukan
+                        $file->move(public_path('dokumen_pendaftaran'), $fileName);
+
+                        // dd($pendaftaran->id);
+                        DokumenPendaftaran::create([
+                            'id_pendaftaran' => $pendaftaran->id,
+                            'path' => $filePath, // Simpan path relatif
+                            'type' => $type,
+                            'created_at' => now(),
+                            'updated_at' => now(),
+                        ]);
+                    }
+                }
+            });
+
+            return redirect()->route('siswa.rekrutmen')->with('success', 'Pendaftaran berhasil');
+
+        } catch (\Exception $e) {
+            // Handle exception and redirect back with error message
+            return redirect()->route('siswa.rekrutmen')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
-
-        // Logika untuk menyimpan data pendaftaran
-        DataPendaftaran::create([
-            'id_siswa' => $siswa->id_siswa,
-            'id_rekrutmen' => $id_rekrutmen, // atau ganti 'id_rekrutmen' dengan 'id_ekskul' jika perlu
-            'tanggal' => now(),
-            'status' => 'Pending',
-        ]);
-
-        return redirect()->route('siswa.rekrutmen')->with('success', 'Pendaftaran berhasil');
     }
+
 }

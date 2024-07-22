@@ -63,33 +63,34 @@ class DataSiswaController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-        // Validasi data
-        $ValidatedData = $request->validate([
+        $validatedData = $request->validate([
             'nama' => 'required|max:255',
             'nis' => 'required|unique:siswa',
             'password' => 'required|min:6|max:12',
         ]);
 
-        // Menyimpan data ke database
-        $userID = User::create([
-            'nama' => $ValidatedData['nama'],
-            'userName' => $ValidatedData['nis'],
-            'password' => Hash::make($ValidatedData['password']),
-            'role' => 'siswa',
-        ]);
+        try {
+            $userID = User::create([
+                'nama' => $validatedData['nama'],
+                'userName' => $validatedData['nis'],
+                'password' => Hash::make($validatedData['password']),
+                'role' => 'siswa',
+            ]);
 
-        SiswaModel::create([
-            'id_user' => $userID->id,
-            'nis' => $ValidatedData['nis'],
-            'kelas' => $request->kelas,
-            'tempat_lahir' => $request->tempat_lahir,
-            'tanggal_lahir' => $request->tanggal_lahir,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'alamat' => $request->alamat,
-        ]);
+            SiswaModel::create([
+                'id_user' => $userID->id,
+                'nis' => $validatedData['nis'],
+                'kelas' => $request->kelas,
+                'tempat_lahir' => $request->tempat_lahir,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'alamat' => $request->alamat,
+            ]);
 
-        return redirect()->route('admin.siswa')->with('success', 'Data has ben created');
+            return redirect()->route('admin.siswa')->with('success', 'Data has been created');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('admin.siswa')->with('error', 'Data could not be saved due to a foreign key constraint.');
+        }
     }
 
     /**
@@ -117,20 +118,22 @@ class DataSiswaController extends Controller
     public function update(Request $request, $id_siswa)
     {
         $rules = [
-            'nis' => 'max:255',
+            'nis' => 'required|max:255',
             'kelas' => 'max:255',
             'tempat_lahir' => 'max:255',
-            'tanggal_lahir' => 'max:255',
+            'tanggal_lahir' => 'date',
             'jenis_kelamin' => 'max:255',
             'alamat' => 'max:255',
         ];
 
-
         $validatedData = $request->validate($rules);
 
-        SiswaModel::where('id_siswa', $id_siswa)->update($validatedData);
-
-        return redirect()->route('admin.siswa')->with('success', 'Data has ben updated');
+        try {
+            SiswaModel::where('id_siswa', $id_siswa)->update($validatedData);
+            return redirect()->route('admin.siswa')->with('success', 'Data has been updated');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('admin.siswa')->with('error', 'Data could not be updated due to a foreign key constraint.');
+        }
     }
 
     /**
@@ -141,8 +144,12 @@ class DataSiswaController extends Controller
      */
     public function destroy($id_siswa)
     {
-        SiswaModel::where('id_siswa', $id_siswa)->delete();
-        return redirect()->route('admin.siswa')->with('success', 'Data has ben deleted');
+        try {
+            SiswaModel::where('id_siswa', $id_siswa)->delete();
+            return redirect()->route('admin.siswa')->with('success', 'Data has been deleted');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('admin.siswa')->with('error', 'Data could not be deleted due to a foreign key constraint.');
+        }
     }
 
     public function pdf()

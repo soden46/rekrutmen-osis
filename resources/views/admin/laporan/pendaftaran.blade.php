@@ -137,13 +137,15 @@
     <div class="card">
         <div class="card-body">
             <div class="header">
-                <img src="{{ public_path('storage/assets/logo.png') }}" id="foto" alt="Logo" height="75px" />
+                <img src="{{ asset('assets/img/logo.png') }}" id="foto" alt="Logo" height="75px" />
                 <h1 class="text-center">SMP Negeri 2 Mlati</h1>
-                <p class="text-center">Jalan </p>
-                <p class="text-center">Telepon (0274) 797496</p>
-                <p class="text-center">Laman: </p>
+                <p class="text-center">Sinduadi, Mlati, Sleman, Yogyakarta </p>
+                <p class="text-center">Telepon 586711</p>
+                <p class="text-center">Kode Pos : 55284 </p>
             </div>
             <div class="divider py-1 bg-dark mb-3 mt-2"></div>
+            <h5 class="text-center">Laporan Data Pendaftaran</h5>
+            
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <tr class="font-12">
@@ -155,7 +157,7 @@
                         @if (
                             $pendaftaran->first()->rekrutmen->ekskul->nama_ekskul === 'tonti' ||
                                 $pendaftaran->first()->rekrutmen->ekskul->nama_ekskul === 'Tonti')
-                            <th>Nilai Seleksi Latihan Tonti</th>
+                        <th>Nilai Seleksi Latihan Tonti</th>
                         @endif
                         <th>Rata Rata</th>
                         <th>Status</th>

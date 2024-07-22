@@ -106,25 +106,26 @@
     <div class="card">
         <div class="card-body">
             <div class="header">
-                <img src="{{ public_path('storage/assets/logo.png') }}" id="foto" alt="Logo" height="75px" />
+                <img src="{{ asset('assets/img/logo.png') }}" id="foto" alt="Logo" height="75px" />
                 <h1 class="text-center">SMP Negeri 2 Mlati</h1>
-                <p class="text-center">Jalan </p>
-                <p class="text-center">Telepon (0274) 797496</p>
-                <p class="text-center">Laman: </p>
+                <p class="text-center">Sinduadi, Mlati, Sleman, Yogyakarta </p>
+                <p class="text-center">Telepon 586711</p>
+                <p class="text-center">Kode Pos : 55284 </p>
             </div>
             <div class="divider py-1 bg-dark mb-3 mt-2"></div>
+            <h5 class="text-center">Laporan Data Rekrutmen</h5>
 
             <table class="table table-bordered">
                 <tr class="font-12">
                     <th style="width: 150px">Nama Ekskul</th>
-                    <th style="width: 150px">Nama Lowongan</th>
+                    <th style="width: 150px">Nama Rekrutmen</th>
                     <th style="width: 150px">Tanggal Dimulai</th>
                     <th style="width: 150px">Tanggal Berakhir</th>
                 </tr>
                 @foreach ($rekrutmen as $data)
                     <tr>
                         <td style="width: 150px">{{ $data->ekskul->nama_ekskul ?? '' }}</td>
-                        <td style="width: 150px">{{ $data->nama_lowongan ?? '' }}</td>
+                        <td style="width: 150px">{{ $data->nama_rekrutmen ?? '' }}</td>
                         <td style="width: 150px">{{ date('d/m/Y', strtotime($data->tanggal_dimulai ?? '')) }}</td>
                         <td style="width: 150px">{{ date('d/m/Y', strtotime($data->tanggal_berakhir ?? '')) }}</td>
 

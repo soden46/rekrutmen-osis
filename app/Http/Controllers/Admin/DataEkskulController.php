@@ -68,10 +68,12 @@ class DataEkskulController extends Controller
             'jml_anggota' => 'required|max:255',
         ]);
 
-        // dd($validatedData);
-        EkskulModel::create($validatedData);
-
-        return redirect()->route('admin.ekskul')->with('success', 'Data has ben created');
+        try {
+            EkskulModel::create($validatedData);
+            return redirect()->route('admin.ekskul')->with('success', 'Data has been created');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('admin.ekskul')->with('error', 'Data could not be saved due to a foreign key constraint.');
+        }
     }
 
     /**
@@ -104,12 +106,14 @@ class DataEkskulController extends Controller
             'jml_anggota' => 'required|max:255',
         ];
 
-
         $validatedData = $request->validate($rules);
 
-        EkskulModel::where('id_ekskul', $id_ekskul)->update($validatedData);
-
-        return redirect()->route('admin.ekskul')->with('success', 'Data has ben updated');
+        try {
+            EkskulModel::where('id_ekskul', $id_ekskul)->update($validatedData);
+            return redirect()->route('admin.ekskul')->with('success', 'Data has been updated');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('admin.ekskul')->with('error', 'Data could not be updated due to a foreign key constraint.');
+        }
     }
 
     /**
@@ -120,8 +124,12 @@ class DataEkskulController extends Controller
      */
     public function destroy($id_ekskul)
     {
-        EkskulModel::where('id_ekskul', $id_ekskul)->delete();
-        return redirect()->route('admin.ekskul')->with('successDeletedMasyarakat', 'Data has ben deleted');
+        try {
+            EkskulModel::where('id_ekskul', $id_ekskul)->delete();
+            return redirect()->route('admin.ekskul')->with('successDeletedMasyarakat', 'Data has been deleted');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('admin.ekskul')->with('error', 'Data could not be deleted due to a foreign key constraint.');
+        }
     }
 
     public function pdf()

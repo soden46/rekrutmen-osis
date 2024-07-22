@@ -60,29 +60,32 @@ class DataPembinaController extends Controller
     public function store(Request $request)
     {
 
-        $ValidatedData = $request->validate([
+        $validatedData = $request->validate([
             'nama' => 'required|max:255',
             'nip' => 'required|unique:pembina',
             'password' => 'required|min:6|max:12',
         ]);
 
-        // Menyimpan data ke database
-        $userID = User::create([
-            'nama' => $ValidatedData['nama'],
-            'userName' => $ValidatedData['nip'],
-            'password' => Hash::make($ValidatedData['password']),
-            'role' => 'pembina',
-        ]);
+        try {
+            $userID = User::create([
+                'nama' => $validatedData['nama'],
+                'userName' => $validatedData['nip'],
+                'password' => Hash::make($validatedData['password']),
+                'role' => 'pembina',
+            ]);
 
-        PembinaModel::create([
-            'id_user' => $userID->id,
-            'nip' => $ValidatedData['nip'],
-            'tempat_lahir' => $request->tempat_lahir,
-            'tanggal_lahir' => $request->tanggal_lahir,
-            'jenis_kelamin' => $request->jenis_kelamin,
-        ]);
+            PembinaModel::create([
+                'id_user' => $userID->id,
+                'nip' => $validatedData['nip'],
+                'tempat_lahir' => $request->tempat_lahir,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'jenis_kelamin' => $request->jenis_kelamin,
+            ]);
 
-        return redirect()->route('admin.pembina')->with('success', 'Data has ben created');
+            return redirect()->route('admin.pembina')->with('success', 'Data has been created');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('admin.pembina')->with('error', 'Data could not be saved due to a foreign key constraint.');
+        }
     }
 
     /**
@@ -110,19 +113,20 @@ class DataPembinaController extends Controller
     public function update(Request $request, $id_pembina)
     {
         $rules = [
-            'id_user' => 'max:255',
-            'nip' => 'max:255',
+            'nip' => 'required|max:255',
             'tempat_lahir' => 'max:255',
-            'tanggal_lahir' => 'max:255',
+            'tanggal_lahir' => 'date',
             'jenis_kelamin' => 'max:255',
         ];
 
-
         $validatedData = $request->validate($rules);
 
-        PembinaModel::where('id_pembina', $id_pembina)->update($validatedData);
-
-        return redirect()->route('admin.pembina')->with('success', 'Data has ben updated');
+        try {
+            PembinaModel::where('id_pembina', $id_pembina)->update($validatedData);
+            return redirect()->route('admin.pembina')->with('success', 'Data has been updated');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('admin.pembina')->with('error', 'Data could not be updated due to a foreign key constraint.');
+        }
     }
 
     /**
@@ -133,8 +137,12 @@ class DataPembinaController extends Controller
      */
     public function destroy($id_pembina)
     {
-        PembinaModel::where('id_pembina', $id_pembina)->delete();
-        return redirect()->route('admin.pembina')->with('success', 'Data has ben deleted');
+        try {
+            PembinaModel::where('id_pembina', $id_pembina)->delete();
+            return redirect()->route('admin.pembina')->with('success', 'Data has been deleted');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('admin.pembina')->with('error', 'Data could not be deleted due to a foreign key constraint.');
+        }
     }
 
     public function pdf()

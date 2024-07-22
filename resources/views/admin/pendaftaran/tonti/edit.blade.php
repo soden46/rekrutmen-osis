@@ -11,8 +11,21 @@
 
     <div class="col-lg-8">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header d-flex justify-content-between">
                 <h5 class="card-title">Edit Pendaftaran Tonti</h5>
+                <div class="dokumen d-flex flex-column">
+                    @if(isset($dokumen['kartu_pelajar']) && $dokumen['kartu_pelajar']->isNotEmpty())
+                        <a href="{{ asset($dokumen['kartu_pelajar']->first()->path) }}" target="_blank">Lihat Kartu Pelajar</a>
+                    @endif
+
+                    @if(isset($dokumen['surat_izin']) && $dokumen['surat_izin']->isNotEmpty())
+                        <a href="{{ asset($dokumen['surat_izin']->first()->path) }}" target="_blank">Lihat Surat Izin</a>
+                    @endif
+
+                    @if(isset($dokumen['pas_foto']) && $dokumen['pas_foto']->isNotEmpty())
+                        <a href="{{ asset($dokumen['pas_foto']->first()->path) }}" target="_blank">Lihat Pas Foto</a>
+                    @endif
+                </div>
             </div>
             <div class="card-body">
                 <form method="post" action="{{ route('admin.pendaftaran.tonti.update', $pendaftaran->id_pendaftaran) }}"

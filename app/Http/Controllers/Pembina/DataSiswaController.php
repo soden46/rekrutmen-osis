@@ -62,7 +62,6 @@ class DataSiswaController extends Controller
      */
     public function store(Request $request)
     {
-
         $validatedData = $request->validate([
             'nis' => 'max:255',
             'kelas' => 'max:255',
@@ -73,10 +72,12 @@ class DataSiswaController extends Controller
             'kelas' => 'max:255',
         ]);
 
-        // dd($validatedData);
-        SiswaModel::create($validatedData);
-
-        return redirect()->route('pembina.didwa')->with('successCreatedPenduduk', 'Data has ben created');
+        try {
+            SiswaModel::create($validatedData);
+            return redirect()->route('pembina.didwa')->with('successCreatedPenduduk', 'Data has been created');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('pembina.didwa')->with('error', 'Data could not be saved due to a foreign key constraint.');
+        }
     }
 
     /**
@@ -112,12 +113,14 @@ class DataSiswaController extends Controller
             'alamat' => 'max:255',
         ];
 
-
         $validatedData = $request->validate($rules);
 
-        SiswaModel::where('id_siswa', $id_siswa)->update($validatedData);
-
-        return redirect()->route('pembina.siswa')->with('successUpdatedMasyarakat', 'Data has ben updated');
+        try {
+            SiswaModel::where('id_siswa', $id_siswa)->update($validatedData);
+            return redirect()->route('pembina.siswa')->with('successUpdatedMasyarakat', 'Data has been updated');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('pembina.siswa')->with('error', 'Data could not be updated due to a foreign key constraint.');
+        }
     }
 
     /**
@@ -128,8 +131,12 @@ class DataSiswaController extends Controller
      */
     public function destroy($id_siswa)
     {
-        SiswaModel::where('id_siswa', $id_siswa)->delete();
-        return redirect()->route('pembina.siswa')->with('successDeletedMasyarakat', 'Data has ben deleted');
+        try {
+            SiswaModel::where('id_siswa', $id_siswa)->delete();
+            return redirect()->route('pembina.siswa')->with('successDeletedMasyarakat', 'Data has been deleted');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('pembina.siswa')->with('error', 'Data could not be deleted due to a foreign key constraint.');
+        }
     }
 
     public function pdf()

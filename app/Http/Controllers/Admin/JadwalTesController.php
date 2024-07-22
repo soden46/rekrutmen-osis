@@ -66,19 +66,19 @@ class JadwalTesController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-
         $validatedData = $request->validate([
             'id_rekrutmen' => 'required',
             'nama_jadwal_tes' => 'required|max:255',
-            'tanggal' => 'required',
+            'tanggal' => 'required|date',
             'jam' => 'required',
         ]);
 
-        // dd($validatedData);
-        DataJadwaltes::create($validatedData);
-
-        return redirect()->route('admin.jadwal')->with('success', 'Data has ben created');
+        try {
+            DataJadwaltes::create($validatedData);
+            return redirect()->route('admin.jadwal')->with('success', 'Data has been created');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('admin.jadwal')->with('error', 'Data could not be saved due to a foreign key constraint.');
+        }
     }
 
     /**
@@ -108,16 +108,18 @@ class JadwalTesController extends Controller
         $rules = [
             'id_rekrutmen' => 'required',
             'nama_jadwal_tes' => 'required|max:255',
-            'tanggal' => 'required',
+            'tanggal' => 'required|date',
             'jam' => 'required',
         ];
 
-
         $validatedData = $request->validate($rules);
 
-        DataJadwaltes::where('id_jadwal', $id_jadwal)->update($validatedData);
-
-        return redirect()->route('admin.jadwal')->with('success', 'Data has ben updated');
+        try {
+            DataJadwaltes::where('id_jadwal', $id_jadwal)->update($validatedData);
+            return redirect()->route('admin.jadwal')->with('success', 'Data has been updated');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('admin.jadwal')->with('error', 'Data could not be updated due to a foreign key constraint.');
+        }
     }
 
     /**
@@ -128,8 +130,12 @@ class JadwalTesController extends Controller
      */
     public function destroy($id_jadwal)
     {
-        DataJadwaltes::where('id_jadwal', $id_jadwal)->delete();
-        return redirect()->route('admin.jadwal')->with('success', 'Data has ben deleted');
+        try {
+            DataJadwaltes::where('id_jadwal', $id_jadwal)->delete();
+            return redirect()->route('admin.jadwal')->with('success', 'Data has been deleted');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('admin.jadwal')->with('error', 'Data could not be deleted due to a foreign key constraint.');
+        }
     }
 
     public function pdf()

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\DataPendaftaran;
 use App\Models\DataRekrutmen;
+use App\Models\DokumenPendaftaran;
 use App\Models\rekrutmenModel;
 use App\Models\SiswaModel;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -21,35 +22,36 @@ class PendaftaranController extends Controller
     {
         $cari = $request->cari;
 
+        $pendaftaranQuery = DataPendaftaran::with(['rekrutmen', 'siswa.users', 'dokumen'])
+            ->whereHas('rekrutmen', function ($query) {
+                $query->whereHas('ekskul', function ($query) {
+                    $query->where('nama_ekskul', 'osis');
+                });
+            });
+
         if ($cari != NULL) {
-            return view('admin.pendaftaran.osis.index', [
-                'title' => 'Data Pendaftaran',
-                'pendaftaran' => DataPendaftaran::with('rekrutmen', 'siswa')
-                    ->where(function ($query) use ($cari) {
-                        $query->where('tanggal', 'like', "%{$cari}%")
-                            ->orWhere('status', 'like', "%{$cari}%")
-                            ->orWhereHas('siswa', function ($query) use ($cari) {
-                                $query->where('nama_siswa', 'like', "%{$cari}%");
-                            });
-                    })->whereHas('rekrutmen', function ($query) {
-                        $query->whereHas('ekskul', function ($query) {
-                            $query->where('nama_ekskul', 'osis');
-                        });
-                    })
-                    ->paginate(10),
-            ]);
-        } else {
-            return view('admin.pendaftaran.osis.index', [
-                'title' => 'Data Pendaftaran',
-                'pendaftaran' => DataPendaftaran::with('rekrutmen', 'siswa')
-                    ->whereHas('rekrutmen', function ($query) {
-                        $query->whereHas('ekskul', function ($query) {
-                            $query->where('nama_ekskul', 'osis');
-                        });
-                    })
-                    ->paginate(10),
-            ]);
+            $pendaftaranQuery->where(function ($query) use ($cari) {
+                $query->where('tanggal', 'like', "%{$cari}%")
+                    ->orWhere('status', 'like', "%{$cari}%")
+                    ->orWhereHas('siswa', function ($query) use ($cari) {
+                        $query->where('nama_siswa', 'like', "%{$cari}%");
+                    });
+            });
         }
+
+        $pendaftaran = $pendaftaranQuery->orderBy('rata_rata', 'desc')->paginate(10);
+
+        // Process each pendaftaran to add document paths
+        foreach ($pendaftaran as $data) {
+            $data->kartuPelajar = $data->dokumen->where('type', 'kartu_pelajar')->first();
+            $data->suratIzin = $data->dokumen->where('type', 'surat_izin')->first();
+            $data->pasFoto = $data->dokumen->where('type', 'pas_foto')->first();
+        }
+
+        return view('admin.pendaftaran.osis.index', [
+            'title' => 'Data Pendaftaran',
+            'pendaftaran' => $pendaftaran,
+        ]);
     }
 
     /**
@@ -75,8 +77,6 @@ class PendaftaranController extends Controller
      */
     public function storeOsis(Request $request)
     {
-        // dd($request);
-
         $validatedData = $request->validate([
             'id_siswa' => 'required',
             'id_rekrutmen' => 'required',
@@ -87,10 +87,12 @@ class PendaftaranController extends Controller
             'status' => 'required',
         ]);
 
-        // dd($validatedData);
-        DataPendaftaran::create($validatedData);
-
-        return redirect()->route('admin.pendaftaran.osis')->with('success', 'Data has ben created');
+        try {
+            DataPendaftaran::create($validatedData);
+            return redirect()->route('admin.pendaftaran.osis')->with('success', 'Data has been created');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('admin.pendaftaran.osis')->with('error', 'Data could not be saved due to a foreign key constraint.');
+        }
     }
 
     /**
@@ -101,11 +103,13 @@ class PendaftaranController extends Controller
      */
     public function editOsis(DataPendaftaran $pendaftaran, $id_pendaftaran)
     {
+        $dokumen = DokumenPendaftaran::all()->where('id_pendaftaran', $id_pendaftaran)->groupBy('type');
         return view('admin.pendaftaran.osis.edit', [
             'title' => 'Edit Data pendaftaran',
             'pendaftaran' => DataPendaftaran::with('rekrutmen', 'siswa')->where('id_pendaftaran', $id_pendaftaran)->first(),
             'rekrutmen' => DataRekrutmen::get(),
-            'siswa' => SiswaModel::get()
+            'siswa' => SiswaModel::get(),
+            'dokumen' => $dokumen
         ]);
     }
 
@@ -128,12 +132,14 @@ class PendaftaranController extends Controller
             'status' => 'nullable',
         ];
 
-
         $validatedData = $request->validate($rules);
 
-        DataPendaftaran::where('id_pendaftaran', $id_pendaftaran)->update($validatedData);
-
-        return redirect()->route('admin.pendaftaran.osis')->with('success', 'Data has ben updated');
+        try {
+            DataPendaftaran::where('id_pendaftaran', $id_pendaftaran)->update($validatedData);
+            return redirect()->route('admin.pendaftaran.osis')->with('success', 'Data has been updated');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('admin.pendaftaran.osis')->with('error', 'Data could not be updated due to a foreign key constraint.');
+        }
     }
 
     /**
@@ -144,8 +150,12 @@ class PendaftaranController extends Controller
      */
     public function destroyOsis($id_pendaftaran)
     {
-        DataPendaftaran::where('id_pendaftaran', $id_pendaftaran)->delete();
-        return redirect()->route('admin.pendaftaran.osis')->with('success', 'Data has ben deleted');
+        try {
+            DataPendaftaran::where('id_pendaftaran', $id_pendaftaran)->delete();
+            return redirect()->route('admin.pendaftaran.osis')->with('success', 'Data has been deleted');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('admin.pendaftaran.osis')->with('error', 'Data could not be deleted due to a foreign key constraint.');
+        }
     }
 
     public function pdfOsis()
@@ -192,12 +202,13 @@ class PendaftaranController extends Controller
                             $query->where('nama_ekskul', 'tonti');
                         });
                     })
+                    ->orderBy('nilai_seleksi_latihan_tonti', 'desc')
                     ->paginate(10),
             ]);
         } else {
             return view('admin.pendaftaran.tonti.index', [
                 'title' => 'Data Pendaftaran',
-                'pendaftaran' => DataPendaftaran::with('rekrutmen', 'siswa')->paginate(10),
+                'pendaftaran' => DataPendaftaran::with('rekrutmen', 'siswa')->orderBy('nilai_seleksi_latihan_tonti', 'desc')->paginate(10),
             ]);
         }
     }
@@ -225,8 +236,6 @@ class PendaftaranController extends Controller
      */
     public function storeTonti(Request $request)
     {
-        // dd($request);
-
         $validatedData = $request->validate([
             'id_siswa' => 'required',
             'id_rekrutmen' => 'required',
@@ -235,10 +244,12 @@ class PendaftaranController extends Controller
             'status' => 'required',
         ]);
 
-        // dd($validatedData);
-        DataPendaftaran::create($validatedData);
-
-        return redirect()->route('admin.pendaftaran.tonti')->with('success', 'Data has ben created');
+        try {
+            DataPendaftaran::create($validatedData);
+            return redirect()->route('admin.pendaftaran.tonti')->with('success', 'Data has been created');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('admin.pendaftaran.tonti')->with('error', 'Data could not be saved due to a foreign key constraint.');
+        }
     }
 
     /**
@@ -249,11 +260,13 @@ class PendaftaranController extends Controller
      */
     public function editTonti(DataPendaftaran $pendaftaran, $id_pendaftaran)
     {
+        $dokumen = DokumenPendaftaran::all()->where('id_pendaftaran', $id_pendaftaran)->groupBy('type');
         return view('admin.pendaftaran.tonti.edit', [
             'title' => 'Edit Data pendaftaran',
             'pendaftaran' => DataPendaftaran::with('rekrutmen', 'siswa')->where('id_pendaftaran', $id_pendaftaran)->first(),
             'rekrutmen' => DataRekrutmen::get(),
-            'siswa' => SiswaModel::get()
+            'siswa' => SiswaModel::get(),
+            'dokumen' => $dokumen
         ]);
     }
 
@@ -274,12 +287,14 @@ class PendaftaranController extends Controller
             'status' => 'nullable',
         ];
 
-
         $validatedData = $request->validate($rules);
 
-        DataPendaftaran::where('id_pendaftaran', $id_pendaftaran)->update($validatedData);
-
-        return redirect()->route('admin.pendaftaran.tonti')->with('success', 'Data has ben updated');
+        try {
+            DataPendaftaran::where('id_pendaftaran', $id_pendaftaran)->update($validatedData);
+            return redirect()->route('admin.pendaftaran.tonti')->with('success', 'Data has been updated');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('admin.pendaftaran.tonti')->with('error', 'Data could not be updated due to a foreign key constraint.');
+        }
     }
 
     /**
@@ -290,8 +305,12 @@ class PendaftaranController extends Controller
      */
     public function destroyTonti($id_pendaftaran)
     {
-        DataPendaftaran::where('id_pendaftaran', $id_pendaftaran)->delete();
-        return redirect()->route('admin.pendaftaran.tonti')->with('success', 'Data has ben deleted');
+        try {
+            DataPendaftaran::where('id_pendaftaran', $id_pendaftaran)->delete();
+            return redirect()->route('admin.pendaftaran.tonti')->with('success', 'Data has been deleted');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('admin.pendaftaran.tonti')->with('error', 'Data could not be deleted due to a foreign key constraint.');
+        }
     }
 
     public function pdfTonti()

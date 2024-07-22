@@ -20,16 +20,15 @@
                 <button type="submit" class="btn btn-md btn-primary ml-2">Search</button>
             </form>
         </div>
-        <div>
-        </div>
     </div>
-    <table class="table table-bordered">
+    <table class="table table-bordered table-responsive">
         <tr class="font-12">
             <th style="width: 150px">Nama Ekskul</th>
             <th style="width: 150px">Nama Rekrutmen</th>
             <th style="width: 150px">Tanggal Dimulai</th>
             <th style="width: 150px">Tanggal Berakhir</th>
             <th style="width: 150px">Deskripsi</th>
+            <th style="width: 150px">Aksi</th>
         </tr>
         @foreach ($rekrutmen as $data)
             <tr>
@@ -44,9 +43,15 @@
                         Detail
                     </button>
                 </td>
+                <td style="width: 150px">
+                    <button type="button" class="btn btn-success btn-sm ml-2" data-toggle="modal"
+                        data-target="#daftarModal{{ $data->id_rekrutmen }}">
+                        Daftar
+                    </button>
+                </td>
             </tr>
 
-            <!-- Modal -->
+            <!-- Modal Detail-->
             <div class="modal fade" id="detailModal{{ $data->id_rekrutmen }}" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -58,15 +63,57 @@
                             </button>
                         </div>
                         <div class="modal-body">
+
                             {!! $data->deskripsi !!}
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <form method="POST" action="{{ route('siswa.rekrutmen.daftar', $data->id_rekrutmen) }}">
-                                @csrf
-                                <button type="submit" class="btn btn-primary">Daftar</button>
                             </form>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Daftar-->
+            <div class="modal fade" id="daftarModal{{ $data->id_rekrutmen }}" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Daftar Ekskul</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form method="POST" action="{{ route('siswa.rekrutmen.daftar', $data->id_rekrutmen) }}"
+                            accept-charset="utf-8" enctype="multipart/form-data">
+                            @csrf
+                            <div class="modal-body">
+                                <div class="mb-3 mt-3">
+                                    <label for="kartu_pelajar" class="form-label">Kartu Pelajar <span
+                                            class="text-danger">*</span></label>
+                                    <input name="kartu_pelajar" class="form-control" type="file" id="kartu_pelajar"
+                                        required accept="pdf">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="pas_foto" class="form-label">Pas Foto 3x4 <span
+                                            class="text-danger">*</span></label>
+                                    <input name="pas_foto" class="form-control" type="file" id="pas_foto" required
+                                        accept="image/*">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="surat_izin" class="form-label">Surat Izin Orang Tua <span
+                                            class="text-danger">*</span></label>
+                                    <input name="surat_izin" class="form-control" type="file" id="surat_izin"
+                                        required accept="pdf">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                                <button type="submit" class="btn btn-primary">Daftar</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

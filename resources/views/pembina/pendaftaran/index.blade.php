@@ -47,6 +47,9 @@
                         $pendaftaran->first()->rekrutmen->ekskul->nama_ekskul === 'Osis'))
                 <th style="width: 150px">Nilai Rata Rata</th>
             @endif
+            <th style="width: 150px">Kartu pelajar</th>
+            <th style="width: 150px">Surat Izin</th>
+            <th style="width: 150px">Foto</th>
             <th style="width: 150px">Status</th>
             <th style="width: 100px">Aksi</th>
         </tr>
@@ -66,6 +69,39 @@
                 @if ($data->rekrutmen->ekskul->nama_ekskul === 'osis' || $data->rekrutmen->ekskul->nama_ekskul === 'Osis')
                     <td style="width: 150px">{{ $data->rata_rata ?? '' }}</td>
                 @endif
+                <td style="width: 150px">
+                    @php
+                        $kartuPelajar = $data->dokumen->where('type', 'kartu_pelajar')->first();
+                    @endphp
+                    @if ($kartuPelajar)
+                        <img src="{{ asset('dokumen_pendaftaran/' . $kartuPelajar->path) }}" alt="Kartu Pelajar"
+                            style="max-width: 100px; max-height: 100px;">
+                    @else
+                        Tidak ada data
+                    @endif
+                </td>
+                <td style="width: 150px">
+                    @php
+                        $suratIzin = $data->dokumen->where('type', 'suart_izin')->first();
+                    @endphp
+                    @if ($suratIzin)
+                        <img src="{{ asset('dokumen_pendaftaran/' . $suratIzin->path) }}" alt="Surat Izin"
+                            style="max-width: 100px; max-height: 100px;">
+                    @else
+                        Tidak ada data
+                    @endif
+                </td>
+                <td style="width: 150px">
+                    @php
+                        $passFoto = $data->dokumen->where('type', 'pass_foto')->first();
+                    @endphp
+                    @if ($passFoto)
+                        <img src="{{ asset('dokumen_pendaftaran/' . $passFoto->path) }}" alt="Pass Foto"
+                            style="max-width: 100px; max-height: 100px;">
+                    @else
+                        Tidak ada data
+                    @endif
+                </td>
                 <td style="width: 150px">{{ $data->status ?? '' }}</td>
                 <td>
                     <div class="btn-group" style="width:135px">

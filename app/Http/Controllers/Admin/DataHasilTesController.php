@@ -65,8 +65,6 @@ class DataHasilTesController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-
         $validatedData = $request->validate([
             'id_pendaftaran' => 'required',
             'nama_tes' => 'required|max:255',
@@ -74,10 +72,12 @@ class DataHasilTesController extends Controller
             'status' => 'required',
         ]);
 
-        // dd($validatedData);
-        HasilPenerimaan::create($validatedData);
-
-        return redirect()->route('admin.hasil')->with('success', 'Data has ben created');
+        try {
+            HasilPenerimaan::create($validatedData);
+            return redirect()->route('admin.hasil')->with('success', 'Data has been created');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('admin.hasil')->with('error', 'Data could not be saved due to a foreign key constraint.');
+        }
     }
 
     /**
@@ -111,10 +111,14 @@ class DataHasilTesController extends Controller
             'status' => 'required',
         ];
 
-
         $validatedData = $request->validate($rules);
-        HasilPenerimaan::where('id_hasil', $id_hasil)->update($validatedData);
-        return redirect()->route('admin.hasil')->with('success', 'Data has ben updated');
+
+        try {
+            HasilPenerimaan::where('id_hasil', $id_hasil)->update($validatedData);
+            return redirect()->route('admin.hasil')->with('success', 'Data has been updated');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('admin.hasil')->with('error', 'Data could not be updated due to a foreign key constraint.');
+        }
     }
 
     /**
@@ -125,8 +129,12 @@ class DataHasilTesController extends Controller
      */
     public function destroy($id_hasil)
     {
-        HasilPenerimaan::where('id_hasil', $id_hasil)->delete();
-        return redirect()->route('admin.hasil')->with('success', 'Data has ben deleted');
+        try {
+            HasilPenerimaan::where('id_hasil', $id_hasil)->delete();
+            return redirect()->route('admin.hasil')->with('success', 'Data has been deleted');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('admin.hasil')->with('error', 'Data could not be deleted due to a foreign key constraint.');
+        }
     }
 
     public function pdf()

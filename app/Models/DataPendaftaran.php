@@ -21,4 +21,9 @@ class DataPendaftaran extends Model
     {
         return $this->hasOne(SiswaModel::class, 'id_siswa', 'id_siswa');
     }
+
+    public function dokumen()
+    {
+        return $this->hasMany(DokumenPendaftaran::class, 'id_pendaftaran', 'id_pendaftaran');
+    }
 }

@@ -11,8 +11,8 @@
 
     <div class="col-lg-8">
         <div class="card">
-            <div class="card-header">
-                <h5 class="card-title">Edit Pendaftaran</h5>
+            <div class="card-header d-flex justify-content-between">
+                <h5 class="card-title">Edit Pendaftaran Tonti</h5>
             </div>
             <div class="card-body">
                 <form method="post" action="{{ route('pembina.pendaftaran.update', $pendaftaran->id_pendaftaran) }}"
@@ -50,7 +50,7 @@
                         <input type="date" class="form-control" id="tanggal" name="tanggal"
                             value="{{ $pendaftaran->tanggal }}">
                     </div>
-                    @if ($pendaftarn->rekrutmen->ekskul->nama_ekskul === 'osis' || $pendaftarn->rekrutmen->ekskul->nama_ekskul === 'Osis')
+                    @if ($pendaftaran->rekrutmen->ekskul->nama_ekskul === 'osis' || $pendaftaran->rekrutmen->ekskul->nama_ekskul === 'Osis')
                         <div class="form-group">
                             <label for="nilai_tertulis">Nilai Tertulis</label>
                             <input type="number" class="form-control" id="nilai_tertulis" name="nilai_tertulis"
@@ -101,11 +101,21 @@
             }
         }
 
+        function updateRataRata() {
+            const nilaiTertulis = parseFloat(document.getElementById('nilai_tertulis').value) || 0;
+            const nilaiWawancara = parseFloat(document.getElementById('nilai_wawancara').value) || 0;
+            const rataRata = (nilaiTertulis + nilaiWawancara) / 2;
+            document.getElementById('rata_rata').value = rataRata;
+        }
+
         document.getElementById('id_rekrutmen').addEventListener('change', toggleNilaiSeleksiLatihanTonti);
+        document.getElementById('nilai_tertulis').addEventListener('input', updateRataRata);
+        document.getElementById('nilai_wawancara').addEventListener('input', updateRataRata);
 
         // Inisialisasi pada saat halaman dimuat
         document.addEventListener('DOMContentLoaded', function() {
             toggleNilaiSeleksiLatihanTonti();
+            updateRataRata();
         });
     </script>
 @endsection

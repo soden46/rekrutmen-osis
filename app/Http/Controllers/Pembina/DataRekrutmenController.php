@@ -76,8 +76,6 @@ class DataRekrutmenController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-
         $validatedData = $request->validate([
             'id_ekskul' => 'required|max:20',
             'nama_rekrutmen' => 'required|max:50',
@@ -86,10 +84,12 @@ class DataRekrutmenController extends Controller
             'deskripsi' => 'required',
         ]);
 
-        // dd($validatedData);
-        DataRekrutmen::create($validatedData);
-
-        return redirect()->route('admin.rekrutmen')->with('success', 'Data has ben created');
+        try {
+            DataRekrutmen::create($validatedData);
+            return redirect()->route('admin.rekrutmen')->with('success', 'Data has been created');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('admin.rekrutmen')->with('error', 'Data could not be saved due to a foreign key constraint.');
+        }
     }
 
     /**
@@ -124,12 +124,14 @@ class DataRekrutmenController extends Controller
             'deskripsi' => 'required',
         ];
 
-
         $validatedData = $request->validate($rules);
 
-        DataRekrutmen::where('id_rekrutmen', $id_rekrutmen)->update($validatedData);
-
-        return redirect()->route('admin.rekrutmen')->with('success', 'Data has ben updated');
+        try {
+            DataRekrutmen::where('id_rekrutmen', $id_rekrutmen)->update($validatedData);
+            return redirect()->route('admin.rekrutmen')->with('success', 'Data has been updated');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('admin.rekrutmen')->with('error', 'Data could not be updated due to a foreign key constraint.');
+        }
     }
 
     /**
@@ -140,8 +142,12 @@ class DataRekrutmenController extends Controller
      */
     public function destroy($id_rekrutmen)
     {
-        DataRekrutmen::where('id_rekrutmen', $id_rekrutmen)->delete();
-        return redirect()->route('admin.rekrutmen')->with('success', 'Data has ben deleted');
+        try {
+            DataRekrutmen::where('id_rekrutmen', $id_rekrutmen)->delete();
+            return redirect()->route('admin.rekrutmen')->with('success', 'Data has been deleted');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('admin.rekrutmen')->with('error', 'Data could not be deleted due to a foreign key constraint.');
+        }
     }
 
     public function pdf()

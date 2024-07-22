@@ -24,7 +24,7 @@ class DataJadwalTesController extends Controller
         $siswa = SiswaModel::where('id_user', $user->id)->first();
 
         if (!$siswa) {
-            return redirect()->route('dashboard')->with('error', 'Siswa tidak ditemukan');
+            return redirect()->back()->with('error', 'Siswa tidak ditemukan');
         }
 
         $siswaId = $siswa->id_siswa;
