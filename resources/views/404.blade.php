@@ -9,7 +9,7 @@
                 <div class="row">
                     <div class="col-lg-8 col-12 col-sm-10 offset-lg-2 offset-sm-1">
                         <h1 class="m-0">404</h1>
-                        <img src="{{ asset('assets/img/logo.png') }}" alt="Logo" width="" height="46">
+                        <img src="{{ asset('assets/img/rekrutmen.png') }}" alt="Logo" width="" height="46">
                         </a>
                         <h6>Halaman Tidak Ditemukan</h6>
                         <p>Halaman Yang Anda Tuju<span class="text-info">Tidak Ditemukan</span></p>
