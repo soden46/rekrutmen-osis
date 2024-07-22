@@ -14,6 +14,11 @@
                     <img src="{{ asset('assets/img/rekrutmen.png') }}" alt="Logo" style="max-width: 110px; height: 110px;">
                 </div>
                 <h1 class="h3 mb-3 fw-normal text-center">MASUK</h1>
+                <div class="text-center mb-1 mt-0">
+                    <p>Akun Admin => Username: Admin , Password: Admin123</p>
+                    <p>Akun Pembina => Username: Pembina , Password: Pembina123</p>
+                    <p>Akun Siswa => Username: Siswa , Password: Siswa123</p>
+                </div>
                 <div class="form-floating mb-3">
                     <label for="userName">NIP/NIS</label>
                     <input type="userName" name="userName" class="form-control @error('userName') is-invalid @enderror"
